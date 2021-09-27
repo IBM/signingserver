@@ -93,11 +93,12 @@ Locked        false
 - Provision an instance of IBM Cloud Hyper Protect DBaaS for MongoDB by following the documentation
 - Note the database name (by default, admin), your cluster name, the endpoint, and username and password
 - Download the CA file
-- Encode the downloaded CA file by running the following command. You will need the encoded CA when provisioning the signing server instance later
+- Split and encode the downloaded CA file by running the following commands. You will need the resulting files `db_cert1.txt` and `db_cert2.txt` when provisioning the signing server instance later
 ```
-base64 -w 0 cafile.pem | fold -w4000
+csplit -s -z -f dbca cafile.pem '/-----BEGIN CERTIFICATE-----/' '{*}'
+base64 -w 0 dbca00 > db_cert1.txt
+base64 -w 0 dbca01 > db_cert2.txt
 ```
-- Note the `fold` command: Depending on the size of the encoded content this command may display one or two lines of output. Copy the first line of the output into an editor and store it in file `db_cert1.txt`. If there is no seconde line of ouput, this step is completed. Else, if there is a second line of output, copy the second line into an editor and store it in file `db_cert2.txt`. 
 
 ### Step 3: Provision and initialize an instance of IBM Cloud Hyper Protect Crypto Services
 
@@ -161,7 +162,7 @@ docker build . -t signingserver
 Use the following command to run the signingserver container. Specify the properties of your IBM Cloud Hyper Protect Crypto Services instance and IBM Cloud Hyper Protect DBaaS instance in form of environment variables.
 
 ```
-docker run -it -p 9443:9443 -e API_KEY=<your api key> -e HPCS_PORT=<port> -e HPCS_INSTANCEID=<instance id> -e HPCS_ENDPOINT=<EP11 endpoint, e.g. ep11.us-east.hs-crypto.cloud.ibm.com> -e DB_USER=<your DB user id, e.g. admin> -e DB_PW=<your DB password> -e DB_URL=<your DB endpoint URL> -e DB_REPLICASET=<your DB cluster> -e DB_CERT1=<the content of file db_cert1.txt created in step2> -e DB_CERT2=<the content of file db_cert2.txt if this file has been created in step 2, otherwise do not specify this parameter> signingserver
+docker run -it -p 9443:9443 -e API_KEY=<your api key> -e HPCS_PORT=<port> -e HPCS_INSTANCEID=<instance id> -e HPCS_ENDPOINT=<EP11 endpoint, e.g. ep11.us-east.hs-crypto.cloud.ibm.com> -e DB_USER=<your DB user id, e.g. admin> -e DB_PW=<your DB password> -e DB_URL=<your DB endpoint URL> -e DB_REPLICASET=<your DB cluster> -e DB_CERT1=<the content of file db_cert1.txt created in step2> -e DB_CERT2=<the content of file db_cert2.txt created in step 2> signingserver
 ```
 
 ### Step 6: Set up the Secure Build Server
@@ -215,7 +216,17 @@ Create file `sbs-config.json` in your current working directory (this is the dir
   "DOCKER_BASE_SERVER": "us.icr.io",
   "DOCKER_PUSH_SERVER": "us.icr.io",
   "DOCKER_CONTENT_TRUST_PUSH_SERVER": "https://us.icr.io:4443",
-  "ENV_WHITELIST":  ["HPCS_ENDPOINT", "HPCS_PORT", "HPCS_INSTANCEID", "API_KEY", "DB_URL", "DB_USER", "DB_PW", "DB_CERT",  "DB_CERT1",  "DB_CERT2", "DB_REPLICASET", "CLIENT_CERT", "IAM_ENDPOINT"]
+  "ENV_WHITELIST":  [
+      "API_KEY",
+      "HPCS_INSTANCEID",
+      "HPCS_ENDPOINT",
+      "HPCS_PORT",
+      "DB_URL",
+      "DB_USER",
+      "DB_PW",
+      "DB_CERT1",
+      "DB_CERT2",
+      "DB_REPLICASET" ]
 }
 ```
 
@@ -519,7 +530,7 @@ Run the following command and specify the properties of your IBM Cloud Hyper Pro
 
 ```
 image_tag=s390x-v1-ad52e76
-ibmcloud hpvs instance-create signingserver lite-s dal13 --rd-path sbs.enc -e API_KEY=<your api key> -e HPCS_PORT=<port> -e HPCS_INSTANCEID=<instance id> -e HPCS_ENDPOINT=<EP11 endpoint, e.g. ep11.us-east.hs-crypto.cloud.ibm.com> -e DB_USER=<your DB user id, e.g. admin> -e DB_PW=<your DB password> -e DB_URL=<your DB endpoint URL> -e DB_REPLICASET=<your DB cluster>  -e DB_CERT1=<the content of file db_cert1.txt created in step2> -e DB_CERT2=<the content of file db_cert2.txt if this file has been created in step 2, otherwise do not specify this parameter> signingserver -i $image_tag
+ibmcloud hpvs instance-create signingserver lite-s dal13 --rd-path sbs.enc -e API_KEY=<your api key> -e HPCS_PORT=<port> -e HPCS_INSTANCEID=<instance id> -e HPCS_ENDPOINT=<EP11 endpoint, e.g. ep11.us-east.hs-crypto.cloud.ibm.com> -e DB_USER=<your DB user id, e.g. admin> -e DB_PW=<your DB password> -e DB_URL=<your DB endpoint URL> -e DB_REPLICASET=<your DB cluster>  -e DB_CERT1=<the content of file db_cert1.txt created in step2> -e DB_CERT2=<the content of file db_cert2.txt created in step 2> signingserver -i $image_tag
 ```
 
 `signingserver` defines the name of the instance to be created, `lite-s` is the pricing plan, and `dal13` is the location - you can use a different values for these parameters.
