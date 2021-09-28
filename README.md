@@ -202,7 +202,7 @@ Create file `sbs-config.json` in your current working directory (this is the dir
   "IMAGE_TAG": "1.3.0.2",
   "CONTAINER_NAME": "SBS",
   "GITHUB_KEY_FILE": "~/.ssh/id_rsa",
-  "GITHUB_URL": "git@github.com:IBM/signingserver",
+  "GITHUB_URL": "git@github.com:IBM/signingserver.git",
   "GITHUB_BRANCH": "main",
   "IMAGE_TAG_PREFIX": "s390x-v1",
   "REPO_ID": "sbs",
