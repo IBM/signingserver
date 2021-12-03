@@ -71,6 +71,9 @@ public class ConstantsGenerator {
 							if (value.endsWith("UL)")) {
 								value = value.substring(0, value.length()-3) + ")".trim();
 							}
+							if (!value.endsWith(")") && !value.endsWith("S")) {
+								value = value + "L";
+							}
 							pw.println("    public static final long " + name + " = " + value + ";");
 						}
 					}
