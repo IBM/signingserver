@@ -1,124 +1,123 @@
 <?xml version='1.0' encoding='utf-8'?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
 
 	<parent>
-        <groupId>com.ibm.signingexample</groupId>
-        <artifactId>signingserver</artifactId>
-        <version>1.0.0</version>
-    </parent>
-    <artifactId>signing</artifactId>
-    <packaging>war</packaging>
+		<groupId>com.ibm.signingexample</groupId>
+		<artifactId>signingserver</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	<artifactId>signing</artifactId>
+	<packaging>war</packaging>
 
-    <dependencies>
+	<dependencies>
 		<dependency>
-    		<groupId>javax</groupId>
-    		<artifactId>javaee-api</artifactId>
-    		<version>8.0.1</version>
-    		<scope>provided</scope>
-		</dependency>
-    	<dependency>
-			<groupId>com.google.protobuf</groupId>
-			<artifactId>protobuf-java</artifactId>
-			<version>3.15.8</version>
-		</dependency>
-        <dependency>
-            <groupId>io.grpc</groupId>
-	 		<artifactId>grpc-netty-shaded</artifactId>
-			<version>1.37.0</version>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>8.0.1</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-  			<groupId>io.grpc</groupId>
-  			<artifactId>grpc-protobuf</artifactId>
-  			<version>1.37.0</version>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-netty-shaded</artifactId>
+			<version>1.44.0</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-  			<groupId>io.grpc</groupId>
-  			<artifactId>grpc-stub</artifactId>
-  			<version>1.37.0</version>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-protobuf</artifactId>
+			<version>1.44.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-stub</artifactId>
+			<version>1.44.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.signingexample</groupId>
 			<artifactId>source-generator</artifactId>
-  			<version>1.0.0</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
-    		<groupId>org.mongodb</groupId>
-    		<artifactId>mongo-java-driver</artifactId>
-    		<version>3.12.10</version>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.12.10</version>
 		</dependency>
-    </dependencies>
+	</dependencies>
 
-    <build>
-        <finalName>${project.artifactId}</finalName>
+	<build>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
-            <plugin>
-    			<groupId>org.apache.maven.plugins</groupId>
-    			<artifactId>maven-antrun-plugin</artifactId>
-    			 <version>3.0.0</version>
-    			<executions>
-        			<execution>
-            			<id>download-files</id>
-            			<phase>generate-sources</phase>
-            			<goals>
-                			<goal>run</goal>
-            			</goals>
-            			<configuration>
-                			<target>
-                    			<!-- download and compile proto file -->
-                    			<get src="https://raw.githubusercontent.com/IBM-Cloud/hpcs-grep11/master/server.proto"
-                         			dest="${project.build.directory}/server.proto"
-                         			verbose="on"/>
-                    			<mkdir dir="${project.build.directory}/generated-sources/com/ibm/example/signingserver/cryptoclient"/>
-                    			<exec executable="protoc" dir="${project.build.directory}">
-                    				<arg line="--java_out=generated-sources server.proto"/>
-                    			</exec>
-                 			</target>
-             			</configuration>
-         			</execution>
-     			</executions>
- 			</plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.3</version>
-            </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>download-files</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<!-- download and compile proto file -->
+								<get
+									src="https://raw.githubusercontent.com/IBM-Cloud/hpcs-grep11/master/server.proto"
+									dest="${project.build.directory}/server.proto" verbose="on" />
+								<mkdir
+									dir="${project.build.directory}/generated-sources/com/ibm/example/signingserver/cryptoclient" />
+								<exec executable="protoc" dir="${project.build.directory}">
+									<arg line="--java_out=generated-sources server.proto" />
+								</exec>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.3</version>
+			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>3.0.0</version>
-            	<executions>
-                	<execution>
-	                    <phase>generate-sources</phase>
-                    	<goals>
-                        	<goal>java</goal>
-                    	</goals>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>java</goal>
+						</goals>
 						<configuration>
 							<mainClass>com.ibm.example.signingserver.utils.ConstantsGenerator</mainClass>
 							<commandlineArgs>${project.build.directory}/generated-sources/com/ibm/example/signingserver/cryptoclient/Constants.java</commandlineArgs>
 						</configuration>
-                	</execution>
-            	</executions>
+					</execution>
+				</executions>
 			</plugin>
-        	<plugin>
-            	<groupId>org.codehaus.mojo</groupId>
-            	<artifactId>build-helper-maven-plugin</artifactId>
-            	<version>3.2.0</version>
-            	<executions>
-                	<execution>
-	                    <phase>generate-sources</phase>
-                    	<goals>
-                        	<goal>add-source</goal>
-                    	</goals>
-                    	<configuration>
-                        	<sources>
-                            	<source>${project.build.directory}/generated-sources</source>
-                        	</sources>
-                    	</configuration>
-                	</execution>
-            	</executions>
-        	</plugin>
-    </plugins>
-    </build>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/generated-sources</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
