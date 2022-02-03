@@ -560,7 +560,7 @@ The signing server provides a REST API through https port 9443. You can use your
 
 #### Create a key pair
 ```
-curl --request POST \
+curl -k --request POST \
   --url https://<ip>:9443/signing/api/v1/keys \
   --header 'Content-Type: application/json' \
   --data '{}'
@@ -580,7 +580,7 @@ This returns the id of the newly created key pair and the public key, e.g.
 Specify the id of a previously generated key and base64-encoded data to be signed:
 
 ```
-curl --request POST \
+curl -k --request POST \
   --url https://<ip>:9443/signing/api/v1/sign \
   --header 'Content-Type: application/json' \
   --data '{
@@ -600,7 +600,7 @@ vSqKTh693H8FC3Qwt2PP/sUIIqndOtGEi4bcPIddbWAt/0eT2HWa5o9RMidS4/74e0XMpC5JW4IztCDs
 Specify the key id, the base-64 encoded data and the base64-encoded signature to be verified:
 
 ```
-curl --request POST \
+curl -k --request POST \
   --url https://<ip>:9443/signing/api/v1/verify \
   --header 'Content-Type: application/json' \
   --data '{
@@ -614,7 +614,7 @@ curl --request POST \
 If the verification is successfuly this API returns response status code 200
 
 ```
-curl --request POST \
+curl -k --request POST \
   --url https://<ip>:9443/signing/api/v1/verify \
   --header 'Content-Type: application/json' \
   --data '{
