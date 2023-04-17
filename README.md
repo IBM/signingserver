@@ -1,4 +1,8 @@
-# Using IBM Cloud Hyper Protect services to build an Edwards Curve signing server
+# WARNING: This repository is no longer maintained
+
+> This repository will not be updated. The repository will be kept available in read-only mode.
+
+## Using IBM Cloud Hyper Protect services to build an Edwards Curve signing server
 
 ## Overview
 
