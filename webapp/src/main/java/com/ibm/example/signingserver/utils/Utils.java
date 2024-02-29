@@ -36,7 +36,7 @@ public class Utils {
 	}
 	
 	private static final Logger LOGGER = Logger.getLogger(Utils.class.getName());
-	private static final String ERROR_CANNOT_CREATE_KEY = "ERROR: Key is already available. Cannot create key.";
+	private static final String ERROR_CANNOT_CREATE_KEY = "ERROR: Cannot create key: Key is already available.";
 	private static final String ERROR_KEY_NOT_FOUND = "ERROR: Expected key not found";
 	private static final String ERROR_BAD_REQUEST = "ERROR: Bad request";
 }
