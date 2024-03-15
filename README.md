@@ -95,7 +95,7 @@ This returns the id of the newly created key pair and the public key, e.g.
 }
 ```
 
-#### Create an Edwards Curve key pair
+#### Create an Elliptic Curve key pair
 ```
 curl -k --request POST \
   --url https://<ip>:9443/signing/api/v2/keys?type=EC \
