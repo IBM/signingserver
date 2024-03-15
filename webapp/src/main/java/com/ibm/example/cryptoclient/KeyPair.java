@@ -17,17 +17,25 @@ import com.google.protobuf.ByteString;
 
 public class KeyPair {
 	
+	public enum Type {
+		EC,
+		Dilithium
+	}
+	
 	private final ByteString pubKey;
 	private final ByteString privKey;
+	private final Type type;
 	
-	public KeyPair(final ByteString byteString, final ByteString byteString2) {
-		this.pubKey = byteString;
-		this.privKey = byteString2;
+	public KeyPair(final ByteString pubKey, final ByteString privKey, final Type type) {
+		this.pubKey = pubKey;
+		this.privKey = privKey;
+		this.type = type;
 	}
 	
 	public KeyPair(final KeyPair base) {
 		this.pubKey = base.pubKey;
 		this.privKey = base.privKey;
+		this.type = base.type;
 	}
 
 	public ByteString getPubKey() {
@@ -36,5 +44,9 @@ public class KeyPair {
 	
 	public ByteString getPrivKey() {
 		return privKey;
+	}
+	
+	public Type getType() {
+		return type;
 	}
 }

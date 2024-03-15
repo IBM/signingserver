@@ -14,30 +14,16 @@
 package com.ibm.example.signingserver;
 
 import javax.ws.rs.core.Application;
+
+import com.ibm.example.signingserver.utils.Config;
+
 import javax.ws.rs.ApplicationPath;
 
-@ApplicationPath("api/v1")
+@ApplicationPath("api/v2")
 public class SigningApplication extends Application {
 	public SigningApplication() {
 		super();
 		
-		try {
-			Config.getInstance().setHpcsAPIKey(System.getenv("API_KEY"));
-			Config.getInstance().setHpcsPort(Integer.valueOf(System.getenv("HPCS_PORT")));
-			Config.getInstance().setHpcsInstanceId(System.getenv("HPCS_INSTANCEID"));
-
-			Config.getInstance().setHpcsEndpoint(System.getenv("HPCS_ENDPOINT"));
-			Config.getInstance().setKeyStorageFolder("/data/signingservice/keys/");
-			
-			Config.getInstance().setDbPW(System.getenv("DB_PW"));
-			Config.getInstance().setDbURL(System.getenv("DB_URL"));
-			Config.getInstance().setDbUser(System.getenv("DB_USER"));
-			Config.getInstance().setDbReplicaSet(System.getenv("DB_REPLICASET"));
-
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
 		System.out.println("SigningApplication started using "+Config.getInstance().toString());
 	}
 

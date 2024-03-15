@@ -13,12 +13,15 @@
 // permissions and limitations under the License.
 package com.ibm.example.signingserver.api;
 
+import com.ibm.example.cryptoclient.KeyPair;
+
 public class Request {
 
 	private String data;
 	private String signature;
 	private String id;
 	private String pubKey;
+	private KeyPair.Type type;
 	
 	public String getSignature() {
 		return signature;
@@ -50,6 +53,14 @@ public class Request {
 
 	public void setPubKey(String pubKey) {
 		this.pubKey = pubKey;
+	}
+
+	public KeyPair.Type getType() {
+		return type;
+	}
+
+	public void setType(KeyPair.Type type) {
+		this.type = type;
 	}
 
 }

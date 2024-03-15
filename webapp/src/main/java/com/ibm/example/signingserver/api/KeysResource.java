@@ -23,25 +23,42 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import com.ibm.example.cryptoclient.CryptoClient;
 import com.ibm.example.cryptoclient.KeyPair;
 import com.ibm.example.signingserver.utils.KeyStore;
-import com.ibm.example.signingserver.utils.Utils;
+import com.ibm.example.signingserver.utils.Errors;
 
 @Path("keys")
 public class KeysResource {
 	
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createKeyPair() throws Exception {
+    public Response createKeyPair(@Context UriInfo info) throws Exception {
+    	final String type = info.getQueryParameters().getFirst("type");
+    	final KeyPair.Type keyType;
+    	if (type == null) {
+    		keyType = KeyPair.Type.Dilithium;
+    	}
+    	else {
+    		try {
+    			keyType = KeyPair.Type.valueOf(type);
+    		} catch (Exception e) {
+    			return Errors.cannotCreateKeyPair();
+    		}
+    	}
     	final CryptoClient client = CryptoClient.getInstance();
-    	final KeyPair keypair = client.createECKeyPair();
-		final String id = KeyStore.createKeyPair(keypair);
-
-		return createResponse(id, keypair);
+    	final KeyPair keypair = client.createKeyPair(keyType);
+    	try {
+    		final String id = KeyStore.storeKeyPair(keypair);
+    		return createResponse(id, keypair);
+    	} catch (Exception e) {
+    		return Errors.cannotCreateKeyPair();
+    	}
     }
 
 	
@@ -51,15 +68,15 @@ public class KeysResource {
     public Response getKeyInfo(@PathParam("id") String id) throws Exception {
     	final KeyPair keypair = KeyStore.getKeyPair(id);
 		if (keypair == null) {
-    		return Utils.errorKeyNotFound();
+    		return Errors.keyNotFound();
     	}
 		return createResponse(id, keypair);
     }
 
-
-	private Response createResponse(String id, final KeyPair keypair) throws UnsupportedEncodingException {
+	private Response createResponse(final String id, final KeyPair keypair) throws UnsupportedEncodingException {
 		final com.ibm.example.signingserver.api.Response resp = new com.ibm.example.signingserver.api.Response();
 		resp.setId(id);
+		resp.setType(keypair.getType());
 		resp.setPubKey(new String(Base64.getEncoder().encode(keypair.getPubKey().toByteArray()), UTF_8.name()));
     	return Response.ok(resp, MediaType.APPLICATION_JSON).build();
 	}

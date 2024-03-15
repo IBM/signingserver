@@ -26,7 +26,7 @@ import com.google.protobuf.ByteString;
 import com.ibm.example.cryptoclient.CryptoClient;
 import com.ibm.example.cryptoclient.KeyPair;
 import com.ibm.example.signingserver.utils.KeyStore;
-import com.ibm.example.signingserver.utils.Utils;
+import com.ibm.example.signingserver.utils.Errors;
 
 @Path("verify")
 public class VerificationResource {
@@ -39,28 +39,31 @@ public class VerificationResource {
     		data = ByteString.copyFrom(Base64.getDecoder().decode(request.getData()));
     	}
     	catch (Exception e) {
-    		return Utils.errorBadRequest();
+    		return Errors.dataInvalid();
     	}
     	final ByteString signature;
     	try {
     		signature = ByteString.copyFrom(Base64.getDecoder().decode(request.getSignature()));
     	}
     	catch (Exception e) {
-    		return Utils.errorBadRequest();
+    		return Errors.dataInvalid();
     	}
     	
     	final String id = request.getId();
     	final KeyPair keypair = (id != null ? KeyStore.getKeyPair(id) : null);
-    	final String pubkey = request.getPubKey();
-    	
-    	if ((keypair != null && pubkey != null) || (keypair == null && pubkey == null)) {
-    		return Utils.errorBadRequest("Must specify either id or pubkey");
+    	final ByteString key = (keypair != null ? keypair.getPubKey() : ByteString.copyFromUtf8(request.getPubKey()));
+    	final KeyPair.Type type =  (keypair != null ? keypair.getType() : request.getType());
+
+    	if ((keypair != null && request.getPubKey() != null) || key == null || type == null) {
+    		return Errors.badRequest("Must specify either id, or pubkey and key type");
     	}
-    	
-    	final ByteString key = (keypair != null ? keypair.getPubKey() : ByteString.copyFromUtf8(pubkey));
-    	
-   		final CryptoClient client = CryptoClient.getInstance();
-   		client.verifyEC(signature, key, data);
+
+    	try {
+    		CryptoClient.getInstance().verify(signature, key, data, type);
+    	}
+    	catch (Exception e) {
+    		return Errors.dataInvalid();
+    	}
 
    		return Response.ok().build();
     }

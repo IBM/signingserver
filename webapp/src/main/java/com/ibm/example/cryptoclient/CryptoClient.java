@@ -14,6 +14,7 @@
 
 package com.ibm.example.cryptoclient;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -29,24 +30,24 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.bouncycastle.asn1.ASN1ObjectIdentifier;
+
 import com.google.protobuf.ByteString;
 import com.ibm.crypto.grep11.grpc.AttributeValue;
 import com.ibm.crypto.grep11.grpc.CryptoGrpc;
 import com.ibm.crypto.grep11.grpc.GenerateKeyPairRequest;
 import com.ibm.crypto.grep11.grpc.GenerateKeyPairResponse;
-import com.ibm.crypto.grep11.grpc.GenerateKeyRequest;
-import com.ibm.crypto.grep11.grpc.GenerateKeyResponse;
 import com.ibm.crypto.grep11.grpc.Mechanism;
-import com.ibm.crypto.grep11.grpc.SignSingleRequest;
-import com.ibm.crypto.grep11.grpc.SignSingleResponse;
-import com.ibm.crypto.grep11.grpc.VerifySingleRequest;
+import com.ibm.crypto.grep11.grpc.SignInitRequest;
+import com.ibm.crypto.grep11.grpc.SignInitResponse;
+import com.ibm.crypto.grep11.grpc.SignRequest;
+import com.ibm.crypto.grep11.grpc.SignResponse;
+import com.ibm.crypto.grep11.grpc.VerifyInitRequest;
+import com.ibm.crypto.grep11.grpc.VerifyInitResponse;
+import com.ibm.crypto.grep11.grpc.VerifyRequest;
 import com.ibm.crypto.grep11.grpc.CryptoGrpc.CryptoBlockingStub;
-import com.ibm.crypto.grep11.grpc.DecryptSingleRequest;
-import com.ibm.crypto.grep11.grpc.DecryptSingleResponse;
-import com.ibm.crypto.grep11.grpc.EncryptSingleRequest;
-import com.ibm.crypto.grep11.grpc.EncryptSingleResponse;
-import com.ibm.example.signingserver.Config;
 import com.ibm.example.signingserver.cryptoclient.Constants;
+import com.ibm.example.signingserver.utils.Config;
 
 import io.grpc.CallOptions;
 import io.grpc.Channel;
@@ -69,9 +70,10 @@ public class CryptoClient {
 	
 	private static final CryptoClient INSTANCE = new CryptoClient();
 
-	private static final AttributeValue IDNamedCurveEd25519 = AttributeValue.newBuilder().setAttributeB(
-			ByteString.copyFrom(new byte[]{6, 3, 43, 101, 112})).build();         // byte array representation of the hex conversion of the ASN.1 OID of the mechanism 
+	private static final ASN1ObjectIdentifier OIDNamedCurveEd25519 = new ASN1ObjectIdentifier("1.3.101.112");
 	
+	private static final ASN1ObjectIdentifier OIDDilithiumHigh = new ASN1ObjectIdentifier("1.3.6.1.4.1.2.267.1.6.5");
+
 	private static class HeadersAddingInterceptor implements ClientInterceptor {
 
 		private final String apikey;
@@ -132,119 +134,122 @@ public class CryptoClient {
     }
     
 	public CryptoClient() {
-		this.channel = ManagedChannelBuilder.forAddress(Config.getInstance().getHpcsEndpoint(), 
-				Config.getInstance().getHpcsPort()).intercept(new HeadersAddingInterceptor(Config.getInstance().getHpcsAPIKey(), Config.getInstance().getHpcsInstanceId())).build();
+		this.channel = ManagedChannelBuilder
+				.forAddress(Config.getInstance().getHpcsEndpoint(), Config.getInstance().getHpcsPort())
+				.intercept(new HeadersAddingInterceptor(Config.getInstance().getHpcsAPIKey(),
+						Config.getInstance().getHpcsInstanceId()))
+				.build();
         this.stub = CryptoGrpc.newBlockingStub(channel);
 	}
 	
-    public KeyPair createECKeyPair() {
-    	final String METHOD = "createECKeyPair";
-    	if (LOGGER.isLoggable(Level.FINER)) LOGGER.entering(CLASSNAME, METHOD);
+    public KeyPair createKeyPair(final KeyPair.Type keyType) throws IOException {
+    	final String METHOD = "createKeyPair";
+    	if (LOGGER.isLoggable(Level.FINER)) LOGGER.entering(CLASSNAME, METHOD, keyType);
     	
-    	final Mechanism mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_EC_KEY_PAIR_GEN).build();
-    	final GenerateKeyPairRequest request = GenerateKeyPairRequest.
-    											newBuilder().
-    											setMech(mechanism).
-    											putPubKeyTemplate(Constants.CKA_EC_PARAMS, IDNamedCurveEd25519).
-    											putPubKeyTemplate(Constants.CKA_VERIFY, aTF(true)).
-    											putPubKeyTemplate(Constants.CKA_EXTRACTABLE, aTF(false)).
-    											putPrivKeyTemplate(Constants.CKA_SIGN, aTF(true)).
-    											putPrivKeyTemplate(Constants.CKA_EXTRACTABLE, aTF(false)).
-    											build();
+    	final Mechanism mechanism;
+    	final GenerateKeyPairRequest request;
+    	switch (keyType) {
+    	case EC:
+        	mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_EC_KEY_PAIR_GEN).build();
+			request = GenerateKeyPairRequest.newBuilder().setMech(mechanism)
+					.putPubKeyTemplate(Constants.CKA_EC_PARAMS,
+							AttributeValue.newBuilder()
+									.setAttributeB(ByteString.copyFrom(OIDNamedCurveEd25519.getEncoded())).build())
+					.putPubKeyTemplate(Constants.CKA_VERIFY, aTF(true))
+					.putPubKeyTemplate(Constants.CKA_EXTRACTABLE, aTF(false))
+					.putPrivKeyTemplate(Constants.CKA_SIGN, aTF(true))
+					.putPrivKeyTemplate(Constants.CKA_EXTRACTABLE, aTF(false)).build();
+    		
+    		break;
+    		
+    	case Dilithium:
+    	default:
+        	mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_IBM_DILITHIUM).build();
+			request = GenerateKeyPairRequest.newBuilder().setMech(mechanism)
+					.putPubKeyTemplate(Constants.CKA_IBM_PQC_PARAMS,
+							AttributeValue.newBuilder()
+									.setAttributeB(ByteString.copyFrom(OIDDilithiumHigh.getEncoded())).build())
+					.putPubKeyTemplate(Constants.CKA_VERIFY, aTF(true))
+					.putPubKeyTemplate(Constants.CKA_EXTRACTABLE, aTF(false))
+					.putPrivKeyTemplate(Constants.CKA_SIGN, aTF(true))
+					.putPrivKeyTemplate(Constants.CKA_EXTRACTABLE, aTF(false)).build();
+
+    		break;
+    	}
+    	
     	final GenerateKeyPairResponse response = stub.generateKeyPair(request);
-    	final KeyPair ret = new KeyPair(response.getPubKeyBytes(), response.getPrivKeyBytes());
+    	final KeyPair ret = new KeyPair(response.getPubKeyBytes(), response.getPrivKeyBytes(), keyType);
     	
     	if (LOGGER.isLoggable(Level.FINER)) LOGGER.exiting(CLASSNAME, METHOD);
     	return ret;
     }
     
-    public ByteString signEC(final ByteString privKey, final ByteString data) {
-    	final String METHOD = "signEC";
-    	if (LOGGER.isLoggable(Level.FINER)) LOGGER.entering(CLASSNAME, METHOD);
+    public ByteString sign(final ByteString privKey, final ByteString data, final KeyPair.Type keyType) {
+    	final String METHOD = "sign";
+    	if (LOGGER.isLoggable(Level.FINER)) LOGGER.entering(CLASSNAME, METHOD, keyType);
     	
-       	final Mechanism mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_IBM_ED25519_SHA512).build();
-    	final SignSingleRequest request = SignSingleRequest.
-    											newBuilder().
-    											setMech(mechanism).
-    											setPrivKey(privKey).
-    											setData(data).
-    											build();
-    	final SignSingleResponse response = stub.signSingle(request);
+    	final Mechanism mechanism;
+    	switch (keyType) {
+    	case EC:
+           	mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_IBM_ED25519_SHA512).build();
+    		break;
+    		
+    	case Dilithium:
+    	default:
+           	mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_IBM_DILITHIUM).build();
+    		break;
+    	}
+
+    	final SignInitRequest signInitRequest = SignInitRequest.newBuilder().
+				setMech(mechanism).
+				setPrivKey(privKey).
+				build();
+    	final SignInitResponse signInitResponse = stub.signInit(signInitRequest);
+    	
+    	final SignRequest request = SignRequest.newBuilder().
+				setState(signInitResponse.getState()).
+				setData(data).
+				build();
+    	final SignResponse response = stub.sign(request);
     	
     	if (LOGGER.isLoggable(Level.FINER)) LOGGER.exiting(CLASSNAME, METHOD);
     	return response.getSignature();
     }
     
-    public void verifyEC(final ByteString signature, final ByteString pubKey, final ByteString data) {
-    	final String METHOD = "verifyEC";
-    	if (LOGGER.isLoggable(Level.FINER)) LOGGER.entering(CLASSNAME, METHOD);
+    public void verify(final ByteString signature, final ByteString pubKey, final ByteString data, final KeyPair.Type keyType) {
+    	final String METHOD = "verify";
+    	if (LOGGER.isLoggable(Level.FINER)) LOGGER.entering(CLASSNAME, METHOD, keyType);
     	
-       	final Mechanism mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_IBM_ED25519_SHA512).build();
-    	final VerifySingleRequest request = VerifySingleRequest.
-    											newBuilder().
-    											setMech(mechanism).
-    											setPubKey(pubKey).
-    											setData(data).
-    											setSignature(signature).
-    											build();
-    	stub.verifySingle(request);    	// this will throw "io.grpc.StatusRuntimeException: UNKNOWN: CKR_SIGNATURE_INVALID" if signature cannot be verified successfully
+    	final Mechanism mechanism;
+    	switch (keyType) {
+    	case EC:
+           	mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_IBM_ED25519_SHA512).build();
+    		break;
+    		
+    	case Dilithium:
+    	default:
+           	mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_IBM_DILITHIUM).build();
+    		break;
+    	}
+    	
+    	final VerifyInitRequest initRequest = VerifyInitRequest.newBuilder().
+				setMech(mechanism).
+				setPubKey(pubKey).
+				build();
+    	final VerifyInitResponse verifyInitResponse = stub.verifyInit(initRequest);
+
+    	final VerifyRequest verifyRequest = VerifyRequest.newBuilder().
+				setState(verifyInitResponse.getState()).
+				setData(data).
+				setSignature(signature).
+				build();
+    	
+      	// this will throw "io.grpc.StatusRuntimeException: UNKNOWN: CKR_SIGNATURE_INVALID" 
+   		// if the signature cannot be verified
+   		stub.verify(verifyRequest);
 
     	if (LOGGER.isLoggable(Level.FINER)) LOGGER.exiting(CLASSNAME, METHOD);
     }
-    
-    public ByteString createAESKey() {
-    	final String METHOD = "createAESKey";
-    	if (LOGGER.isLoggable(Level.FINER)) LOGGER.entering(CLASSNAME, METHOD);
-    	
-    	final Mechanism mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_AES_KEY_GEN).build();
-    	final GenerateKeyRequest request = GenerateKeyRequest.
-    											newBuilder().
-    											setMech(mechanism).
-    											putTemplate(Constants.CKA_VALUE_LEN, aTI(128/8)).
-    											putTemplate(Constants.CKA_WRAP, aTF(true)).
-    											putTemplate(Constants.CKA_UNWRAP, aTF(true)).
-    											putTemplate(Constants.CKA_EXTRACTABLE, aTF(false)).
-    											build();
-    	final GenerateKeyResponse response = stub.generateKey(request);
-    	
-    	if (LOGGER.isLoggable(Level.FINER)) LOGGER.exiting(CLASSNAME, METHOD);
-    	return response.getKeyBytes();
-    }
-    
-    public ByteString encryptAES(final ByteString kek, final ByteString plain) {
-    	final String METHOD = "encryptAES";
-    	if (LOGGER.isLoggable(Level.FINER)) LOGGER.entering(CLASSNAME, METHOD);
-    	
-       	final Mechanism mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_AES_ECB).build();
-    	final EncryptSingleRequest request = EncryptSingleRequest.
-    											newBuilder().
-    											setMech(mechanism).
-    											setKey(kek).
-    											setPlain(plain).
-    											build();
-    	final EncryptSingleResponse response = stub.encryptSingle(request);
-    	
-    	if (LOGGER.isLoggable(Level.FINER)) LOGGER.exiting(CLASSNAME, METHOD);
-    	return response.getCiphered();
-    }
-    
-    public ByteString decryptAES(final ByteString kek, final ByteString ciphered) {
-    	final String METHOD = "decryptAES";
-    	if (LOGGER.isLoggable(Level.FINER)) LOGGER.entering(CLASSNAME, METHOD);
-    	
-       	final Mechanism mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_AES_ECB).build();
-    	final DecryptSingleRequest request = DecryptSingleRequest.
-    											newBuilder().
-    											setMech(mechanism).
-    											setKey(kek).
-    											setCiphered(ciphered).
-    											build();
-    	final DecryptSingleResponse response = stub.decryptSingle(request);
-
-    	if (LOGGER.isLoggable(Level.FINER)) LOGGER.exiting(CLASSNAME, METHOD);
-    	return response.getPlain();
-    }
-
     
     public void shutdownNow() {
         channel.shutdownNow();
@@ -258,9 +263,4 @@ public class CryptoClient {
 	private AttributeValue aTF(final boolean val) {
 		return AttributeValue.newBuilder().setAttributeTF(val).build();
 	}
-
-	private AttributeValue aTI(final long val) {
-		return AttributeValue.newBuilder().setAttributeI(val).build();
-	}
-
 }

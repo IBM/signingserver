@@ -10,12 +10,9 @@
     <grpcClient host="*" headersToPropagate="*"/>
 
     <httpEndpoint id="defaultHttpEndpoint"
-                  httpPort="-1"
+                  httpPort="9080"
                   httpsPort="9443" 
                   host="*"/>
-
-    <ssl id="defaultSSLConfig" trustDefaultCerts="true" keyStoreRef="defaultKeyStore" trustStoreRef="defaultTrustStore"/>
-    
-	<keyStore id="defaultKeyStore" location="${server.config.dir}/resources/security/key.p12" password="changeit" />
-	<keyStore id="defaultTrustStore" location="${server.config.dir}/resources/security/trust.p12" password="changeit" />
+                
+    <ssl id="defaultSSLConfig" trustDefaultCerts="true" />
 </server>

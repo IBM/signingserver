@@ -26,7 +26,7 @@ import com.google.protobuf.ByteString;
 import com.ibm.example.cryptoclient.CryptoClient;
 import com.ibm.example.cryptoclient.KeyPair;
 import com.ibm.example.signingserver.utils.KeyStore;
-import com.ibm.example.signingserver.utils.Utils;
+import com.ibm.example.signingserver.utils.Errors;
 
 @Path("sign")
 public class SignatureResource {
@@ -39,13 +39,13 @@ public class SignatureResource {
     		data = ByteString.copyFrom(Base64.getDecoder().decode(request.getData()));
     	}
     	catch (Exception e) {
-    		return Utils.errorBadRequest();
+    		return Errors.dataInvalid();
     	}
     	
     	final KeyPair keypair = KeyStore.getKeyPair(request.getId());
     	
     	final CryptoClient client = CryptoClient.getInstance();
-    	final ByteString signature = client.signEC(keypair.getPrivKey(), data);
+    	final ByteString signature = client.sign(keypair.getPrivKey(), data, keypair.getType());
     	
        	return Response.ok(Base64.getEncoder().encode(signature.toByteArray())).build();
     }
