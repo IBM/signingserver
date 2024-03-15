@@ -1,5 +1,4 @@
-
-# Using quantum-safe cryptography with IBM Cloud Hyper Protect Crypto Services
+# A signing server for quantum-safe cryptography with IBM Cloud Hyper Protect Crypto Services
 
 ## Overview
 
@@ -24,7 +23,7 @@ To run the signing server, you need to meet the following prerequisites:
 To setup a development environment on your workstation, you need to meet the following prerequisites:
 - Install JDK 1.8 or newer
 - Install Apache Maven
-- Install the gRPC compiler (https://developers.google.com/protocol-buffers)
+- Install the gRPC compiler from [link](https://developers.google.com/protocol-buffers)
 - Install git
 
 ## Build the signing server application
