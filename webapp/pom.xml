@@ -21,10 +21,9 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>io.grpc</groupId>
-			<artifactId>grpc-netty-shaded</artifactId>
-			<version>1.61.1</version>
-			<scope>runtime</scope>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+    		<version>3.12.4</version>
 		</dependency>
 		<dependency>
 			<groupId>io.grpc</groupId>
