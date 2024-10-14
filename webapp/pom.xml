@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>com.google.protobuf</groupId>
 			<artifactId>protobuf-java</artifactId>
-    		<version>3.12.4</version>
+    		<version>3.21.7</version>
 		</dependency>
 		<dependency>
 			<groupId>io.grpc</groupId>
@@ -65,7 +65,7 @@
 							<target>
 								<!-- download and compile proto file -->
 								<get
-									src="https://raw.githubusercontent.com/IBM-Cloud/hpcs-grep11/master/server.proto"
+									src="https://raw.githubusercontent.com/IBM-Cloud/hpcs-grep11/b3ea4e7f31b55aa5e96a4d4f6f5d60e3670478b9/server.proto"
 									dest="${project.build.directory}/server.proto" verbose="on" />
 								<mkdir
 									dir="${project.build.directory}/generated-sources/com/ibm/example/signingserver/cryptoclient" />
