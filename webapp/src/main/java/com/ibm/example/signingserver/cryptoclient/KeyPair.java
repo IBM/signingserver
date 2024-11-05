@@ -11,9 +11,9 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
 // implied.  See the License for the specific language governing
 // permissions and limitations under the License.
-package com.ibm.example.cryptoclient;
+package com.ibm.example.signingserver.cryptoclient;
 
-import com.google.protobuf.ByteString;
+import com.ibm.crypto.grep11.grpc.KeyBlob;
 
 public class KeyPair {
 	
@@ -22,11 +22,11 @@ public class KeyPair {
 		Dilithium
 	}
 	
-	private final ByteString pubKey;
-	private final ByteString privKey;
+	private final KeyBlob pubKey;
+	private final KeyBlob privKey;
 	private final Type type;
 	
-	public KeyPair(final ByteString pubKey, final ByteString privKey, final Type type) {
+	public KeyPair(final KeyBlob pubKey, final KeyBlob privKey, final Type type) {
 		this.pubKey = pubKey;
 		this.privKey = privKey;
 		this.type = type;
@@ -38,11 +38,11 @@ public class KeyPair {
 		this.type = base.type;
 	}
 
-	public ByteString getPubKey() {
+	public KeyBlob getPubKey() {
 		return pubKey;
 	}
 	
-	public ByteString getPrivKey() {
+	public KeyBlob getPrivKey() {
 		return privKey;
 	}
 	

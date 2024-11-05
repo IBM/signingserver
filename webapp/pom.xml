@@ -21,24 +21,35 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.17.1</version>
+        </dependency>
+		<dependency>
 			<groupId>com.google.protobuf</groupId>
 			<artifactId>protobuf-java</artifactId>
-    		<version>3.21.7</version>
+    		<version>3.25.2</version>     <!-- must use this old version and old protoc to workaround this issue: https://github.com/googleapis/google-cloud-java/issues/10698 
+    		                                   built and tested with protoc 3.21.10 (locally), protoc 3.12.4 (podman with ubuntu 22.04 builder image) -->
 		</dependency>
 		<dependency>
 			<groupId>io.grpc</groupId>
 			<artifactId>grpc-protobuf</artifactId>
-			<version>1.61.1</version>
+			<version>1.68.0</version>
 		</dependency>
 		<dependency>
 			<groupId>io.grpc</groupId>
 			<artifactId>grpc-stub</artifactId>
-			<version>1.61.1</version>
+			<version>1.68.0</version>
 		</dependency>
+		<dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-netty</artifactId>
+            <version>1.68.0</version>
+        </dependency>
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcprov-lts8on</artifactId>
-			<version>2.73.5</version>
+			<version>2.73.6</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.signingexample</groupId>
@@ -65,13 +76,21 @@
 							<target>
 								<!-- download and compile proto file -->
 								<get
-									src="https://raw.githubusercontent.com/IBM-Cloud/hpcs-grep11/b3ea4e7f31b55aa5e96a4d4f6f5d60e3670478b9/server.proto"
+									src="https://raw.githubusercontent.com/IBM-Cloud/hpcs-grep11/master/server.proto"
 									dest="${project.build.directory}/server.proto" verbose="on" />
 								<mkdir
 									dir="${project.build.directory}/generated-sources/com/ibm/example/signingserver/cryptoclient" />
 								<exec executable="protoc" dir="${project.build.directory}">
 									<arg line="--java_out=generated-sources server.proto" />
 								</exec>
+								<!-- 
+								To create com.ibm.crypto.grep11.grpc.CryptoGrpc.java in the target/generated-sources folder:
+								- Download and install protoc-gen-grpc-java.exe in protoc bin folder
+								- Enable the following section, unescape the "\-\-" parts and rebuild:
+								<exec executable="protoc" dir="${project.build.directory}">
+									<arg line="\-\-plugin=protoc-gen-grpc-java.exe \-\-grpc-java_out=generated-sources server.proto" />
+								</exec>	
+								-->
 							</target>
 						</configuration>
 					</execution>

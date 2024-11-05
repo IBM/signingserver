@@ -13,7 +13,7 @@
 // permissions and limitations under the License.
 package com.ibm.example.signingserver.api;
 
-import com.ibm.example.cryptoclient.KeyPair;
+import com.ibm.example.signingserver.cryptoclient.KeyPair;
 
 public class Response {
 	private String pubKey;

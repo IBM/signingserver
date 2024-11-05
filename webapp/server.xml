@@ -3,16 +3,15 @@
 
     <featureManager>
         <feature>jaxrs-2.1</feature>
-        <feature>grpcClient-1.0</feature>
         <feature>transportSecurity-1.0</feature>
     </featureManager>
 	
-    <grpcClient host="*" headersToPropagate="*"/>
-
     <httpEndpoint id="defaultHttpEndpoint"
                   httpPort="9080"
                   httpsPort="9443" 
                   host="*"/>
                 
     <ssl id="defaultSSLConfig" trustDefaultCerts="true" />
+    
+    <logging traceSpecification="com.ibm.example.signingserver.*=finest:io.grpc=finer:io.grpc.netty.NettyClientHandler=finer:io.grpc.netty.shaded.io.grpc.netty.NettyClientHandler=finer"/>
 </server>

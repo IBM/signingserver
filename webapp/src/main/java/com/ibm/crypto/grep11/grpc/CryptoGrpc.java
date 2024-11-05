@@ -2,14 +2,20 @@ package com.ibm.crypto.grep11.grpc;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 
+/**
+ * <pre>
+ * See ep11-structure.pdf from support program zip file for further documentation
+ * </pre>
+ */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.37.0)",
+    value = "by gRPC proto compiler (version 1.68.0)",
     comments = "Source: server.proto")
+@io.grpc.stub.annotations.GrpcGenerated
 public final class CryptoGrpc {
 
   private CryptoGrpc() {}
 
-  public static final String SERVICE_NAME = "grep11.Crypto";
+  public static final java.lang.String SERVICE_NAME = "grep11.Crypto";
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<com.ibm.crypto.grep11.grpc.GenerateRandomRequest,
@@ -849,6 +855,37 @@ public final class CryptoGrpc {
     return getVerifySingleMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.ibm.crypto.grep11.grpc.ReencryptSingleRequest,
+      com.ibm.crypto.grep11.grpc.ReencryptSingleResponse> getReencryptSingleMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ReencryptSingle",
+      requestType = com.ibm.crypto.grep11.grpc.ReencryptSingleRequest.class,
+      responseType = com.ibm.crypto.grep11.grpc.ReencryptSingleResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.ibm.crypto.grep11.grpc.ReencryptSingleRequest,
+      com.ibm.crypto.grep11.grpc.ReencryptSingleResponse> getReencryptSingleMethod() {
+    io.grpc.MethodDescriptor<com.ibm.crypto.grep11.grpc.ReencryptSingleRequest, com.ibm.crypto.grep11.grpc.ReencryptSingleResponse> getReencryptSingleMethod;
+    if ((getReencryptSingleMethod = CryptoGrpc.getReencryptSingleMethod) == null) {
+      synchronized (CryptoGrpc.class) {
+        if ((getReencryptSingleMethod = CryptoGrpc.getReencryptSingleMethod) == null) {
+          CryptoGrpc.getReencryptSingleMethod = getReencryptSingleMethod =
+              io.grpc.MethodDescriptor.<com.ibm.crypto.grep11.grpc.ReencryptSingleRequest, com.ibm.crypto.grep11.grpc.ReencryptSingleResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ReencryptSingle"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ibm.crypto.grep11.grpc.ReencryptSingleRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ibm.crypto.grep11.grpc.ReencryptSingleResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new CryptoMethodDescriptorSupplier("ReencryptSingle"))
+              .build();
+        }
+      }
+    }
+    return getReencryptSingleMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<com.ibm.crypto.grep11.grpc.GenerateKeyRequest,
       com.ibm.crypto.grep11.grpc.GenerateKeyResponse> getGenerateKeyMethod;
 
@@ -1128,6 +1165,68 @@ public final class CryptoGrpc {
     return getSetAttributeValueMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.ibm.crypto.grep11.grpc.LoginRequest,
+      com.ibm.crypto.grep11.grpc.LoginResponse> getLoginMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Login",
+      requestType = com.ibm.crypto.grep11.grpc.LoginRequest.class,
+      responseType = com.ibm.crypto.grep11.grpc.LoginResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.ibm.crypto.grep11.grpc.LoginRequest,
+      com.ibm.crypto.grep11.grpc.LoginResponse> getLoginMethod() {
+    io.grpc.MethodDescriptor<com.ibm.crypto.grep11.grpc.LoginRequest, com.ibm.crypto.grep11.grpc.LoginResponse> getLoginMethod;
+    if ((getLoginMethod = CryptoGrpc.getLoginMethod) == null) {
+      synchronized (CryptoGrpc.class) {
+        if ((getLoginMethod = CryptoGrpc.getLoginMethod) == null) {
+          CryptoGrpc.getLoginMethod = getLoginMethod =
+              io.grpc.MethodDescriptor.<com.ibm.crypto.grep11.grpc.LoginRequest, com.ibm.crypto.grep11.grpc.LoginResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Login"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ibm.crypto.grep11.grpc.LoginRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ibm.crypto.grep11.grpc.LoginResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new CryptoMethodDescriptorSupplier("Login"))
+              .build();
+        }
+      }
+    }
+    return getLoginMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.ibm.crypto.grep11.grpc.LogoutRequest,
+      com.ibm.crypto.grep11.grpc.LogoutResponse> getLogoutMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Logout",
+      requestType = com.ibm.crypto.grep11.grpc.LogoutRequest.class,
+      responseType = com.ibm.crypto.grep11.grpc.LogoutResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.ibm.crypto.grep11.grpc.LogoutRequest,
+      com.ibm.crypto.grep11.grpc.LogoutResponse> getLogoutMethod() {
+    io.grpc.MethodDescriptor<com.ibm.crypto.grep11.grpc.LogoutRequest, com.ibm.crypto.grep11.grpc.LogoutResponse> getLogoutMethod;
+    if ((getLogoutMethod = CryptoGrpc.getLogoutMethod) == null) {
+      synchronized (CryptoGrpc.class) {
+        if ((getLogoutMethod = CryptoGrpc.getLogoutMethod) == null) {
+          CryptoGrpc.getLogoutMethod = getLogoutMethod =
+              io.grpc.MethodDescriptor.<com.ibm.crypto.grep11.grpc.LogoutRequest, com.ibm.crypto.grep11.grpc.LogoutResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Logout"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ibm.crypto.grep11.grpc.LogoutRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ibm.crypto.grep11.grpc.LogoutResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new CryptoMethodDescriptorSupplier("Logout"))
+              .build();
+        }
+      }
+    }
+    return getLogoutMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<com.ibm.crypto.grep11.grpc.RewrapKeyBlobRequest,
       com.ibm.crypto.grep11.grpc.RewrapKeyBlobResponse> getRewrapKeyBlobMethod;
 
@@ -1205,19 +1304,19 @@ public final class CryptoGrpc {
 
   /**
    * <pre>
-   * See https://www.ibm.com/downloads/cas/WXRDPRAN for further documentation
+   * See ep11-structure.pdf from support program zip file for further documentation
    * </pre>
    */
-  public static abstract class CryptoImplBase implements io.grpc.BindableService {
+  public interface AsyncService {
 
     /**
      * <pre>
      * CK_RV m_GenerateRandom (
-     *     CK_BYTE_PTR rnd, CK_ULONG rndlen,
-     *     target_t target) ;
+     * CK_BYTE_PTR rnd, CK_ULONG rndlen,
+     * target_t target) ;
      * </pre>
      */
-    public void generateRandom(com.ibm.crypto.grep11.grpc.GenerateRandomRequest request,
+    default void generateRandom(com.ibm.crypto.grep11.grpc.GenerateRandomRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.GenerateRandomResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGenerateRandomMethod(), responseObserver);
     }
@@ -1225,12 +1324,12 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestInit (
-     *     unsigned char *state, size_t *statelen,
-     *     const CK_MECHANISM_PTR mech,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * const CK_MECHANISM_PTR mech,
+     * target_t target) ;
      * </pre>
      */
-    public void digestInit(com.ibm.crypto.grep11.grpc.DigestInitRequest request,
+    default void digestInit(com.ibm.crypto.grep11.grpc.DigestInitRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.DigestInitResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDigestInitMethod(), responseObserver);
     }
@@ -1238,13 +1337,13 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Digest (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
+     * target_t target) ;
      * </pre>
      */
-    public void digest(com.ibm.crypto.grep11.grpc.DigestRequest request,
+    default void digest(com.ibm.crypto.grep11.grpc.DigestRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.DigestResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDigestMethod(), responseObserver);
     }
@@ -1252,12 +1351,12 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * target_t target) ;
      * </pre>
      */
-    public void digestUpdate(com.ibm.crypto.grep11.grpc.DigestUpdateRequest request,
+    default void digestUpdate(com.ibm.crypto.grep11.grpc.DigestUpdateRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.DigestUpdateResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDigestUpdateMethod(), responseObserver);
     }
@@ -1265,12 +1364,12 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestKey (
-     *     unsigned char *state, size_t statelen,
-     *     const unsigned char *key, size_t keylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * target_t target) ;
      * </pre>
      */
-    public void digestKey(com.ibm.crypto.grep11.grpc.DigestKeyRequest request,
+    default void digestKey(com.ibm.crypto.grep11.grpc.DigestKeyRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.DigestKeyResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDigestKeyMethod(), responseObserver);
     }
@@ -1278,12 +1377,12 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
+     * target_t target) ;
      * </pre>
      */
-    public void digestFinal(com.ibm.crypto.grep11.grpc.DigestFinalRequest request,
+    default void digestFinal(com.ibm.crypto.grep11.grpc.DigestFinalRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.DigestFinalResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDigestFinalMethod(), responseObserver);
     }
@@ -1291,13 +1390,13 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestSingle (
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
-     *     target_t target) ;
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
+     * target_t target) ;
      * </pre>
      */
-    public void digestSingle(com.ibm.crypto.grep11.grpc.DigestSingleRequest request,
+    default void digestSingle(com.ibm.crypto.grep11.grpc.DigestSingleRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.DigestSingleResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDigestSingleMethod(), responseObserver);
     }
@@ -1305,13 +1404,13 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_EncryptInit (
-     *     unsigned char *state, size_t *statelen,
-     *     CK_MECHANISM_PTR mech,
-     *     const unsigned char *key, size_t keylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * CK_MECHANISM_PTR mech,
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * target_t target) ;
      * </pre>
      */
-    public void encryptInit(com.ibm.crypto.grep11.grpc.EncryptInitRequest request,
+    default void encryptInit(com.ibm.crypto.grep11.grpc.EncryptInitRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.EncryptInitResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getEncryptInitMethod(), responseObserver);
     }
@@ -1319,13 +1418,13 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DecryptInit (
-     *     unsigned char *state, size_t *statelen,
-     *     CK_MECHANISM_PTR mech,
-     *     const unsigned char *key, size_t keylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * CK_MECHANISM_PTR mech,
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * target_t target) ;
      * </pre>
      */
-    public void decryptInit(com.ibm.crypto.grep11.grpc.DecryptInitRequest request,
+    default void decryptInit(com.ibm.crypto.grep11.grpc.DecryptInitRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.DecryptInitResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDecryptInitMethod(), responseObserver);
     }
@@ -1333,13 +1432,13 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_EncryptUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR plain, CK_ULONG plainlen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR plain, CK_ULONG plainlen,
+     * CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
+     * target_t target) ;
      * </pre>
      */
-    public void encryptUpdate(com.ibm.crypto.grep11.grpc.EncryptUpdateRequest request,
+    default void encryptUpdate(com.ibm.crypto.grep11.grpc.EncryptUpdateRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.EncryptUpdateResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getEncryptUpdateMethod(), responseObserver);
     }
@@ -1347,13 +1446,13 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DecryptUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
-     *     CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
+     * CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
+     * target_t target) ;
      * </pre>
      */
-    public void decryptUpdate(com.ibm.crypto.grep11.grpc.DecryptUpdateRequest request,
+    default void decryptUpdate(com.ibm.crypto.grep11.grpc.DecryptUpdateRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.DecryptUpdateResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDecryptUpdateMethod(), responseObserver);
     }
@@ -1361,13 +1460,13 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Encrypt (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR plain, CK_ULONG plainlen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR plain, CK_ULONG plainlen,
+     * CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
+     * target_t target) ;
      * </pre>
      */
-    public void encrypt(com.ibm.crypto.grep11.grpc.EncryptRequest request,
+    default void encrypt(com.ibm.crypto.grep11.grpc.EncryptRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.EncryptResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getEncryptMethod(), responseObserver);
     }
@@ -1375,13 +1474,13 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Decrypt (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
-     *     CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
+     * CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
+     * target_t target) ;
      * </pre>
      */
-    public void decrypt(com.ibm.crypto.grep11.grpc.DecryptRequest request,
+    default void decrypt(com.ibm.crypto.grep11.grpc.DecryptRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.DecryptResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDecryptMethod(), responseObserver);
     }
@@ -1389,12 +1488,12 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_EncryptFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
+     * target_t target) ;
      * </pre>
      */
-    public void encryptFinal(com.ibm.crypto.grep11.grpc.EncryptFinalRequest request,
+    default void encryptFinal(com.ibm.crypto.grep11.grpc.EncryptFinalRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.EncryptFinalResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getEncryptFinalMethod(), responseObserver);
     }
@@ -1402,12 +1501,12 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DecryptFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
+     * target_t target) ;
      * </pre>
      */
-    public void decryptFinal(com.ibm.crypto.grep11.grpc.DecryptFinalRequest request,
+    default void decryptFinal(com.ibm.crypto.grep11.grpc.DecryptFinalRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.DecryptFinalResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDecryptFinalMethod(), responseObserver);
     }
@@ -1415,14 +1514,14 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_EncryptSingle (
-     *     const unsigned char *key, size_t keylen,
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR plain, CK_ULONG plainlen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
-     *     target_t target) ;
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR plain, CK_ULONG plainlen,
+     * CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
+     * target_t target) ;
      * </pre>
      */
-    public void encryptSingle(com.ibm.crypto.grep11.grpc.EncryptSingleRequest request,
+    default void encryptSingle(com.ibm.crypto.grep11.grpc.EncryptSingleRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.EncryptSingleResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getEncryptSingleMethod(), responseObserver);
     }
@@ -1430,14 +1529,14 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DecryptSingle (
-     *     const unsigned char *key, size_t keylen,
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
-     *     CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
-     *     target_t target) ;
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
+     * CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
+     * target_t target) ;
      * </pre>
      */
-    public void decryptSingle(com.ibm.crypto.grep11.grpc.DecryptSingleRequest request,
+    default void decryptSingle(com.ibm.crypto.grep11.grpc.DecryptSingleRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.DecryptSingleResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDecryptSingleMethod(), responseObserver);
     }
@@ -1445,13 +1544,13 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SignInit (
-     *     unsigned char *state, size_t *statelen,
-     *     CK_MECHANISM_PTR mech,
-     *     const unsigned char *privKey, size_t privKeylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * CK_MECHANISM_PTR mech,
+     * const unsigned char *privKeyBytes, size_t privKeyByteslen,
+     * target_t target) ;
      * </pre>
      */
-    public void signInit(com.ibm.crypto.grep11.grpc.SignInitRequest request,
+    default void signInit(com.ibm.crypto.grep11.grpc.SignInitRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.SignInitResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSignInitMethod(), responseObserver);
     }
@@ -1459,13 +1558,13 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_VerifyInit (
-     *     unsigned char *state, size_t *statelen,
-     *     CK_MECHANISM_PTR mech,
-     *     const unsigned char *pubKey, size_t pubKeylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * CK_MECHANISM_PTR mech,
+     * const unsigned char *pubKeyBytes, size_t pubKeyByteslen,
+     * target_t target) ;
      * </pre>
      */
-    public void verifyInit(com.ibm.crypto.grep11.grpc.VerifyInitRequest request,
+    default void verifyInit(com.ibm.crypto.grep11.grpc.VerifyInitRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.VerifyInitResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getVerifyInitMethod(), responseObserver);
     }
@@ -1473,12 +1572,12 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SignUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * target_t target) ;
      * </pre>
      */
-    public void signUpdate(com.ibm.crypto.grep11.grpc.SignUpdateRequest request,
+    default void signUpdate(com.ibm.crypto.grep11.grpc.SignUpdateRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.SignUpdateResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSignUpdateMethod(), responseObserver);
     }
@@ -1486,12 +1585,12 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_VerifyUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * target_t target) ;
      * </pre>
      */
-    public void verifyUpdate(com.ibm.crypto.grep11.grpc.VerifyUpdateRequest request,
+    default void verifyUpdate(com.ibm.crypto.grep11.grpc.VerifyUpdateRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.VerifyUpdateResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getVerifyUpdateMethod(), responseObserver);
     }
@@ -1499,12 +1598,12 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SignFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
+     * target_t target) ;
      * </pre>
      */
-    public void signFinal(com.ibm.crypto.grep11.grpc.SignFinalRequest request,
+    default void signFinal(com.ibm.crypto.grep11.grpc.SignFinalRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.SignFinalResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSignFinalMethod(), responseObserver);
     }
@@ -1512,12 +1611,12 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_VerifyFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR signature, CK_ULONG signaturelen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR signature, CK_ULONG signaturelen,
+     * target_t target) ;
      * </pre>
      */
-    public void verifyFinal(com.ibm.crypto.grep11.grpc.VerifyFinalRequest request,
+    default void verifyFinal(com.ibm.crypto.grep11.grpc.VerifyFinalRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.VerifyFinalResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getVerifyFinalMethod(), responseObserver);
     }
@@ -1525,13 +1624,13 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Sign (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
+     * target_t target) ;
      * </pre>
      */
-    public void sign(com.ibm.crypto.grep11.grpc.SignRequest request,
+    default void sign(com.ibm.crypto.grep11.grpc.SignRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.SignResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSignMethod(), responseObserver);
     }
@@ -1539,13 +1638,13 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Verify (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR signature, CK_ULONG signaturelen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR signature, CK_ULONG signaturelen,
+     * target_t target) ;
      * </pre>
      */
-    public void verify(com.ibm.crypto.grep11.grpc.VerifyRequest request,
+    default void verify(com.ibm.crypto.grep11.grpc.VerifyRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.VerifyResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getVerifyMethod(), responseObserver);
     }
@@ -1553,14 +1652,14 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SignSingle (
-     *     const unsigned char *privKey, size_t privKeylen,
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
-     *     target_t target) ;
+     * const unsigned char *privKeyBytes, size_t privKeyByteslen,
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
+     * target_t target) ;
      * </pre>
      */
-    public void signSingle(com.ibm.crypto.grep11.grpc.SignSingleRequest request,
+    default void signSingle(com.ibm.crypto.grep11.grpc.SignSingleRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.SignSingleResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSignSingleMethod(), responseObserver);
     }
@@ -1568,30 +1667,47 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_VerifySingle (
-     *     const unsigned char *pubKey, size_t pubKeylen,
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR signature, CK_ULONG signaturelen,
-     *     target_t target) ;
+     * const unsigned char *pubKeyBytes, size_t pubKeyByteslen,
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR signature, CK_ULONG signaturelen,
+     * target_t target) ;
      * </pre>
      */
-    public void verifySingle(com.ibm.crypto.grep11.grpc.VerifySingleRequest request,
+    default void verifySingle(com.ibm.crypto.grep11.grpc.VerifySingleRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.VerifySingleResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getVerifySingleMethod(), responseObserver);
     }
 
     /**
      * <pre>
-     * CK_RV m_GenerateKey (
-     *     CK_MECHANISM_PTR mech,
-     *     CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
-     *     const unsigned char *pin, size_t pinlen,
-     *     unsigned char *keyBytes, size_t *keyByteslen,
-     *     unsigned char *checkSum, size_t *checkSumlen,
-     *     target_t target) ;
+     * CK_RV m_ReencryptSingle (
+     * const unsigned char *decKeyBytes, size_t decKeyByteslen,
+     * const unsigned char *encKeyBytes, size_t encKeyByteslen,
+     * CK_MECHANISM_PTR decMech,
+     * CK_MECHANISM_PTR encMech,
+     * CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
+     * CK_BYTE_PTR reciphered, CK_ULONG_PTR recipheredlen,
+     * target_t target) ;
      * </pre>
      */
-    public void generateKey(com.ibm.crypto.grep11.grpc.GenerateKeyRequest request,
+    default void reencryptSingle(com.ibm.crypto.grep11.grpc.ReencryptSingleRequest request,
+        io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.ReencryptSingleResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getReencryptSingleMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * CK_RV m_GenerateKey (
+     * CK_MECHANISM_PTR mech,
+     * CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
+     * const unsigned char *pin, size_t pinlen,
+     * unsigned char *keyBytes, size_t *keyByteslen,
+     * unsigned char *checkSum, size_t *checkSumlen,
+     * target_t target) ;
+     * </pre>
+     */
+    default void generateKey(com.ibm.crypto.grep11.grpc.GenerateKeyRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.GenerateKeyResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGenerateKeyMethod(), responseObserver);
     }
@@ -1599,16 +1715,16 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GenerateKeyPair (
-     *     CK_MECHANISM_PTR mech,
-     *     CK_ATTRIBUTE_PTR pubKeyTemplateBytes, CK_ULONG pubKeyTemplateByteslen,
-     *     CK_ATTRIBUTE_PTR privKeyTemplateBytes, CK_ULONG privKeyTemplateByteslen,
-     *     const unsigned char *pin, size_t pinlen,
-     *     unsigned char *privKeyBytes, size_t *privKeyByteslen,
-     *     unsigned char *pubKeyBytes, size_t *pubKeyByteslen,
-     *     target_t target) ;
+     * CK_MECHANISM_PTR mech,
+     * CK_ATTRIBUTE_PTR pubKeyTemplateBytes, CK_ULONG pubKeyTemplateByteslen,
+     * CK_ATTRIBUTE_PTR privKeyTemplateBytes, CK_ULONG privKeyTemplateByteslen,
+     * const unsigned char *pin, size_t pinlen,
+     * unsigned char *privKeyBytes, size_t *privKeyByteslen,
+     * unsigned char *pubKeyBytes, size_t *pubKeyByteslen,
+     * target_t target) ;
      * </pre>
      */
-    public void generateKeyPair(com.ibm.crypto.grep11.grpc.GenerateKeyPairRequest request,
+    default void generateKeyPair(com.ibm.crypto.grep11.grpc.GenerateKeyPairRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.GenerateKeyPairResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGenerateKeyPairMethod(), responseObserver);
     }
@@ -1616,15 +1732,15 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_WrapKey (
-     *     const unsigned char *key, size_t keylen,
-     *     const unsigned char *keK, size_t keKlen,
-     *     const unsigned char *macKey, size_t macKeylen,
-     *     const CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR wrapped, CK_ULONG_PTR wrappedlen,
-     *     target_t target) ;
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * const unsigned char *keKBytes, size_t keKByteslen,
+     * const unsigned char *macKeyBytes, size_t macKeyByteslen,
+     * const CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR wrapped, CK_ULONG_PTR wrappedlen,
+     * target_t target) ;
      * </pre>
      */
-    public void wrapKey(com.ibm.crypto.grep11.grpc.WrapKeyRequest request,
+    default void wrapKey(com.ibm.crypto.grep11.grpc.WrapKeyRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.WrapKeyResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getWrapKeyMethod(), responseObserver);
     }
@@ -1632,18 +1748,18 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_UnwrapKey (
-     *     const CK_BYTE_PTR wrapped, CK_ULONG wrappedlen,
-     *     const unsigned char *keK, size_t keKlen,
-     *     const unsigned char *macKey, size_t macKeylen,
-     *     const unsigned char *pin, size_t pinlen,
-     *     const CK_MECHANISM_PTR mech,
-     *     const CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
-     *     unsigned char *unwrappedBytes, size_t *unwrappedByteslen,
-     *     CK_BYTE_PTR checkSum, CK_ULONG *checkSumlen,
-     *     target_t target) ;
+     * const CK_BYTE_PTR wrapped, CK_ULONG wrappedlen,
+     * const unsigned char *keKBytes, size_t keKByteslen,
+     * const unsigned char *macKeyBytes, size_t macKeyByteslen,
+     * const unsigned char *pin, size_t pinlen,
+     * const CK_MECHANISM_PTR mech,
+     * const CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
+     * unsigned char *unwrappedBytes, size_t *unwrappedByteslen,
+     * CK_BYTE_PTR checkSum, CK_ULONG *checkSumlen,
+     * target_t target) ;
      * </pre>
      */
-    public void unwrapKey(com.ibm.crypto.grep11.grpc.UnwrapKeyRequest request,
+    default void unwrapKey(com.ibm.crypto.grep11.grpc.UnwrapKeyRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.UnwrapKeyResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUnwrapKeyMethod(), responseObserver);
     }
@@ -1651,17 +1767,17 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DeriveKey (
-     *     CK_MECHANISM_PTR mech,
-     *     CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
-     *     const unsigned char *baseKey, size_t baseKeylen,
-     *     const unsigned char *data, size_t datalen,
-     *     const unsigned char *pin, size_t pinlen,
-     *     unsigned char *newKeyBytes, size_t *newKeyByteslen,
-     *     unsigned char *checkSum, size_t *checkSumlen,
-     *     target_t target) ;
+     * CK_MECHANISM_PTR mech,
+     * CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
+     * const unsigned char *baseKeyBytes, size_t baseKeyByteslen,
+     * const unsigned char *data, size_t datalen,
+     * const unsigned char *pin, size_t pinlen,
+     * unsigned char *newKeyBytes, size_t *newKeyByteslen,
+     * unsigned char *checkSum, size_t *checkSumlen,
+     * target_t target) ;
      * </pre>
      */
-    public void deriveKey(com.ibm.crypto.grep11.grpc.DeriveKeyRequest request,
+    default void deriveKey(com.ibm.crypto.grep11.grpc.DeriveKeyRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.DeriveKeyResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeriveKeyMethod(), responseObserver);
     }
@@ -1669,12 +1785,12 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GetMechanismList (
-     *     CK_SLOT_ID slot,
-     *     CK_MECHANISM_TYPE_PTR mechs, CK_ULONG_PTR mechslen,
-     *     target_t target) ;
+     * CK_SLOT_ID slot,
+     * CK_MECHANISM_TYPE_PTR mechs, CK_ULONG_PTR mechslen,
+     * target_t target) ;
      * </pre>
      */
-    public void getMechanismList(com.ibm.crypto.grep11.grpc.GetMechanismListRequest request,
+    default void getMechanismList(com.ibm.crypto.grep11.grpc.GetMechanismListRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.GetMechanismListResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetMechanismListMethod(), responseObserver);
     }
@@ -1682,13 +1798,13 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GetMechanismInfo (
-     *     CK_SLOT_ID slot,
-     *     CK_MECHANISM_TYPE mech,
-     *     CK_MECHANISM_INFO_PTR mechInfo,
-     *     target_t target) ;
+     * CK_SLOT_ID slot,
+     * CK_MECHANISM_TYPE mech,
+     * CK_MECHANISM_INFO_PTR mechInfo,
+     * target_t target) ;
      * </pre>
      */
-    public void getMechanismInfo(com.ibm.crypto.grep11.grpc.GetMechanismInfoRequest request,
+    default void getMechanismInfo(com.ibm.crypto.grep11.grpc.GetMechanismInfoRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.GetMechanismInfoResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetMechanismInfoMethod(), responseObserver);
     }
@@ -1696,12 +1812,12 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GetAttributeValue (
-     *     const unsigned char *object, size_t objectlen,
-     *     CK_ATTRIBUTE_PTR attributesBytes, CK_ULONG attributesByteslen,
-     *     target_t target) ;
+     * const unsigned char *object, size_t objectlen,
+     * CK_ATTRIBUTE_PTR attributesBytes, CK_ULONG attributesByteslen,
+     * target_t target) ;
      * </pre>
      */
-    public void getAttributeValue(com.ibm.crypto.grep11.grpc.GetAttributeValueRequest request,
+    default void getAttributeValue(com.ibm.crypto.grep11.grpc.GetAttributeValueRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.GetAttributeValueResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAttributeValueMethod(), responseObserver);
     }
@@ -1709,294 +1825,72 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SetAttributeValue (
-     *     unsigned char *object, size_t objectlen,
-     *     CK_ATTRIBUTE_PTR attributesBytes, CK_ULONG attributesByteslen,
-     *     target_t target) ;
+     * unsigned char *object, size_t objectlen,
+     * CK_ATTRIBUTE_PTR attributesBytes, CK_ULONG attributesByteslen,
+     * target_t target) ;
      * </pre>
      */
-    public void setAttributeValue(com.ibm.crypto.grep11.grpc.SetAttributeValueRequest request,
+    default void setAttributeValue(com.ibm.crypto.grep11.grpc.SetAttributeValueRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.SetAttributeValueResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSetAttributeValueMethod(), responseObserver);
     }
 
     /**
+     * <pre>
+     * CK_RV m_Login (
+     * CK_UTF8CHAR_PTR pin, CK_ULONG pinLen,
+     * const unsigned char *nonce, size_t noncelen,
+     * unsigned char *pinblob, size_t *pinbloblen,
+     * target_t target) ;
+     * </pre>
      */
-    public void rewrapKeyBlob(com.ibm.crypto.grep11.grpc.RewrapKeyBlobRequest request,
-        io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.RewrapKeyBlobResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRewrapKeyBlobMethod(), responseObserver);
+    default void login(com.ibm.crypto.grep11.grpc.LoginRequest request,
+        io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.LoginResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getLoginMethod(), responseObserver);
     }
 
-    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
-      return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
-          .addMethod(
-            getGenerateRandomMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.GenerateRandomRequest,
-                com.ibm.crypto.grep11.grpc.GenerateRandomResponse>(
-                  this, METHODID_GENERATE_RANDOM)))
-          .addMethod(
-            getDigestInitMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.DigestInitRequest,
-                com.ibm.crypto.grep11.grpc.DigestInitResponse>(
-                  this, METHODID_DIGEST_INIT)))
-          .addMethod(
-            getDigestMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.DigestRequest,
-                com.ibm.crypto.grep11.grpc.DigestResponse>(
-                  this, METHODID_DIGEST)))
-          .addMethod(
-            getDigestUpdateMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.DigestUpdateRequest,
-                com.ibm.crypto.grep11.grpc.DigestUpdateResponse>(
-                  this, METHODID_DIGEST_UPDATE)))
-          .addMethod(
-            getDigestKeyMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.DigestKeyRequest,
-                com.ibm.crypto.grep11.grpc.DigestKeyResponse>(
-                  this, METHODID_DIGEST_KEY)))
-          .addMethod(
-            getDigestFinalMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.DigestFinalRequest,
-                com.ibm.crypto.grep11.grpc.DigestFinalResponse>(
-                  this, METHODID_DIGEST_FINAL)))
-          .addMethod(
-            getDigestSingleMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.DigestSingleRequest,
-                com.ibm.crypto.grep11.grpc.DigestSingleResponse>(
-                  this, METHODID_DIGEST_SINGLE)))
-          .addMethod(
-            getEncryptInitMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.EncryptInitRequest,
-                com.ibm.crypto.grep11.grpc.EncryptInitResponse>(
-                  this, METHODID_ENCRYPT_INIT)))
-          .addMethod(
-            getDecryptInitMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.DecryptInitRequest,
-                com.ibm.crypto.grep11.grpc.DecryptInitResponse>(
-                  this, METHODID_DECRYPT_INIT)))
-          .addMethod(
-            getEncryptUpdateMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.EncryptUpdateRequest,
-                com.ibm.crypto.grep11.grpc.EncryptUpdateResponse>(
-                  this, METHODID_ENCRYPT_UPDATE)))
-          .addMethod(
-            getDecryptUpdateMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.DecryptUpdateRequest,
-                com.ibm.crypto.grep11.grpc.DecryptUpdateResponse>(
-                  this, METHODID_DECRYPT_UPDATE)))
-          .addMethod(
-            getEncryptMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.EncryptRequest,
-                com.ibm.crypto.grep11.grpc.EncryptResponse>(
-                  this, METHODID_ENCRYPT)))
-          .addMethod(
-            getDecryptMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.DecryptRequest,
-                com.ibm.crypto.grep11.grpc.DecryptResponse>(
-                  this, METHODID_DECRYPT)))
-          .addMethod(
-            getEncryptFinalMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.EncryptFinalRequest,
-                com.ibm.crypto.grep11.grpc.EncryptFinalResponse>(
-                  this, METHODID_ENCRYPT_FINAL)))
-          .addMethod(
-            getDecryptFinalMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.DecryptFinalRequest,
-                com.ibm.crypto.grep11.grpc.DecryptFinalResponse>(
-                  this, METHODID_DECRYPT_FINAL)))
-          .addMethod(
-            getEncryptSingleMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.EncryptSingleRequest,
-                com.ibm.crypto.grep11.grpc.EncryptSingleResponse>(
-                  this, METHODID_ENCRYPT_SINGLE)))
-          .addMethod(
-            getDecryptSingleMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.DecryptSingleRequest,
-                com.ibm.crypto.grep11.grpc.DecryptSingleResponse>(
-                  this, METHODID_DECRYPT_SINGLE)))
-          .addMethod(
-            getSignInitMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.SignInitRequest,
-                com.ibm.crypto.grep11.grpc.SignInitResponse>(
-                  this, METHODID_SIGN_INIT)))
-          .addMethod(
-            getVerifyInitMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.VerifyInitRequest,
-                com.ibm.crypto.grep11.grpc.VerifyInitResponse>(
-                  this, METHODID_VERIFY_INIT)))
-          .addMethod(
-            getSignUpdateMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.SignUpdateRequest,
-                com.ibm.crypto.grep11.grpc.SignUpdateResponse>(
-                  this, METHODID_SIGN_UPDATE)))
-          .addMethod(
-            getVerifyUpdateMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.VerifyUpdateRequest,
-                com.ibm.crypto.grep11.grpc.VerifyUpdateResponse>(
-                  this, METHODID_VERIFY_UPDATE)))
-          .addMethod(
-            getSignFinalMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.SignFinalRequest,
-                com.ibm.crypto.grep11.grpc.SignFinalResponse>(
-                  this, METHODID_SIGN_FINAL)))
-          .addMethod(
-            getVerifyFinalMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.VerifyFinalRequest,
-                com.ibm.crypto.grep11.grpc.VerifyFinalResponse>(
-                  this, METHODID_VERIFY_FINAL)))
-          .addMethod(
-            getSignMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.SignRequest,
-                com.ibm.crypto.grep11.grpc.SignResponse>(
-                  this, METHODID_SIGN)))
-          .addMethod(
-            getVerifyMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.VerifyRequest,
-                com.ibm.crypto.grep11.grpc.VerifyResponse>(
-                  this, METHODID_VERIFY)))
-          .addMethod(
-            getSignSingleMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.SignSingleRequest,
-                com.ibm.crypto.grep11.grpc.SignSingleResponse>(
-                  this, METHODID_SIGN_SINGLE)))
-          .addMethod(
-            getVerifySingleMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.VerifySingleRequest,
-                com.ibm.crypto.grep11.grpc.VerifySingleResponse>(
-                  this, METHODID_VERIFY_SINGLE)))
-          .addMethod(
-            getGenerateKeyMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.GenerateKeyRequest,
-                com.ibm.crypto.grep11.grpc.GenerateKeyResponse>(
-                  this, METHODID_GENERATE_KEY)))
-          .addMethod(
-            getGenerateKeyPairMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.GenerateKeyPairRequest,
-                com.ibm.crypto.grep11.grpc.GenerateKeyPairResponse>(
-                  this, METHODID_GENERATE_KEY_PAIR)))
-          .addMethod(
-            getWrapKeyMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.WrapKeyRequest,
-                com.ibm.crypto.grep11.grpc.WrapKeyResponse>(
-                  this, METHODID_WRAP_KEY)))
-          .addMethod(
-            getUnwrapKeyMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.UnwrapKeyRequest,
-                com.ibm.crypto.grep11.grpc.UnwrapKeyResponse>(
-                  this, METHODID_UNWRAP_KEY)))
-          .addMethod(
-            getDeriveKeyMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.DeriveKeyRequest,
-                com.ibm.crypto.grep11.grpc.DeriveKeyResponse>(
-                  this, METHODID_DERIVE_KEY)))
-          .addMethod(
-            getGetMechanismListMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.GetMechanismListRequest,
-                com.ibm.crypto.grep11.grpc.GetMechanismListResponse>(
-                  this, METHODID_GET_MECHANISM_LIST)))
-          .addMethod(
-            getGetMechanismInfoMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.GetMechanismInfoRequest,
-                com.ibm.crypto.grep11.grpc.GetMechanismInfoResponse>(
-                  this, METHODID_GET_MECHANISM_INFO)))
-          .addMethod(
-            getGetAttributeValueMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.GetAttributeValueRequest,
-                com.ibm.crypto.grep11.grpc.GetAttributeValueResponse>(
-                  this, METHODID_GET_ATTRIBUTE_VALUE)))
-          .addMethod(
-            getSetAttributeValueMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.SetAttributeValueRequest,
-                com.ibm.crypto.grep11.grpc.SetAttributeValueResponse>(
-                  this, METHODID_SET_ATTRIBUTE_VALUE)))
-          .addMethod(
-            getRewrapKeyBlobMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                com.ibm.crypto.grep11.grpc.RewrapKeyBlobRequest,
-                com.ibm.crypto.grep11.grpc.RewrapKeyBlobResponse>(
-                  this, METHODID_REWRAP_KEY_BLOB)))
-          .build();
+    /**
+     * <pre>
+     * CK_RV m_Logout (
+     * const unsigned char *pinblob, size_t pinbloblen,
+     * target_t target) ;
+     * </pre>
+     */
+    default void logout(com.ibm.crypto.grep11.grpc.LogoutRequest request,
+        io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.LogoutResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getLogoutMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void rewrapKeyBlob(com.ibm.crypto.grep11.grpc.RewrapKeyBlobRequest request,
+        io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.RewrapKeyBlobResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRewrapKeyBlobMethod(), responseObserver);
     }
   }
 
   /**
+   * Base class for the server implementation of the service Crypto.
    * <pre>
-   * See https://www.ibm.com/downloads/cas/WXRDPRAN for further documentation
+   * See ep11-structure.pdf from support program zip file for further documentation
    * </pre>
    */
-  public static final class CryptoStub extends io.grpc.stub.AbstractAsyncStub<CryptoStub> {
+  public static abstract class CryptoImplBase
+      implements io.grpc.BindableService, AsyncService {
+
+    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
+      return CryptoGrpc.bindService(this);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do asynchronous rpc calls to service Crypto.
+   * <pre>
+   * See ep11-structure.pdf from support program zip file for further documentation
+   * </pre>
+   */
+  public static final class CryptoStub
+      extends io.grpc.stub.AbstractAsyncStub<CryptoStub> {
     private CryptoStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -2011,8 +1905,8 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GenerateRandom (
-     *     CK_BYTE_PTR rnd, CK_ULONG rndlen,
-     *     target_t target) ;
+     * CK_BYTE_PTR rnd, CK_ULONG rndlen,
+     * target_t target) ;
      * </pre>
      */
     public void generateRandom(com.ibm.crypto.grep11.grpc.GenerateRandomRequest request,
@@ -2024,9 +1918,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestInit (
-     *     unsigned char *state, size_t *statelen,
-     *     const CK_MECHANISM_PTR mech,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * const CK_MECHANISM_PTR mech,
+     * target_t target) ;
      * </pre>
      */
     public void digestInit(com.ibm.crypto.grep11.grpc.DigestInitRequest request,
@@ -2038,10 +1932,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Digest (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
+     * target_t target) ;
      * </pre>
      */
     public void digest(com.ibm.crypto.grep11.grpc.DigestRequest request,
@@ -2053,9 +1947,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * target_t target) ;
      * </pre>
      */
     public void digestUpdate(com.ibm.crypto.grep11.grpc.DigestUpdateRequest request,
@@ -2067,9 +1961,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestKey (
-     *     unsigned char *state, size_t statelen,
-     *     const unsigned char *key, size_t keylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public void digestKey(com.ibm.crypto.grep11.grpc.DigestKeyRequest request,
@@ -2081,9 +1975,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
+     * target_t target) ;
      * </pre>
      */
     public void digestFinal(com.ibm.crypto.grep11.grpc.DigestFinalRequest request,
@@ -2095,10 +1989,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestSingle (
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
-     *     target_t target) ;
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
+     * target_t target) ;
      * </pre>
      */
     public void digestSingle(com.ibm.crypto.grep11.grpc.DigestSingleRequest request,
@@ -2110,10 +2004,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_EncryptInit (
-     *     unsigned char *state, size_t *statelen,
-     *     CK_MECHANISM_PTR mech,
-     *     const unsigned char *key, size_t keylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * CK_MECHANISM_PTR mech,
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public void encryptInit(com.ibm.crypto.grep11.grpc.EncryptInitRequest request,
@@ -2125,10 +2019,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DecryptInit (
-     *     unsigned char *state, size_t *statelen,
-     *     CK_MECHANISM_PTR mech,
-     *     const unsigned char *key, size_t keylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * CK_MECHANISM_PTR mech,
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public void decryptInit(com.ibm.crypto.grep11.grpc.DecryptInitRequest request,
@@ -2140,10 +2034,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_EncryptUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR plain, CK_ULONG plainlen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR plain, CK_ULONG plainlen,
+     * CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
+     * target_t target) ;
      * </pre>
      */
     public void encryptUpdate(com.ibm.crypto.grep11.grpc.EncryptUpdateRequest request,
@@ -2155,10 +2049,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DecryptUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
-     *     CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
+     * CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
+     * target_t target) ;
      * </pre>
      */
     public void decryptUpdate(com.ibm.crypto.grep11.grpc.DecryptUpdateRequest request,
@@ -2170,10 +2064,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Encrypt (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR plain, CK_ULONG plainlen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR plain, CK_ULONG plainlen,
+     * CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
+     * target_t target) ;
      * </pre>
      */
     public void encrypt(com.ibm.crypto.grep11.grpc.EncryptRequest request,
@@ -2185,10 +2079,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Decrypt (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
-     *     CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
+     * CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
+     * target_t target) ;
      * </pre>
      */
     public void decrypt(com.ibm.crypto.grep11.grpc.DecryptRequest request,
@@ -2200,9 +2094,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_EncryptFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
+     * target_t target) ;
      * </pre>
      */
     public void encryptFinal(com.ibm.crypto.grep11.grpc.EncryptFinalRequest request,
@@ -2214,9 +2108,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DecryptFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
+     * target_t target) ;
      * </pre>
      */
     public void decryptFinal(com.ibm.crypto.grep11.grpc.DecryptFinalRequest request,
@@ -2228,11 +2122,11 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_EncryptSingle (
-     *     const unsigned char *key, size_t keylen,
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR plain, CK_ULONG plainlen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
-     *     target_t target) ;
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR plain, CK_ULONG plainlen,
+     * CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
+     * target_t target) ;
      * </pre>
      */
     public void encryptSingle(com.ibm.crypto.grep11.grpc.EncryptSingleRequest request,
@@ -2244,11 +2138,11 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DecryptSingle (
-     *     const unsigned char *key, size_t keylen,
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
-     *     CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
-     *     target_t target) ;
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
+     * CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
+     * target_t target) ;
      * </pre>
      */
     public void decryptSingle(com.ibm.crypto.grep11.grpc.DecryptSingleRequest request,
@@ -2260,10 +2154,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SignInit (
-     *     unsigned char *state, size_t *statelen,
-     *     CK_MECHANISM_PTR mech,
-     *     const unsigned char *privKey, size_t privKeylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * CK_MECHANISM_PTR mech,
+     * const unsigned char *privKeyBytes, size_t privKeyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public void signInit(com.ibm.crypto.grep11.grpc.SignInitRequest request,
@@ -2275,10 +2169,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_VerifyInit (
-     *     unsigned char *state, size_t *statelen,
-     *     CK_MECHANISM_PTR mech,
-     *     const unsigned char *pubKey, size_t pubKeylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * CK_MECHANISM_PTR mech,
+     * const unsigned char *pubKeyBytes, size_t pubKeyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public void verifyInit(com.ibm.crypto.grep11.grpc.VerifyInitRequest request,
@@ -2290,9 +2184,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SignUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * target_t target) ;
      * </pre>
      */
     public void signUpdate(com.ibm.crypto.grep11.grpc.SignUpdateRequest request,
@@ -2304,9 +2198,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_VerifyUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * target_t target) ;
      * </pre>
      */
     public void verifyUpdate(com.ibm.crypto.grep11.grpc.VerifyUpdateRequest request,
@@ -2318,9 +2212,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SignFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public void signFinal(com.ibm.crypto.grep11.grpc.SignFinalRequest request,
@@ -2332,9 +2226,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_VerifyFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR signature, CK_ULONG signaturelen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR signature, CK_ULONG signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public void verifyFinal(com.ibm.crypto.grep11.grpc.VerifyFinalRequest request,
@@ -2346,10 +2240,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Sign (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public void sign(com.ibm.crypto.grep11.grpc.SignRequest request,
@@ -2361,10 +2255,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Verify (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR signature, CK_ULONG signaturelen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR signature, CK_ULONG signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public void verify(com.ibm.crypto.grep11.grpc.VerifyRequest request,
@@ -2376,11 +2270,11 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SignSingle (
-     *     const unsigned char *privKey, size_t privKeylen,
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
-     *     target_t target) ;
+     * const unsigned char *privKeyBytes, size_t privKeyByteslen,
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public void signSingle(com.ibm.crypto.grep11.grpc.SignSingleRequest request,
@@ -2392,11 +2286,11 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_VerifySingle (
-     *     const unsigned char *pubKey, size_t pubKeylen,
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR signature, CK_ULONG signaturelen,
-     *     target_t target) ;
+     * const unsigned char *pubKeyBytes, size_t pubKeyByteslen,
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR signature, CK_ULONG signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public void verifySingle(com.ibm.crypto.grep11.grpc.VerifySingleRequest request,
@@ -2407,13 +2301,31 @@ public final class CryptoGrpc {
 
     /**
      * <pre>
+     * CK_RV m_ReencryptSingle (
+     * const unsigned char *decKeyBytes, size_t decKeyByteslen,
+     * const unsigned char *encKeyBytes, size_t encKeyByteslen,
+     * CK_MECHANISM_PTR decMech,
+     * CK_MECHANISM_PTR encMech,
+     * CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
+     * CK_BYTE_PTR reciphered, CK_ULONG_PTR recipheredlen,
+     * target_t target) ;
+     * </pre>
+     */
+    public void reencryptSingle(com.ibm.crypto.grep11.grpc.ReencryptSingleRequest request,
+        io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.ReencryptSingleResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getReencryptSingleMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
      * CK_RV m_GenerateKey (
-     *     CK_MECHANISM_PTR mech,
-     *     CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
-     *     const unsigned char *pin, size_t pinlen,
-     *     unsigned char *keyBytes, size_t *keyByteslen,
-     *     unsigned char *checkSum, size_t *checkSumlen,
-     *     target_t target) ;
+     * CK_MECHANISM_PTR mech,
+     * CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
+     * const unsigned char *pin, size_t pinlen,
+     * unsigned char *keyBytes, size_t *keyByteslen,
+     * unsigned char *checkSum, size_t *checkSumlen,
+     * target_t target) ;
      * </pre>
      */
     public void generateKey(com.ibm.crypto.grep11.grpc.GenerateKeyRequest request,
@@ -2425,13 +2337,13 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GenerateKeyPair (
-     *     CK_MECHANISM_PTR mech,
-     *     CK_ATTRIBUTE_PTR pubKeyTemplateBytes, CK_ULONG pubKeyTemplateByteslen,
-     *     CK_ATTRIBUTE_PTR privKeyTemplateBytes, CK_ULONG privKeyTemplateByteslen,
-     *     const unsigned char *pin, size_t pinlen,
-     *     unsigned char *privKeyBytes, size_t *privKeyByteslen,
-     *     unsigned char *pubKeyBytes, size_t *pubKeyByteslen,
-     *     target_t target) ;
+     * CK_MECHANISM_PTR mech,
+     * CK_ATTRIBUTE_PTR pubKeyTemplateBytes, CK_ULONG pubKeyTemplateByteslen,
+     * CK_ATTRIBUTE_PTR privKeyTemplateBytes, CK_ULONG privKeyTemplateByteslen,
+     * const unsigned char *pin, size_t pinlen,
+     * unsigned char *privKeyBytes, size_t *privKeyByteslen,
+     * unsigned char *pubKeyBytes, size_t *pubKeyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public void generateKeyPair(com.ibm.crypto.grep11.grpc.GenerateKeyPairRequest request,
@@ -2443,12 +2355,12 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_WrapKey (
-     *     const unsigned char *key, size_t keylen,
-     *     const unsigned char *keK, size_t keKlen,
-     *     const unsigned char *macKey, size_t macKeylen,
-     *     const CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR wrapped, CK_ULONG_PTR wrappedlen,
-     *     target_t target) ;
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * const unsigned char *keKBytes, size_t keKByteslen,
+     * const unsigned char *macKeyBytes, size_t macKeyByteslen,
+     * const CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR wrapped, CK_ULONG_PTR wrappedlen,
+     * target_t target) ;
      * </pre>
      */
     public void wrapKey(com.ibm.crypto.grep11.grpc.WrapKeyRequest request,
@@ -2460,15 +2372,15 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_UnwrapKey (
-     *     const CK_BYTE_PTR wrapped, CK_ULONG wrappedlen,
-     *     const unsigned char *keK, size_t keKlen,
-     *     const unsigned char *macKey, size_t macKeylen,
-     *     const unsigned char *pin, size_t pinlen,
-     *     const CK_MECHANISM_PTR mech,
-     *     const CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
-     *     unsigned char *unwrappedBytes, size_t *unwrappedByteslen,
-     *     CK_BYTE_PTR checkSum, CK_ULONG *checkSumlen,
-     *     target_t target) ;
+     * const CK_BYTE_PTR wrapped, CK_ULONG wrappedlen,
+     * const unsigned char *keKBytes, size_t keKByteslen,
+     * const unsigned char *macKeyBytes, size_t macKeyByteslen,
+     * const unsigned char *pin, size_t pinlen,
+     * const CK_MECHANISM_PTR mech,
+     * const CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
+     * unsigned char *unwrappedBytes, size_t *unwrappedByteslen,
+     * CK_BYTE_PTR checkSum, CK_ULONG *checkSumlen,
+     * target_t target) ;
      * </pre>
      */
     public void unwrapKey(com.ibm.crypto.grep11.grpc.UnwrapKeyRequest request,
@@ -2480,14 +2392,14 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DeriveKey (
-     *     CK_MECHANISM_PTR mech,
-     *     CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
-     *     const unsigned char *baseKey, size_t baseKeylen,
-     *     const unsigned char *data, size_t datalen,
-     *     const unsigned char *pin, size_t pinlen,
-     *     unsigned char *newKeyBytes, size_t *newKeyByteslen,
-     *     unsigned char *checkSum, size_t *checkSumlen,
-     *     target_t target) ;
+     * CK_MECHANISM_PTR mech,
+     * CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
+     * const unsigned char *baseKeyBytes, size_t baseKeyByteslen,
+     * const unsigned char *data, size_t datalen,
+     * const unsigned char *pin, size_t pinlen,
+     * unsigned char *newKeyBytes, size_t *newKeyByteslen,
+     * unsigned char *checkSum, size_t *checkSumlen,
+     * target_t target) ;
      * </pre>
      */
     public void deriveKey(com.ibm.crypto.grep11.grpc.DeriveKeyRequest request,
@@ -2499,9 +2411,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GetMechanismList (
-     *     CK_SLOT_ID slot,
-     *     CK_MECHANISM_TYPE_PTR mechs, CK_ULONG_PTR mechslen,
-     *     target_t target) ;
+     * CK_SLOT_ID slot,
+     * CK_MECHANISM_TYPE_PTR mechs, CK_ULONG_PTR mechslen,
+     * target_t target) ;
      * </pre>
      */
     public void getMechanismList(com.ibm.crypto.grep11.grpc.GetMechanismListRequest request,
@@ -2513,10 +2425,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GetMechanismInfo (
-     *     CK_SLOT_ID slot,
-     *     CK_MECHANISM_TYPE mech,
-     *     CK_MECHANISM_INFO_PTR mechInfo,
-     *     target_t target) ;
+     * CK_SLOT_ID slot,
+     * CK_MECHANISM_TYPE mech,
+     * CK_MECHANISM_INFO_PTR mechInfo,
+     * target_t target) ;
      * </pre>
      */
     public void getMechanismInfo(com.ibm.crypto.grep11.grpc.GetMechanismInfoRequest request,
@@ -2528,9 +2440,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GetAttributeValue (
-     *     const unsigned char *object, size_t objectlen,
-     *     CK_ATTRIBUTE_PTR attributesBytes, CK_ULONG attributesByteslen,
-     *     target_t target) ;
+     * const unsigned char *object, size_t objectlen,
+     * CK_ATTRIBUTE_PTR attributesBytes, CK_ULONG attributesByteslen,
+     * target_t target) ;
      * </pre>
      */
     public void getAttributeValue(com.ibm.crypto.grep11.grpc.GetAttributeValueRequest request,
@@ -2542,15 +2454,43 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SetAttributeValue (
-     *     unsigned char *object, size_t objectlen,
-     *     CK_ATTRIBUTE_PTR attributesBytes, CK_ULONG attributesByteslen,
-     *     target_t target) ;
+     * unsigned char *object, size_t objectlen,
+     * CK_ATTRIBUTE_PTR attributesBytes, CK_ULONG attributesByteslen,
+     * target_t target) ;
      * </pre>
      */
     public void setAttributeValue(com.ibm.crypto.grep11.grpc.SetAttributeValueRequest request,
         io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.SetAttributeValueResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getSetAttributeValueMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * CK_RV m_Login (
+     * CK_UTF8CHAR_PTR pin, CK_ULONG pinLen,
+     * const unsigned char *nonce, size_t noncelen,
+     * unsigned char *pinblob, size_t *pinbloblen,
+     * target_t target) ;
+     * </pre>
+     */
+    public void login(com.ibm.crypto.grep11.grpc.LoginRequest request,
+        io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.LoginResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getLoginMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * CK_RV m_Logout (
+     * const unsigned char *pinblob, size_t pinbloblen,
+     * target_t target) ;
+     * </pre>
+     */
+    public void logout(com.ibm.crypto.grep11.grpc.LogoutRequest request,
+        io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.LogoutResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getLogoutMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -2563,11 +2503,13 @@ public final class CryptoGrpc {
   }
 
   /**
+   * A stub to allow clients to do synchronous rpc calls to service Crypto.
    * <pre>
-   * See https://www.ibm.com/downloads/cas/WXRDPRAN for further documentation
+   * See ep11-structure.pdf from support program zip file for further documentation
    * </pre>
    */
-  public static final class CryptoBlockingStub extends io.grpc.stub.AbstractBlockingStub<CryptoBlockingStub> {
+  public static final class CryptoBlockingStub
+      extends io.grpc.stub.AbstractBlockingStub<CryptoBlockingStub> {
     private CryptoBlockingStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -2582,8 +2524,8 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GenerateRandom (
-     *     CK_BYTE_PTR rnd, CK_ULONG rndlen,
-     *     target_t target) ;
+     * CK_BYTE_PTR rnd, CK_ULONG rndlen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.GenerateRandomResponse generateRandom(com.ibm.crypto.grep11.grpc.GenerateRandomRequest request) {
@@ -2594,9 +2536,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestInit (
-     *     unsigned char *state, size_t *statelen,
-     *     const CK_MECHANISM_PTR mech,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * const CK_MECHANISM_PTR mech,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.DigestInitResponse digestInit(com.ibm.crypto.grep11.grpc.DigestInitRequest request) {
@@ -2607,10 +2549,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Digest (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.DigestResponse digest(com.ibm.crypto.grep11.grpc.DigestRequest request) {
@@ -2621,9 +2563,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.DigestUpdateResponse digestUpdate(com.ibm.crypto.grep11.grpc.DigestUpdateRequest request) {
@@ -2634,9 +2576,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestKey (
-     *     unsigned char *state, size_t statelen,
-     *     const unsigned char *key, size_t keylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.DigestKeyResponse digestKey(com.ibm.crypto.grep11.grpc.DigestKeyRequest request) {
@@ -2647,9 +2589,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.DigestFinalResponse digestFinal(com.ibm.crypto.grep11.grpc.DigestFinalRequest request) {
@@ -2660,10 +2602,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestSingle (
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
-     *     target_t target) ;
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.DigestSingleResponse digestSingle(com.ibm.crypto.grep11.grpc.DigestSingleRequest request) {
@@ -2674,10 +2616,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_EncryptInit (
-     *     unsigned char *state, size_t *statelen,
-     *     CK_MECHANISM_PTR mech,
-     *     const unsigned char *key, size_t keylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * CK_MECHANISM_PTR mech,
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.EncryptInitResponse encryptInit(com.ibm.crypto.grep11.grpc.EncryptInitRequest request) {
@@ -2688,10 +2630,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DecryptInit (
-     *     unsigned char *state, size_t *statelen,
-     *     CK_MECHANISM_PTR mech,
-     *     const unsigned char *key, size_t keylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * CK_MECHANISM_PTR mech,
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.DecryptInitResponse decryptInit(com.ibm.crypto.grep11.grpc.DecryptInitRequest request) {
@@ -2702,10 +2644,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_EncryptUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR plain, CK_ULONG plainlen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR plain, CK_ULONG plainlen,
+     * CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.EncryptUpdateResponse encryptUpdate(com.ibm.crypto.grep11.grpc.EncryptUpdateRequest request) {
@@ -2716,10 +2658,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DecryptUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
-     *     CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
+     * CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.DecryptUpdateResponse decryptUpdate(com.ibm.crypto.grep11.grpc.DecryptUpdateRequest request) {
@@ -2730,10 +2672,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Encrypt (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR plain, CK_ULONG plainlen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR plain, CK_ULONG plainlen,
+     * CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.EncryptResponse encrypt(com.ibm.crypto.grep11.grpc.EncryptRequest request) {
@@ -2744,10 +2686,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Decrypt (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
-     *     CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
+     * CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.DecryptResponse decrypt(com.ibm.crypto.grep11.grpc.DecryptRequest request) {
@@ -2758,9 +2700,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_EncryptFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.EncryptFinalResponse encryptFinal(com.ibm.crypto.grep11.grpc.EncryptFinalRequest request) {
@@ -2771,9 +2713,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DecryptFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.DecryptFinalResponse decryptFinal(com.ibm.crypto.grep11.grpc.DecryptFinalRequest request) {
@@ -2784,11 +2726,11 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_EncryptSingle (
-     *     const unsigned char *key, size_t keylen,
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR plain, CK_ULONG plainlen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
-     *     target_t target) ;
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR plain, CK_ULONG plainlen,
+     * CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.EncryptSingleResponse encryptSingle(com.ibm.crypto.grep11.grpc.EncryptSingleRequest request) {
@@ -2799,11 +2741,11 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DecryptSingle (
-     *     const unsigned char *key, size_t keylen,
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
-     *     CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
-     *     target_t target) ;
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
+     * CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.DecryptSingleResponse decryptSingle(com.ibm.crypto.grep11.grpc.DecryptSingleRequest request) {
@@ -2814,10 +2756,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SignInit (
-     *     unsigned char *state, size_t *statelen,
-     *     CK_MECHANISM_PTR mech,
-     *     const unsigned char *privKey, size_t privKeylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * CK_MECHANISM_PTR mech,
+     * const unsigned char *privKeyBytes, size_t privKeyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.SignInitResponse signInit(com.ibm.crypto.grep11.grpc.SignInitRequest request) {
@@ -2828,10 +2770,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_VerifyInit (
-     *     unsigned char *state, size_t *statelen,
-     *     CK_MECHANISM_PTR mech,
-     *     const unsigned char *pubKey, size_t pubKeylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * CK_MECHANISM_PTR mech,
+     * const unsigned char *pubKeyBytes, size_t pubKeyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.VerifyInitResponse verifyInit(com.ibm.crypto.grep11.grpc.VerifyInitRequest request) {
@@ -2842,9 +2784,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SignUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.SignUpdateResponse signUpdate(com.ibm.crypto.grep11.grpc.SignUpdateRequest request) {
@@ -2855,9 +2797,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_VerifyUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.VerifyUpdateResponse verifyUpdate(com.ibm.crypto.grep11.grpc.VerifyUpdateRequest request) {
@@ -2868,9 +2810,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SignFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.SignFinalResponse signFinal(com.ibm.crypto.grep11.grpc.SignFinalRequest request) {
@@ -2881,9 +2823,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_VerifyFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR signature, CK_ULONG signaturelen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR signature, CK_ULONG signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.VerifyFinalResponse verifyFinal(com.ibm.crypto.grep11.grpc.VerifyFinalRequest request) {
@@ -2894,10 +2836,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Sign (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.SignResponse sign(com.ibm.crypto.grep11.grpc.SignRequest request) {
@@ -2908,10 +2850,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Verify (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR signature, CK_ULONG signaturelen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR signature, CK_ULONG signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.VerifyResponse verify(com.ibm.crypto.grep11.grpc.VerifyRequest request) {
@@ -2922,11 +2864,11 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SignSingle (
-     *     const unsigned char *privKey, size_t privKeylen,
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
-     *     target_t target) ;
+     * const unsigned char *privKeyBytes, size_t privKeyByteslen,
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.SignSingleResponse signSingle(com.ibm.crypto.grep11.grpc.SignSingleRequest request) {
@@ -2937,11 +2879,11 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_VerifySingle (
-     *     const unsigned char *pubKey, size_t pubKeylen,
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR signature, CK_ULONG signaturelen,
-     *     target_t target) ;
+     * const unsigned char *pubKeyBytes, size_t pubKeyByteslen,
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR signature, CK_ULONG signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.VerifySingleResponse verifySingle(com.ibm.crypto.grep11.grpc.VerifySingleRequest request) {
@@ -2951,13 +2893,30 @@ public final class CryptoGrpc {
 
     /**
      * <pre>
+     * CK_RV m_ReencryptSingle (
+     * const unsigned char *decKeyBytes, size_t decKeyByteslen,
+     * const unsigned char *encKeyBytes, size_t encKeyByteslen,
+     * CK_MECHANISM_PTR decMech,
+     * CK_MECHANISM_PTR encMech,
+     * CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
+     * CK_BYTE_PTR reciphered, CK_ULONG_PTR recipheredlen,
+     * target_t target) ;
+     * </pre>
+     */
+    public com.ibm.crypto.grep11.grpc.ReencryptSingleResponse reencryptSingle(com.ibm.crypto.grep11.grpc.ReencryptSingleRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getReencryptSingleMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
      * CK_RV m_GenerateKey (
-     *     CK_MECHANISM_PTR mech,
-     *     CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
-     *     const unsigned char *pin, size_t pinlen,
-     *     unsigned char *keyBytes, size_t *keyByteslen,
-     *     unsigned char *checkSum, size_t *checkSumlen,
-     *     target_t target) ;
+     * CK_MECHANISM_PTR mech,
+     * CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
+     * const unsigned char *pin, size_t pinlen,
+     * unsigned char *keyBytes, size_t *keyByteslen,
+     * unsigned char *checkSum, size_t *checkSumlen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.GenerateKeyResponse generateKey(com.ibm.crypto.grep11.grpc.GenerateKeyRequest request) {
@@ -2968,13 +2927,13 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GenerateKeyPair (
-     *     CK_MECHANISM_PTR mech,
-     *     CK_ATTRIBUTE_PTR pubKeyTemplateBytes, CK_ULONG pubKeyTemplateByteslen,
-     *     CK_ATTRIBUTE_PTR privKeyTemplateBytes, CK_ULONG privKeyTemplateByteslen,
-     *     const unsigned char *pin, size_t pinlen,
-     *     unsigned char *privKeyBytes, size_t *privKeyByteslen,
-     *     unsigned char *pubKeyBytes, size_t *pubKeyByteslen,
-     *     target_t target) ;
+     * CK_MECHANISM_PTR mech,
+     * CK_ATTRIBUTE_PTR pubKeyTemplateBytes, CK_ULONG pubKeyTemplateByteslen,
+     * CK_ATTRIBUTE_PTR privKeyTemplateBytes, CK_ULONG privKeyTemplateByteslen,
+     * const unsigned char *pin, size_t pinlen,
+     * unsigned char *privKeyBytes, size_t *privKeyByteslen,
+     * unsigned char *pubKeyBytes, size_t *pubKeyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.GenerateKeyPairResponse generateKeyPair(com.ibm.crypto.grep11.grpc.GenerateKeyPairRequest request) {
@@ -2985,12 +2944,12 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_WrapKey (
-     *     const unsigned char *key, size_t keylen,
-     *     const unsigned char *keK, size_t keKlen,
-     *     const unsigned char *macKey, size_t macKeylen,
-     *     const CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR wrapped, CK_ULONG_PTR wrappedlen,
-     *     target_t target) ;
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * const unsigned char *keKBytes, size_t keKByteslen,
+     * const unsigned char *macKeyBytes, size_t macKeyByteslen,
+     * const CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR wrapped, CK_ULONG_PTR wrappedlen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.WrapKeyResponse wrapKey(com.ibm.crypto.grep11.grpc.WrapKeyRequest request) {
@@ -3001,15 +2960,15 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_UnwrapKey (
-     *     const CK_BYTE_PTR wrapped, CK_ULONG wrappedlen,
-     *     const unsigned char *keK, size_t keKlen,
-     *     const unsigned char *macKey, size_t macKeylen,
-     *     const unsigned char *pin, size_t pinlen,
-     *     const CK_MECHANISM_PTR mech,
-     *     const CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
-     *     unsigned char *unwrappedBytes, size_t *unwrappedByteslen,
-     *     CK_BYTE_PTR checkSum, CK_ULONG *checkSumlen,
-     *     target_t target) ;
+     * const CK_BYTE_PTR wrapped, CK_ULONG wrappedlen,
+     * const unsigned char *keKBytes, size_t keKByteslen,
+     * const unsigned char *macKeyBytes, size_t macKeyByteslen,
+     * const unsigned char *pin, size_t pinlen,
+     * const CK_MECHANISM_PTR mech,
+     * const CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
+     * unsigned char *unwrappedBytes, size_t *unwrappedByteslen,
+     * CK_BYTE_PTR checkSum, CK_ULONG *checkSumlen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.UnwrapKeyResponse unwrapKey(com.ibm.crypto.grep11.grpc.UnwrapKeyRequest request) {
@@ -3020,14 +2979,14 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DeriveKey (
-     *     CK_MECHANISM_PTR mech,
-     *     CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
-     *     const unsigned char *baseKey, size_t baseKeylen,
-     *     const unsigned char *data, size_t datalen,
-     *     const unsigned char *pin, size_t pinlen,
-     *     unsigned char *newKeyBytes, size_t *newKeyByteslen,
-     *     unsigned char *checkSum, size_t *checkSumlen,
-     *     target_t target) ;
+     * CK_MECHANISM_PTR mech,
+     * CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
+     * const unsigned char *baseKeyBytes, size_t baseKeyByteslen,
+     * const unsigned char *data, size_t datalen,
+     * const unsigned char *pin, size_t pinlen,
+     * unsigned char *newKeyBytes, size_t *newKeyByteslen,
+     * unsigned char *checkSum, size_t *checkSumlen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.DeriveKeyResponse deriveKey(com.ibm.crypto.grep11.grpc.DeriveKeyRequest request) {
@@ -3038,9 +2997,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GetMechanismList (
-     *     CK_SLOT_ID slot,
-     *     CK_MECHANISM_TYPE_PTR mechs, CK_ULONG_PTR mechslen,
-     *     target_t target) ;
+     * CK_SLOT_ID slot,
+     * CK_MECHANISM_TYPE_PTR mechs, CK_ULONG_PTR mechslen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.GetMechanismListResponse getMechanismList(com.ibm.crypto.grep11.grpc.GetMechanismListRequest request) {
@@ -3051,10 +3010,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GetMechanismInfo (
-     *     CK_SLOT_ID slot,
-     *     CK_MECHANISM_TYPE mech,
-     *     CK_MECHANISM_INFO_PTR mechInfo,
-     *     target_t target) ;
+     * CK_SLOT_ID slot,
+     * CK_MECHANISM_TYPE mech,
+     * CK_MECHANISM_INFO_PTR mechInfo,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.GetMechanismInfoResponse getMechanismInfo(com.ibm.crypto.grep11.grpc.GetMechanismInfoRequest request) {
@@ -3065,9 +3024,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GetAttributeValue (
-     *     const unsigned char *object, size_t objectlen,
-     *     CK_ATTRIBUTE_PTR attributesBytes, CK_ULONG attributesByteslen,
-     *     target_t target) ;
+     * const unsigned char *object, size_t objectlen,
+     * CK_ATTRIBUTE_PTR attributesBytes, CK_ULONG attributesByteslen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.GetAttributeValueResponse getAttributeValue(com.ibm.crypto.grep11.grpc.GetAttributeValueRequest request) {
@@ -3078,14 +3037,40 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SetAttributeValue (
-     *     unsigned char *object, size_t objectlen,
-     *     CK_ATTRIBUTE_PTR attributesBytes, CK_ULONG attributesByteslen,
-     *     target_t target) ;
+     * unsigned char *object, size_t objectlen,
+     * CK_ATTRIBUTE_PTR attributesBytes, CK_ULONG attributesByteslen,
+     * target_t target) ;
      * </pre>
      */
     public com.ibm.crypto.grep11.grpc.SetAttributeValueResponse setAttributeValue(com.ibm.crypto.grep11.grpc.SetAttributeValueRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getSetAttributeValueMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * CK_RV m_Login (
+     * CK_UTF8CHAR_PTR pin, CK_ULONG pinLen,
+     * const unsigned char *nonce, size_t noncelen,
+     * unsigned char *pinblob, size_t *pinbloblen,
+     * target_t target) ;
+     * </pre>
+     */
+    public com.ibm.crypto.grep11.grpc.LoginResponse login(com.ibm.crypto.grep11.grpc.LoginRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getLoginMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * CK_RV m_Logout (
+     * const unsigned char *pinblob, size_t pinbloblen,
+     * target_t target) ;
+     * </pre>
+     */
+    public com.ibm.crypto.grep11.grpc.LogoutResponse logout(com.ibm.crypto.grep11.grpc.LogoutRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getLogoutMethod(), getCallOptions(), request);
     }
 
     /**
@@ -3097,11 +3082,13 @@ public final class CryptoGrpc {
   }
 
   /**
+   * A stub to allow clients to do ListenableFuture-style rpc calls to service Crypto.
    * <pre>
-   * See https://www.ibm.com/downloads/cas/WXRDPRAN for further documentation
+   * See ep11-structure.pdf from support program zip file for further documentation
    * </pre>
    */
-  public static final class CryptoFutureStub extends io.grpc.stub.AbstractFutureStub<CryptoFutureStub> {
+  public static final class CryptoFutureStub
+      extends io.grpc.stub.AbstractFutureStub<CryptoFutureStub> {
     private CryptoFutureStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
@@ -3116,8 +3103,8 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GenerateRandom (
-     *     CK_BYTE_PTR rnd, CK_ULONG rndlen,
-     *     target_t target) ;
+     * CK_BYTE_PTR rnd, CK_ULONG rndlen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.GenerateRandomResponse> generateRandom(
@@ -3129,9 +3116,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestInit (
-     *     unsigned char *state, size_t *statelen,
-     *     const CK_MECHANISM_PTR mech,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * const CK_MECHANISM_PTR mech,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.DigestInitResponse> digestInit(
@@ -3143,10 +3130,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Digest (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.DigestResponse> digest(
@@ -3158,9 +3145,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.DigestUpdateResponse> digestUpdate(
@@ -3172,9 +3159,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestKey (
-     *     unsigned char *state, size_t statelen,
-     *     const unsigned char *key, size_t keylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.DigestKeyResponse> digestKey(
@@ -3186,9 +3173,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.DigestFinalResponse> digestFinal(
@@ -3200,10 +3187,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DigestSingle (
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
-     *     target_t target) ;
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR digest, CK_ULONG_PTR digestlen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.DigestSingleResponse> digestSingle(
@@ -3215,10 +3202,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_EncryptInit (
-     *     unsigned char *state, size_t *statelen,
-     *     CK_MECHANISM_PTR mech,
-     *     const unsigned char *key, size_t keylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * CK_MECHANISM_PTR mech,
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.EncryptInitResponse> encryptInit(
@@ -3230,10 +3217,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DecryptInit (
-     *     unsigned char *state, size_t *statelen,
-     *     CK_MECHANISM_PTR mech,
-     *     const unsigned char *key, size_t keylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * CK_MECHANISM_PTR mech,
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.DecryptInitResponse> decryptInit(
@@ -3245,10 +3232,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_EncryptUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR plain, CK_ULONG plainlen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR plain, CK_ULONG plainlen,
+     * CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.EncryptUpdateResponse> encryptUpdate(
@@ -3260,10 +3247,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DecryptUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
-     *     CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
+     * CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.DecryptUpdateResponse> decryptUpdate(
@@ -3275,10 +3262,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Encrypt (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR plain, CK_ULONG plainlen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR plain, CK_ULONG plainlen,
+     * CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.EncryptResponse> encrypt(
@@ -3290,10 +3277,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Decrypt (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
-     *     CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
+     * CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.DecryptResponse> decrypt(
@@ -3305,9 +3292,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_EncryptFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.EncryptFinalResponse> encryptFinal(
@@ -3319,9 +3306,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DecryptFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.DecryptFinalResponse> decryptFinal(
@@ -3333,11 +3320,11 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_EncryptSingle (
-     *     const unsigned char *key, size_t keylen,
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR plain, CK_ULONG plainlen,
-     *     CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
-     *     target_t target) ;
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR plain, CK_ULONG plainlen,
+     * CK_BYTE_PTR ciphered, CK_ULONG_PTR cipheredlen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.EncryptSingleResponse> encryptSingle(
@@ -3349,11 +3336,11 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DecryptSingle (
-     *     const unsigned char *key, size_t keylen,
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
-     *     CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
-     *     target_t target) ;
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
+     * CK_BYTE_PTR plain, CK_ULONG_PTR plainlen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.DecryptSingleResponse> decryptSingle(
@@ -3365,10 +3352,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SignInit (
-     *     unsigned char *state, size_t *statelen,
-     *     CK_MECHANISM_PTR mech,
-     *     const unsigned char *privKey, size_t privKeylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * CK_MECHANISM_PTR mech,
+     * const unsigned char *privKeyBytes, size_t privKeyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.SignInitResponse> signInit(
@@ -3380,10 +3367,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_VerifyInit (
-     *     unsigned char *state, size_t *statelen,
-     *     CK_MECHANISM_PTR mech,
-     *     const unsigned char *pubKey, size_t pubKeylen,
-     *     target_t target) ;
+     * unsigned char *state, size_t *statelen,
+     * CK_MECHANISM_PTR mech,
+     * const unsigned char *pubKeyBytes, size_t pubKeyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.VerifyInitResponse> verifyInit(
@@ -3395,9 +3382,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SignUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.SignUpdateResponse> signUpdate(
@@ -3409,9 +3396,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_VerifyUpdate (
-     *     unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     target_t target) ;
+     * unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.VerifyUpdateResponse> verifyUpdate(
@@ -3423,9 +3410,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SignFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.SignFinalResponse> signFinal(
@@ -3437,9 +3424,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_VerifyFinal (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR signature, CK_ULONG signaturelen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR signature, CK_ULONG signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.VerifyFinalResponse> verifyFinal(
@@ -3451,10 +3438,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Sign (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.SignResponse> sign(
@@ -3466,10 +3453,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_Verify (
-     *     const unsigned char *state, size_t statelen,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR signature, CK_ULONG signaturelen,
-     *     target_t target) ;
+     * const unsigned char *state, size_t statelen,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR signature, CK_ULONG signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.VerifyResponse> verify(
@@ -3481,11 +3468,11 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SignSingle (
-     *     const unsigned char *privKey, size_t privKeylen,
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
-     *     target_t target) ;
+     * const unsigned char *privKeyBytes, size_t privKeyByteslen,
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR signature, CK_ULONG_PTR signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.SignSingleResponse> signSingle(
@@ -3497,11 +3484,11 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_VerifySingle (
-     *     const unsigned char *pubKey, size_t pubKeylen,
-     *     CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR data, CK_ULONG datalen,
-     *     CK_BYTE_PTR signature, CK_ULONG signaturelen,
-     *     target_t target) ;
+     * const unsigned char *pubKeyBytes, size_t pubKeyByteslen,
+     * CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR data, CK_ULONG datalen,
+     * CK_BYTE_PTR signature, CK_ULONG signaturelen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.VerifySingleResponse> verifySingle(
@@ -3512,13 +3499,31 @@ public final class CryptoGrpc {
 
     /**
      * <pre>
+     * CK_RV m_ReencryptSingle (
+     * const unsigned char *decKeyBytes, size_t decKeyByteslen,
+     * const unsigned char *encKeyBytes, size_t encKeyByteslen,
+     * CK_MECHANISM_PTR decMech,
+     * CK_MECHANISM_PTR encMech,
+     * CK_BYTE_PTR ciphered, CK_ULONG cipheredlen,
+     * CK_BYTE_PTR reciphered, CK_ULONG_PTR recipheredlen,
+     * target_t target) ;
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.ReencryptSingleResponse> reencryptSingle(
+        com.ibm.crypto.grep11.grpc.ReencryptSingleRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getReencryptSingleMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      * CK_RV m_GenerateKey (
-     *     CK_MECHANISM_PTR mech,
-     *     CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
-     *     const unsigned char *pin, size_t pinlen,
-     *     unsigned char *keyBytes, size_t *keyByteslen,
-     *     unsigned char *checkSum, size_t *checkSumlen,
-     *     target_t target) ;
+     * CK_MECHANISM_PTR mech,
+     * CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
+     * const unsigned char *pin, size_t pinlen,
+     * unsigned char *keyBytes, size_t *keyByteslen,
+     * unsigned char *checkSum, size_t *checkSumlen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.GenerateKeyResponse> generateKey(
@@ -3530,13 +3535,13 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GenerateKeyPair (
-     *     CK_MECHANISM_PTR mech,
-     *     CK_ATTRIBUTE_PTR pubKeyTemplateBytes, CK_ULONG pubKeyTemplateByteslen,
-     *     CK_ATTRIBUTE_PTR privKeyTemplateBytes, CK_ULONG privKeyTemplateByteslen,
-     *     const unsigned char *pin, size_t pinlen,
-     *     unsigned char *privKeyBytes, size_t *privKeyByteslen,
-     *     unsigned char *pubKeyBytes, size_t *pubKeyByteslen,
-     *     target_t target) ;
+     * CK_MECHANISM_PTR mech,
+     * CK_ATTRIBUTE_PTR pubKeyTemplateBytes, CK_ULONG pubKeyTemplateByteslen,
+     * CK_ATTRIBUTE_PTR privKeyTemplateBytes, CK_ULONG privKeyTemplateByteslen,
+     * const unsigned char *pin, size_t pinlen,
+     * unsigned char *privKeyBytes, size_t *privKeyByteslen,
+     * unsigned char *pubKeyBytes, size_t *pubKeyByteslen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.GenerateKeyPairResponse> generateKeyPair(
@@ -3548,12 +3553,12 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_WrapKey (
-     *     const unsigned char *key, size_t keylen,
-     *     const unsigned char *keK, size_t keKlen,
-     *     const unsigned char *macKey, size_t macKeylen,
-     *     const CK_MECHANISM_PTR mech,
-     *     CK_BYTE_PTR wrapped, CK_ULONG_PTR wrappedlen,
-     *     target_t target) ;
+     * const unsigned char *keyBytes, size_t keyByteslen,
+     * const unsigned char *keKBytes, size_t keKByteslen,
+     * const unsigned char *macKeyBytes, size_t macKeyByteslen,
+     * const CK_MECHANISM_PTR mech,
+     * CK_BYTE_PTR wrapped, CK_ULONG_PTR wrappedlen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.WrapKeyResponse> wrapKey(
@@ -3565,15 +3570,15 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_UnwrapKey (
-     *     const CK_BYTE_PTR wrapped, CK_ULONG wrappedlen,
-     *     const unsigned char *keK, size_t keKlen,
-     *     const unsigned char *macKey, size_t macKeylen,
-     *     const unsigned char *pin, size_t pinlen,
-     *     const CK_MECHANISM_PTR mech,
-     *     const CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
-     *     unsigned char *unwrappedBytes, size_t *unwrappedByteslen,
-     *     CK_BYTE_PTR checkSum, CK_ULONG *checkSumlen,
-     *     target_t target) ;
+     * const CK_BYTE_PTR wrapped, CK_ULONG wrappedlen,
+     * const unsigned char *keKBytes, size_t keKByteslen,
+     * const unsigned char *macKeyBytes, size_t macKeyByteslen,
+     * const unsigned char *pin, size_t pinlen,
+     * const CK_MECHANISM_PTR mech,
+     * const CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
+     * unsigned char *unwrappedBytes, size_t *unwrappedByteslen,
+     * CK_BYTE_PTR checkSum, CK_ULONG *checkSumlen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.UnwrapKeyResponse> unwrapKey(
@@ -3585,14 +3590,14 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_DeriveKey (
-     *     CK_MECHANISM_PTR mech,
-     *     CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
-     *     const unsigned char *baseKey, size_t baseKeylen,
-     *     const unsigned char *data, size_t datalen,
-     *     const unsigned char *pin, size_t pinlen,
-     *     unsigned char *newKeyBytes, size_t *newKeyByteslen,
-     *     unsigned char *checkSum, size_t *checkSumlen,
-     *     target_t target) ;
+     * CK_MECHANISM_PTR mech,
+     * CK_ATTRIBUTE_PTR templateBytes, CK_ULONG templateByteslen,
+     * const unsigned char *baseKeyBytes, size_t baseKeyByteslen,
+     * const unsigned char *data, size_t datalen,
+     * const unsigned char *pin, size_t pinlen,
+     * unsigned char *newKeyBytes, size_t *newKeyByteslen,
+     * unsigned char *checkSum, size_t *checkSumlen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.DeriveKeyResponse> deriveKey(
@@ -3604,9 +3609,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GetMechanismList (
-     *     CK_SLOT_ID slot,
-     *     CK_MECHANISM_TYPE_PTR mechs, CK_ULONG_PTR mechslen,
-     *     target_t target) ;
+     * CK_SLOT_ID slot,
+     * CK_MECHANISM_TYPE_PTR mechs, CK_ULONG_PTR mechslen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.GetMechanismListResponse> getMechanismList(
@@ -3618,10 +3623,10 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GetMechanismInfo (
-     *     CK_SLOT_ID slot,
-     *     CK_MECHANISM_TYPE mech,
-     *     CK_MECHANISM_INFO_PTR mechInfo,
-     *     target_t target) ;
+     * CK_SLOT_ID slot,
+     * CK_MECHANISM_TYPE mech,
+     * CK_MECHANISM_INFO_PTR mechInfo,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.GetMechanismInfoResponse> getMechanismInfo(
@@ -3633,9 +3638,9 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_GetAttributeValue (
-     *     const unsigned char *object, size_t objectlen,
-     *     CK_ATTRIBUTE_PTR attributesBytes, CK_ULONG attributesByteslen,
-     *     target_t target) ;
+     * const unsigned char *object, size_t objectlen,
+     * CK_ATTRIBUTE_PTR attributesBytes, CK_ULONG attributesByteslen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.GetAttributeValueResponse> getAttributeValue(
@@ -3647,15 +3652,43 @@ public final class CryptoGrpc {
     /**
      * <pre>
      * CK_RV m_SetAttributeValue (
-     *     unsigned char *object, size_t objectlen,
-     *     CK_ATTRIBUTE_PTR attributesBytes, CK_ULONG attributesByteslen,
-     *     target_t target) ;
+     * unsigned char *object, size_t objectlen,
+     * CK_ATTRIBUTE_PTR attributesBytes, CK_ULONG attributesByteslen,
+     * target_t target) ;
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.SetAttributeValueResponse> setAttributeValue(
         com.ibm.crypto.grep11.grpc.SetAttributeValueRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getSetAttributeValueMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * CK_RV m_Login (
+     * CK_UTF8CHAR_PTR pin, CK_ULONG pinLen,
+     * const unsigned char *nonce, size_t noncelen,
+     * unsigned char *pinblob, size_t *pinbloblen,
+     * target_t target) ;
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.LoginResponse> login(
+        com.ibm.crypto.grep11.grpc.LoginRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getLoginMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * CK_RV m_Logout (
+     * const unsigned char *pinblob, size_t pinbloblen,
+     * target_t target) ;
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.ibm.crypto.grep11.grpc.LogoutResponse> logout(
+        com.ibm.crypto.grep11.grpc.LogoutRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getLogoutMethod(), getCallOptions()), request);
     }
 
     /**
@@ -3694,26 +3727,29 @@ public final class CryptoGrpc {
   private static final int METHODID_VERIFY = 24;
   private static final int METHODID_SIGN_SINGLE = 25;
   private static final int METHODID_VERIFY_SINGLE = 26;
-  private static final int METHODID_GENERATE_KEY = 27;
-  private static final int METHODID_GENERATE_KEY_PAIR = 28;
-  private static final int METHODID_WRAP_KEY = 29;
-  private static final int METHODID_UNWRAP_KEY = 30;
-  private static final int METHODID_DERIVE_KEY = 31;
-  private static final int METHODID_GET_MECHANISM_LIST = 32;
-  private static final int METHODID_GET_MECHANISM_INFO = 33;
-  private static final int METHODID_GET_ATTRIBUTE_VALUE = 34;
-  private static final int METHODID_SET_ATTRIBUTE_VALUE = 35;
-  private static final int METHODID_REWRAP_KEY_BLOB = 36;
+  private static final int METHODID_REENCRYPT_SINGLE = 27;
+  private static final int METHODID_GENERATE_KEY = 28;
+  private static final int METHODID_GENERATE_KEY_PAIR = 29;
+  private static final int METHODID_WRAP_KEY = 30;
+  private static final int METHODID_UNWRAP_KEY = 31;
+  private static final int METHODID_DERIVE_KEY = 32;
+  private static final int METHODID_GET_MECHANISM_LIST = 33;
+  private static final int METHODID_GET_MECHANISM_INFO = 34;
+  private static final int METHODID_GET_ATTRIBUTE_VALUE = 35;
+  private static final int METHODID_SET_ATTRIBUTE_VALUE = 36;
+  private static final int METHODID_LOGIN = 37;
+  private static final int METHODID_LOGOUT = 38;
+  private static final int METHODID_REWRAP_KEY_BLOB = 39;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.BidiStreamingMethod<Req, Resp> {
-    private final CryptoImplBase serviceImpl;
+    private final AsyncService serviceImpl;
     private final int methodId;
 
-    MethodHandlers(CryptoImplBase serviceImpl, int methodId) {
+    MethodHandlers(AsyncService serviceImpl, int methodId) {
       this.serviceImpl = serviceImpl;
       this.methodId = methodId;
     }
@@ -3830,6 +3866,10 @@ public final class CryptoGrpc {
           serviceImpl.verifySingle((com.ibm.crypto.grep11.grpc.VerifySingleRequest) request,
               (io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.VerifySingleResponse>) responseObserver);
           break;
+        case METHODID_REENCRYPT_SINGLE:
+          serviceImpl.reencryptSingle((com.ibm.crypto.grep11.grpc.ReencryptSingleRequest) request,
+              (io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.ReencryptSingleResponse>) responseObserver);
+          break;
         case METHODID_GENERATE_KEY:
           serviceImpl.generateKey((com.ibm.crypto.grep11.grpc.GenerateKeyRequest) request,
               (io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.GenerateKeyResponse>) responseObserver);
@@ -3866,6 +3906,14 @@ public final class CryptoGrpc {
           serviceImpl.setAttributeValue((com.ibm.crypto.grep11.grpc.SetAttributeValueRequest) request,
               (io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.SetAttributeValueResponse>) responseObserver);
           break;
+        case METHODID_LOGIN:
+          serviceImpl.login((com.ibm.crypto.grep11.grpc.LoginRequest) request,
+              (io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.LoginResponse>) responseObserver);
+          break;
+        case METHODID_LOGOUT:
+          serviceImpl.logout((com.ibm.crypto.grep11.grpc.LogoutRequest) request,
+              (io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.LogoutResponse>) responseObserver);
+          break;
         case METHODID_REWRAP_KEY_BLOB:
           serviceImpl.rewrapKeyBlob((com.ibm.crypto.grep11.grpc.RewrapKeyBlobRequest) request,
               (io.grpc.stub.StreamObserver<com.ibm.crypto.grep11.grpc.RewrapKeyBlobResponse>) responseObserver);
@@ -3886,13 +3934,298 @@ public final class CryptoGrpc {
     }
   }
 
+  public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
+    return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+        .addMethod(
+          getGenerateRandomMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.GenerateRandomRequest,
+              com.ibm.crypto.grep11.grpc.GenerateRandomResponse>(
+                service, METHODID_GENERATE_RANDOM)))
+        .addMethod(
+          getDigestInitMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.DigestInitRequest,
+              com.ibm.crypto.grep11.grpc.DigestInitResponse>(
+                service, METHODID_DIGEST_INIT)))
+        .addMethod(
+          getDigestMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.DigestRequest,
+              com.ibm.crypto.grep11.grpc.DigestResponse>(
+                service, METHODID_DIGEST)))
+        .addMethod(
+          getDigestUpdateMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.DigestUpdateRequest,
+              com.ibm.crypto.grep11.grpc.DigestUpdateResponse>(
+                service, METHODID_DIGEST_UPDATE)))
+        .addMethod(
+          getDigestKeyMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.DigestKeyRequest,
+              com.ibm.crypto.grep11.grpc.DigestKeyResponse>(
+                service, METHODID_DIGEST_KEY)))
+        .addMethod(
+          getDigestFinalMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.DigestFinalRequest,
+              com.ibm.crypto.grep11.grpc.DigestFinalResponse>(
+                service, METHODID_DIGEST_FINAL)))
+        .addMethod(
+          getDigestSingleMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.DigestSingleRequest,
+              com.ibm.crypto.grep11.grpc.DigestSingleResponse>(
+                service, METHODID_DIGEST_SINGLE)))
+        .addMethod(
+          getEncryptInitMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.EncryptInitRequest,
+              com.ibm.crypto.grep11.grpc.EncryptInitResponse>(
+                service, METHODID_ENCRYPT_INIT)))
+        .addMethod(
+          getDecryptInitMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.DecryptInitRequest,
+              com.ibm.crypto.grep11.grpc.DecryptInitResponse>(
+                service, METHODID_DECRYPT_INIT)))
+        .addMethod(
+          getEncryptUpdateMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.EncryptUpdateRequest,
+              com.ibm.crypto.grep11.grpc.EncryptUpdateResponse>(
+                service, METHODID_ENCRYPT_UPDATE)))
+        .addMethod(
+          getDecryptUpdateMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.DecryptUpdateRequest,
+              com.ibm.crypto.grep11.grpc.DecryptUpdateResponse>(
+                service, METHODID_DECRYPT_UPDATE)))
+        .addMethod(
+          getEncryptMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.EncryptRequest,
+              com.ibm.crypto.grep11.grpc.EncryptResponse>(
+                service, METHODID_ENCRYPT)))
+        .addMethod(
+          getDecryptMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.DecryptRequest,
+              com.ibm.crypto.grep11.grpc.DecryptResponse>(
+                service, METHODID_DECRYPT)))
+        .addMethod(
+          getEncryptFinalMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.EncryptFinalRequest,
+              com.ibm.crypto.grep11.grpc.EncryptFinalResponse>(
+                service, METHODID_ENCRYPT_FINAL)))
+        .addMethod(
+          getDecryptFinalMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.DecryptFinalRequest,
+              com.ibm.crypto.grep11.grpc.DecryptFinalResponse>(
+                service, METHODID_DECRYPT_FINAL)))
+        .addMethod(
+          getEncryptSingleMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.EncryptSingleRequest,
+              com.ibm.crypto.grep11.grpc.EncryptSingleResponse>(
+                service, METHODID_ENCRYPT_SINGLE)))
+        .addMethod(
+          getDecryptSingleMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.DecryptSingleRequest,
+              com.ibm.crypto.grep11.grpc.DecryptSingleResponse>(
+                service, METHODID_DECRYPT_SINGLE)))
+        .addMethod(
+          getSignInitMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.SignInitRequest,
+              com.ibm.crypto.grep11.grpc.SignInitResponse>(
+                service, METHODID_SIGN_INIT)))
+        .addMethod(
+          getVerifyInitMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.VerifyInitRequest,
+              com.ibm.crypto.grep11.grpc.VerifyInitResponse>(
+                service, METHODID_VERIFY_INIT)))
+        .addMethod(
+          getSignUpdateMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.SignUpdateRequest,
+              com.ibm.crypto.grep11.grpc.SignUpdateResponse>(
+                service, METHODID_SIGN_UPDATE)))
+        .addMethod(
+          getVerifyUpdateMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.VerifyUpdateRequest,
+              com.ibm.crypto.grep11.grpc.VerifyUpdateResponse>(
+                service, METHODID_VERIFY_UPDATE)))
+        .addMethod(
+          getSignFinalMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.SignFinalRequest,
+              com.ibm.crypto.grep11.grpc.SignFinalResponse>(
+                service, METHODID_SIGN_FINAL)))
+        .addMethod(
+          getVerifyFinalMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.VerifyFinalRequest,
+              com.ibm.crypto.grep11.grpc.VerifyFinalResponse>(
+                service, METHODID_VERIFY_FINAL)))
+        .addMethod(
+          getSignMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.SignRequest,
+              com.ibm.crypto.grep11.grpc.SignResponse>(
+                service, METHODID_SIGN)))
+        .addMethod(
+          getVerifyMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.VerifyRequest,
+              com.ibm.crypto.grep11.grpc.VerifyResponse>(
+                service, METHODID_VERIFY)))
+        .addMethod(
+          getSignSingleMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.SignSingleRequest,
+              com.ibm.crypto.grep11.grpc.SignSingleResponse>(
+                service, METHODID_SIGN_SINGLE)))
+        .addMethod(
+          getVerifySingleMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.VerifySingleRequest,
+              com.ibm.crypto.grep11.grpc.VerifySingleResponse>(
+                service, METHODID_VERIFY_SINGLE)))
+        .addMethod(
+          getReencryptSingleMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.ReencryptSingleRequest,
+              com.ibm.crypto.grep11.grpc.ReencryptSingleResponse>(
+                service, METHODID_REENCRYPT_SINGLE)))
+        .addMethod(
+          getGenerateKeyMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.GenerateKeyRequest,
+              com.ibm.crypto.grep11.grpc.GenerateKeyResponse>(
+                service, METHODID_GENERATE_KEY)))
+        .addMethod(
+          getGenerateKeyPairMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.GenerateKeyPairRequest,
+              com.ibm.crypto.grep11.grpc.GenerateKeyPairResponse>(
+                service, METHODID_GENERATE_KEY_PAIR)))
+        .addMethod(
+          getWrapKeyMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.WrapKeyRequest,
+              com.ibm.crypto.grep11.grpc.WrapKeyResponse>(
+                service, METHODID_WRAP_KEY)))
+        .addMethod(
+          getUnwrapKeyMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.UnwrapKeyRequest,
+              com.ibm.crypto.grep11.grpc.UnwrapKeyResponse>(
+                service, METHODID_UNWRAP_KEY)))
+        .addMethod(
+          getDeriveKeyMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.DeriveKeyRequest,
+              com.ibm.crypto.grep11.grpc.DeriveKeyResponse>(
+                service, METHODID_DERIVE_KEY)))
+        .addMethod(
+          getGetMechanismListMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.GetMechanismListRequest,
+              com.ibm.crypto.grep11.grpc.GetMechanismListResponse>(
+                service, METHODID_GET_MECHANISM_LIST)))
+        .addMethod(
+          getGetMechanismInfoMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.GetMechanismInfoRequest,
+              com.ibm.crypto.grep11.grpc.GetMechanismInfoResponse>(
+                service, METHODID_GET_MECHANISM_INFO)))
+        .addMethod(
+          getGetAttributeValueMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.GetAttributeValueRequest,
+              com.ibm.crypto.grep11.grpc.GetAttributeValueResponse>(
+                service, METHODID_GET_ATTRIBUTE_VALUE)))
+        .addMethod(
+          getSetAttributeValueMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.SetAttributeValueRequest,
+              com.ibm.crypto.grep11.grpc.SetAttributeValueResponse>(
+                service, METHODID_SET_ATTRIBUTE_VALUE)))
+        .addMethod(
+          getLoginMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.LoginRequest,
+              com.ibm.crypto.grep11.grpc.LoginResponse>(
+                service, METHODID_LOGIN)))
+        .addMethod(
+          getLogoutMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.LogoutRequest,
+              com.ibm.crypto.grep11.grpc.LogoutResponse>(
+                service, METHODID_LOGOUT)))
+        .addMethod(
+          getRewrapKeyBlobMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ibm.crypto.grep11.grpc.RewrapKeyBlobRequest,
+              com.ibm.crypto.grep11.grpc.RewrapKeyBlobResponse>(
+                service, METHODID_REWRAP_KEY_BLOB)))
+        .build();
+  }
+
   private static abstract class CryptoBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
     CryptoBaseDescriptorSupplier() {}
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return com.ibm.crypto.grep11.grpc.Server.getDescriptor();
+      return com.ibm.crypto.grep11.grpc.CryptoProto.getDescriptor();
     }
 
     @java.lang.Override
@@ -3909,9 +4242,9 @@ public final class CryptoGrpc {
   private static final class CryptoMethodDescriptorSupplier
       extends CryptoBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
-    private final String methodName;
+    private final java.lang.String methodName;
 
-    CryptoMethodDescriptorSupplier(String methodName) {
+    CryptoMethodDescriptorSupplier(java.lang.String methodName) {
       this.methodName = methodName;
     }
 
@@ -3958,6 +4291,7 @@ public final class CryptoGrpc {
               .addMethod(getVerifyMethod())
               .addMethod(getSignSingleMethod())
               .addMethod(getVerifySingleMethod())
+              .addMethod(getReencryptSingleMethod())
               .addMethod(getGenerateKeyMethod())
               .addMethod(getGenerateKeyPairMethod())
               .addMethod(getWrapKeyMethod())
@@ -3967,6 +4301,8 @@ public final class CryptoGrpc {
               .addMethod(getGetMechanismInfoMethod())
               .addMethod(getGetAttributeValueMethod())
               .addMethod(getSetAttributeValueMethod())
+              .addMethod(getLoginMethod())
+              .addMethod(getLogoutMethod())
               .addMethod(getRewrapKeyBlobMethod())
               .build();
         }

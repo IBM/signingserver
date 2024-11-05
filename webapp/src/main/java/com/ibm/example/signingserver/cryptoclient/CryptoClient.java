@@ -12,9 +12,13 @@
 // implied.  See the License for the specific language governing
 // permissions and limitations under the License.
 
-package com.ibm.example.cryptoclient;
+package com.ibm.example.signingserver.cryptoclient;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -30,6 +34,7 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.codec.binary.Base64InputStream;
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
 import com.google.protobuf.ByteString;
@@ -37,6 +42,9 @@ import com.ibm.crypto.grep11.grpc.AttributeValue;
 import com.ibm.crypto.grep11.grpc.CryptoGrpc;
 import com.ibm.crypto.grep11.grpc.GenerateKeyPairRequest;
 import com.ibm.crypto.grep11.grpc.GenerateKeyPairResponse;
+import com.ibm.crypto.grep11.grpc.GetMechanismListRequest;
+import com.ibm.crypto.grep11.grpc.GetMechanismListResponse;
+import com.ibm.crypto.grep11.grpc.KeyBlob;
 import com.ibm.crypto.grep11.grpc.Mechanism;
 import com.ibm.crypto.grep11.grpc.SignInitRequest;
 import com.ibm.crypto.grep11.grpc.SignInitResponse;
@@ -46,21 +54,26 @@ import com.ibm.crypto.grep11.grpc.VerifyInitRequest;
 import com.ibm.crypto.grep11.grpc.VerifyInitResponse;
 import com.ibm.crypto.grep11.grpc.VerifyRequest;
 import com.ibm.crypto.grep11.grpc.CryptoGrpc.CryptoBlockingStub;
-import com.ibm.example.signingserver.cryptoclient.Constants;
 import com.ibm.example.signingserver.utils.Config;
 
 import io.grpc.CallOptions;
 import io.grpc.Channel;
+import io.grpc.ChannelCredentials;
 import io.grpc.ClientCall;
 import io.grpc.ClientInterceptor;
 import io.grpc.ForwardingClientCall.SimpleForwardingClientCall;
+import io.grpc.Grpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.Metadata;
+import io.grpc.TlsChannelCredentials;
 
 public class CryptoClient {
 	
-	public static CryptoClient getInstance() {
+	public static synchronized CryptoClient getInstance() throws IOException {
+		if (INSTANCE == null) {
+			INSTANCE = new CryptoClient();
+		}
 		return INSTANCE;
 	}
 
@@ -68,11 +81,11 @@ public class CryptoClient {
 
 	private static final Logger LOGGER = Logger.getLogger(CLASSNAME);
 	
-	private static final CryptoClient INSTANCE = new CryptoClient();
-
 	private static final ASN1ObjectIdentifier OIDNamedCurveEd25519 = new ASN1ObjectIdentifier("1.3.101.112");
 	
 	private static final ASN1ObjectIdentifier OIDDilithiumHigh = new ASN1ObjectIdentifier("1.3.6.1.4.1.2.267.1.6.5");
+
+	private static CryptoClient INSTANCE;
 
 	private static class HeadersAddingInterceptor implements ClientInterceptor {
 
@@ -101,8 +114,6 @@ public class CryptoClient {
 	              if (LOGGER.isLoggable(Level.FINEST)) LOGGER.log(Level.FINEST, "headers", headers);
 	              super.start(responseListener, headers);
 	            }
-
-
 	        };
 	    }
 	};
@@ -133,13 +144,39 @@ public class CryptoClient {
 		return iamtoken;
     }
     
-	public CryptoClient() {
-		this.channel = ManagedChannelBuilder
+	public CryptoClient() throws IOException {
+    	final String METHOD = "CryptoClient()";
+    	if (LOGGER.isLoggable(Level.FINER)) LOGGER.entering(CLASSNAME, METHOD);
+    	
+		if (Config.getInstance().isClientAuthEnabled()) {
+			final InputStream caCert = new Base64InputStream(new ByteArrayInputStream(Config.getInstance().getCacert().getBytes(UTF_8)), false);
+	        final InputStream clientCert = new Base64InputStream(new ByteArrayInputStream(Config.getInstance().getClientcert().getBytes(UTF_8)), false);
+	        final InputStream clientKey = new Base64InputStream(new ByteArrayInputStream(Config.getInstance().getClientkey().getBytes(UTF_8)), false);
+	        final ChannelCredentials creds = TlsChannelCredentials.newBuilder()
+	                  .trustManager(caCert)
+	                  .keyManager(clientCert, clientKey)
+	                  .build();
+	        this.channel = Grpc.newChannelBuilder(Config.getInstance().getHpcsEndpoint() + ":" + Config.getInstance().getHpcsPort(), creds).build();
+	        this.stub = CryptoGrpc.newBlockingStub(channel);
+	        caCert.close();
+	        clientCert.close();
+	        clientKey.close();
+		}
+		else {
+			this.channel = ManagedChannelBuilder
 				.forAddress(Config.getInstance().getHpcsEndpoint(), Config.getInstance().getHpcsPort())
 				.intercept(new HeadersAddingInterceptor(Config.getInstance().getHpcsAPIKey(),
 						Config.getInstance().getHpcsInstanceId()))
 				.build();
-        this.stub = CryptoGrpc.newBlockingStub(channel);
+			this.stub = CryptoGrpc.newBlockingStub(channel);
+		}
+		
+		final GetMechanismListRequest request = GetMechanismListRequest.newBuilder().build();
+		final GetMechanismListResponse mechanismList = stub.getMechanismList(request);
+		if (LOGGER.isLoggable(Level.FINER)) {
+			LOGGER.finer(mechanismList.toString());
+			LOGGER.exiting(CLASSNAME, METHOD);
+		}
 	}
 	
     public KeyPair createKeyPair(final KeyPair.Type keyType) throws IOException {
@@ -178,13 +215,13 @@ public class CryptoClient {
     	}
     	
     	final GenerateKeyPairResponse response = stub.generateKeyPair(request);
-    	final KeyPair ret = new KeyPair(response.getPubKeyBytes(), response.getPrivKeyBytes(), keyType);
+    	final KeyPair ret = new KeyPair(response.getPubKey(), response.getPrivKey(), keyType);
     	
     	if (LOGGER.isLoggable(Level.FINER)) LOGGER.exiting(CLASSNAME, METHOD);
     	return ret;
     }
     
-    public ByteString sign(final ByteString privKey, final ByteString data, final KeyPair.Type keyType) {
+    public ByteString sign(final KeyBlob privKey, final ByteString data, final KeyPair.Type keyType) {
     	final String METHOD = "sign";
     	if (LOGGER.isLoggable(Level.FINER)) LOGGER.entering(CLASSNAME, METHOD, keyType);
     	
@@ -216,7 +253,7 @@ public class CryptoClient {
     	return response.getSignature();
     }
     
-    public void verify(final ByteString signature, final ByteString pubKey, final ByteString data, final KeyPair.Type keyType) {
+    public void verify(final ByteString signature, final KeyBlob pubKey, final ByteString data, final KeyPair.Type keyType) {
     	final String METHOD = "verify";
     	if (LOGGER.isLoggable(Level.FINER)) LOGGER.entering(CLASSNAME, METHOD, keyType);
     	
