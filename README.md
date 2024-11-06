@@ -23,7 +23,7 @@ To run the signing server, you need to meet the following prerequisites:
 To setup a development environment on your workstation, you need to meet the following prerequisites:
 - Install JDK 11 or newer
 - Install Apache Maven
-- Install the gRPC compiler from [link](https://developers.google.com/protocol-buffers). The build was tested with protoc 3.21.10 and protoc 3.12.4. Do not use a newer version of the gRPC compiler. For further information see the comments in file `webapp/pom.xml`.
+- Install the gRPC compiler from [link](https://developers.google.com/protocol-buffers).
 - Install git
 
 ## Build the signing server application

@@ -13,5 +13,5 @@
                 
     <ssl id="defaultSSLConfig" trustDefaultCerts="true" />
     
-    <logging traceSpecification="com.ibm.example.signingserver.*=finest:io.grpc=finer:io.grpc.netty.NettyClientHandler=finer:io.grpc.netty.shaded.io.grpc.netty.NettyClientHandler=finer"/>
+    <logging traceSpecification="com.ibm.example.signingserver.*=finer"/>
 </server>
