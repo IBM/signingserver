@@ -23,9 +23,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.google.protobuf.ByteString;
-import com.ibm.example.cryptoclient.CryptoClient;
-import com.ibm.example.cryptoclient.KeyPair;
 import com.ibm.example.signingserver.utils.KeyStore;
+import com.ibm.example.signingserver.cryptoclient.CryptoClient;
+import com.ibm.example.signingserver.cryptoclient.KeyPair;
 import com.ibm.example.signingserver.utils.Errors;
 
 @Path("sign")

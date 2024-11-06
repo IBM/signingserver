@@ -21,9 +21,9 @@ To run the signing server, you need to meet the following prerequisites:
 - Create an API key for a id which provides the required access on your IBM Cloud Hyper Protect Crypto Services instance
 
 To setup a development environment on your workstation, you need to meet the following prerequisites:
-- Install JDK 1.8 or newer
+- Install JDK 11 or newer
 - Install Apache Maven
-- Install the gRPC compiler from [link](https://developers.google.com/protocol-buffers)
+- Install the gRPC compiler from [link](https://developers.google.com/protocol-buffers).
 - Install git
 
 ## Build the signing server application
@@ -60,7 +60,7 @@ The Maven build comprises the following steps:
 Use e.g. the following command to build the signing server container image: 
 
 ```
-docker build . -t signingserver
+podman build . -t signingserver
 ```
 
 ### Run the container image
@@ -68,7 +68,7 @@ docker build . -t signingserver
 Use the following command to run the signing server container. Specify the properties of your IBM Cloud Hyper Protect Crypto Services instance in form of environment variables:
 
 ```
-docker run -it -p 9443:9443 -e API_KEY=<your api key> -e HPCS_PORT=<port> -e HPCS_INSTANCEID=<instance id> -e HPCS_ENDPOINT=<EP11 endpoint, e.g. ep11.us-east.hs-crypto.cloud.ibm.com> signingserver
+podman run -it -p 9443:9443 -e API_KEY=<your api key> -e HPCS_PORT=<port> -e HPCS_INSTANCEID=<instance id> -e HPCS_ENDPOINT=<EP11 endpoint, e.g. ep11.us-east.hs-crypto.cloud.ibm.com> signingserver
 ```
 
 ## Run the application in IBM Cloud Hyper Protect Virtual Server

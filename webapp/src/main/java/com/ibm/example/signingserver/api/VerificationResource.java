@@ -23,9 +23,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.google.protobuf.ByteString;
-import com.ibm.example.cryptoclient.CryptoClient;
-import com.ibm.example.cryptoclient.KeyPair;
+import com.ibm.crypto.grep11.grpc.KeyBlob;
 import com.ibm.example.signingserver.utils.KeyStore;
+import com.ibm.example.signingserver.cryptoclient.CryptoClient;
+import com.ibm.example.signingserver.cryptoclient.KeyPair;
 import com.ibm.example.signingserver.utils.Errors;
 
 @Path("verify")
@@ -51,7 +52,7 @@ public class VerificationResource {
     	
     	final String id = request.getId();
     	final KeyPair keypair = (id != null ? KeyStore.getKeyPair(id) : null);
-    	final ByteString key = (keypair != null ? keypair.getPubKey() : ByteString.copyFromUtf8(request.getPubKey()));
+    	final KeyBlob key = (keypair != null ? keypair.getPubKey() : KeyBlob.parseFrom(ByteString.copyFromUtf8(request.getPubKey())));
     	final KeyPair.Type type =  (keypair != null ? keypair.getType() : request.getType());
 
     	if ((keypair != null && request.getPubKey() != null) || key == null || type == null) {

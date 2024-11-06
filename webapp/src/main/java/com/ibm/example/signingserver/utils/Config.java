@@ -1,4 +1,4 @@
-// Copyright 2021 IBM Corp. All Rights Reserved.
+// Copyright 	2021 IBM Corp. All Rights Reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License"); you
 // may not use this file except in compliance with the License.  You
@@ -25,14 +25,39 @@ public class Config {
 	private final String hpcsEndpoint;
 	private final String hpcsInstanceId;
 	private final int hpcsPort;
+	private final String keyStorePath;
+	private final String clientkey;
+	private final String clientcert;
+	private final String cacert;
+	private final boolean clientAuth;
 	
 	private Config() {
 		this.hpcsAPIKey = System.getenv("API_KEY");
 		this.hpcsInstanceId = System.getenv("HPCS_INSTANCEID");
-		this.hpcsPort = Integer.valueOf(System.getenv("HPCS_PORT"));
 		this.hpcsEndpoint = System.getenv("HPCS_ENDPOINT");
+		this.keyStorePath = System.getenv("KEYSTORE_PATH");
+		this.clientkey =  System.getenv("CLIENT_KEY");
+		this.clientcert =  System.getenv("CLIENT_CERT");
+		this.cacert =  System.getenv("CA_CERT");
+		try {
+			this.hpcsPort = Integer.valueOf(System.getenv("HPCS_PORT"));
+		} catch (NumberFormatException e) {
+			throw new IllegalStateException("Invalid configuration: "+toString() + "  ("+System.getenv("HPCS_PORT")+")", e);
+		}
 		
-		if (hpcsAPIKey == null || hpcsInstanceId==null || hpcsEndpoint==null) {
+		if (clientkey != null || clientcert != null || cacert != null) {
+			if (clientkey == null || clientcert == null || cacert == null || hpcsAPIKey != null || hpcsInstanceId != null) {
+				throw new IllegalStateException("Invalid configuration: "+toString());
+			}
+			this.clientAuth = true;
+		} else {
+			if (hpcsAPIKey == null || hpcsInstanceId==null) {
+				throw new IllegalStateException("Invalid configuration: "+toString());
+			}
+			this.clientAuth = false;
+		}
+		
+		if  (hpcsEndpoint==null || keyStorePath==null) {
 			throw new IllegalStateException("Invalid configuration: "+toString());
 		}
 	}
@@ -53,9 +78,31 @@ public class Config {
 		return hpcsPort;
 	}
 
+	public String getKeyStorePath() {
+		return keyStorePath;
+	}
+	
+	public String getClientkey() {
+		return clientkey;
+	}
+
+	public String getClientcert() {
+		return clientcert;
+	}
+
+	public String getCacert() {
+		return cacert;
+	}
+
+	public boolean isClientAuthEnabled() {
+		return clientAuth;
+	}
+
 	@Override
 	public String toString() {
-		return "Config [hpcsAPIKey=(redacted), hpcsInstanceId=" + hpcsInstanceId + ", hpcsEndpoint="
-				+ hpcsEndpoint + ", hpcsPort=" + hpcsPort + "]";
+		return "Config [hpcsAPIKey=" + (hpcsAPIKey == null ? "null" : "(redacted)") + ", hpcsEndpoint=" + hpcsEndpoint + ", hpcsInstanceId="
+				+ hpcsInstanceId + ", hpcsPort=" + hpcsPort + ", keyStorePath=" + keyStorePath + ", clientkey="
+				+ (clientkey == null ? "null" : "(redacted)") + ", clientcert=" + clientcert + ", cacert=" + cacert + ", isClientAuth=" + clientAuth
+				+ "]";
 	}
 }
