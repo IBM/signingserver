@@ -18,8 +18,9 @@ import com.ibm.crypto.grep11.grpc.KeyBlob;
 public class KeyPair {
     
     public enum Type {
-        EC,
-        Dilithium
+        Dilithium,
+        ECDSA_SECP256K1,
+        EDDSA_ED25519
     }
     
     private final KeyBlob pubKey;

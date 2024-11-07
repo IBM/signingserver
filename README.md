@@ -95,10 +95,29 @@ This returns the id of the newly created key pair and the public key, e.g.
 }
 ```
 
-#### Create an Elliptic Curve key pair
+#### Create a ED25519 key pair
+
+Provide query parameter `type=EDDSA_ED25519` or `type=EC`:
 ```
 curl -k --request POST \
   --url https://<ip>:9443/signing/api/v2/keys?type=EC \
+  --header 'Content-Type: application/json' \
+  --data '{}'
+```
+
+This returns the id of the newly created key pair and the public key, e.g.
+ 
+```
+{
+  "id": "9b3e7169-e4a1-44cc-acf4-c3c4875f4fa3",
+  "pubKey": "MDMwDgYHKoZIzj0CAQYDK2VwAy..."
+}
+```
+
+#### Create a EC SECP256K1 key pair
+```
+curl -k --request POST \
+  --url https://<ip>:9443/signing/api/v2/keys?type=ECDSA_SECP256K1 \
   --header 'Content-Type: application/json' \
   --data '{}'
 ```

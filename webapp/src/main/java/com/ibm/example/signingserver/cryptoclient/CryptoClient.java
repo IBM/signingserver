@@ -46,14 +46,17 @@ import com.ibm.crypto.grep11.grpc.GetMechanismListRequest;
 import com.ibm.crypto.grep11.grpc.GetMechanismListResponse;
 import com.ibm.crypto.grep11.grpc.KeyBlob;
 import com.ibm.crypto.grep11.grpc.Mechanism;
-import com.ibm.crypto.grep11.grpc.SignInitRequest;
-import com.ibm.crypto.grep11.grpc.SignInitResponse;
 import com.ibm.crypto.grep11.grpc.SignRequest;
 import com.ibm.crypto.grep11.grpc.SignResponse;
+import com.ibm.crypto.grep11.grpc.SignSingleRequest;
+import com.ibm.crypto.grep11.grpc.SignSingleResponse;
 import com.ibm.crypto.grep11.grpc.VerifyInitRequest;
 import com.ibm.crypto.grep11.grpc.VerifyInitResponse;
 import com.ibm.crypto.grep11.grpc.VerifyRequest;
+import com.ibm.crypto.grep11.grpc.VerifySingleRequest;
+import com.ibm.crypto.grep11.grpc.VerifySingleResponse;
 import com.ibm.crypto.grep11.grpc.CryptoGrpc.CryptoBlockingStub;
+import com.ibm.crypto.grep11.grpc.ECSGParm;
 import com.ibm.example.signingserver.utils.Config;
 
 import io.grpc.CallOptions;
@@ -82,7 +85,7 @@ public class CryptoClient {
     private static final Logger LOGGER = Logger.getLogger(CLASSNAME);
     
     private static final ASN1ObjectIdentifier OIDNamedCurveEd25519 = new ASN1ObjectIdentifier("1.3.101.112");
-    
+    private static final ASN1ObjectIdentifier OIDNamedCurveSecp256k1  = new ASN1ObjectIdentifier("1.3.132.0.10");
     private static final ASN1ObjectIdentifier OIDDilithiumHigh = new ASN1ObjectIdentifier("1.3.6.1.4.1.2.267.1.6.5");
 
     private static CryptoClient INSTANCE;
@@ -186,12 +189,25 @@ public class CryptoClient {
         final Mechanism mechanism;
         final GenerateKeyPairRequest request;
         switch (keyType) {
-        case EC:
+        case EDDSA_ED25519:
             mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_EC_KEY_PAIR_GEN).build();
             request = GenerateKeyPairRequest.newBuilder().setMech(mechanism)
                     .putPubKeyTemplate(Constants.CKA_EC_PARAMS,
                             AttributeValue.newBuilder()
                                     .setAttributeB(ByteString.copyFrom(OIDNamedCurveEd25519.getEncoded())).build())
+                    .putPubKeyTemplate(Constants.CKA_VERIFY, aTF(true))
+                    .putPubKeyTemplate(Constants.CKA_EXTRACTABLE, aTF(false))
+                    .putPrivKeyTemplate(Constants.CKA_SIGN, aTF(true))
+                    .putPrivKeyTemplate(Constants.CKA_EXTRACTABLE, aTF(false)).build();
+            
+            break;
+            
+        case ECDSA_SECP256K1:
+            mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_EC_KEY_PAIR_GEN).build();
+            request = GenerateKeyPairRequest.newBuilder().setMech(mechanism)
+                    .putPubKeyTemplate(Constants.CKA_EC_PARAMS,
+                            AttributeValue.newBuilder()
+                                    .setAttributeB(ByteString.copyFrom(OIDNamedCurveSecp256k1.getEncoded())).build())
                     .putPubKeyTemplate(Constants.CKA_VERIFY, aTF(true))
                     .putPubKeyTemplate(Constants.CKA_EXTRACTABLE, aTF(false))
                     .putPrivKeyTemplate(Constants.CKA_SIGN, aTF(true))
@@ -227,8 +243,13 @@ public class CryptoClient {
         
         final Mechanism mechanism;
         switch (keyType) {
-        case EC:
+        case EDDSA_ED25519:
             mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_IBM_ED25519_SHA512).build();
+            break;
+            
+        case ECDSA_SECP256K1:
+            final ECSGParm parameter = ECSGParm.newBuilder().setType(ECSGParm.ECSGType.CkEcsgIbmEcsdsaComprMulti).build();
+			mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_IBM_ECDSA_OTHER).setECSGParameter(parameter).build();
             break;
             
         case Dilithium:
@@ -237,17 +258,12 @@ public class CryptoClient {
             break;
         }
 
-        final SignInitRequest signInitRequest = SignInitRequest.newBuilder().
+        final SignSingleRequest request = SignSingleRequest.newBuilder().
                 setMech(mechanism).
                 setPrivKey(privKey).
-                build();
-        final SignInitResponse signInitResponse = stub.signInit(signInitRequest);
-        
-        final SignRequest request = SignRequest.newBuilder().
-                setState(signInitResponse.getState()).
                 setData(data).
                 build();
-        final SignResponse response = stub.sign(request);
+        final SignSingleResponse response = stub.signSingle(request);
         
         if (LOGGER.isLoggable(Level.FINER)) LOGGER.exiting(CLASSNAME, METHOD);
         return response.getSignature();
@@ -259,8 +275,13 @@ public class CryptoClient {
         
         final Mechanism mechanism;
         switch (keyType) {
-        case EC:
+        case EDDSA_ED25519:
             mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_IBM_ED25519_SHA512).build();
+            break;
+            
+        case ECDSA_SECP256K1:
+            final ECSGParm parameter = ECSGParm.newBuilder().setType(ECSGParm.ECSGType.CkEcsgIbmEcsdsaComprMulti).build();
+			mechanism = Mechanism.newBuilder().setMechanism(Constants.CKM_IBM_ECDSA_OTHER).setECSGParameter(parameter).build();
             break;
             
         case Dilithium:
@@ -269,22 +290,16 @@ public class CryptoClient {
             break;
         }
         
-        final VerifyInitRequest initRequest = VerifyInitRequest.newBuilder().
+        final VerifySingleRequest request = VerifySingleRequest.newBuilder().
                 setMech(mechanism).
                 setPubKey(pubKey).
-                build();
-        final VerifyInitResponse verifyInitResponse = stub.verifyInit(initRequest);
-
-        final VerifyRequest verifyRequest = VerifyRequest.newBuilder().
-                setState(verifyInitResponse.getState()).
                 setData(data).
                 setSignature(signature).
                 build();
-        
+        final VerifySingleResponse response = stub.verifySingle(request);
         // this will throw "io.grpc.StatusRuntimeException: UNKNOWN: CKR_SIGNATURE_INVALID" 
         // if the signature cannot be verified
-        stub.verify(verifyRequest);
-
+        
         if (LOGGER.isLoggable(Level.FINER)) LOGGER.exiting(CLASSNAME, METHOD);
     }
     
