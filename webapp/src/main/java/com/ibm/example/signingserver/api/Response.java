@@ -17,6 +17,7 @@ import com.ibm.example.signingserver.cryptoclient.KeyPair;
 
 public class Response {
 	private String pubKey;
+	private String pubKeyPEM;
 	private String signature;
 	private String result;
 	private String id;
@@ -39,6 +40,12 @@ public class Response {
 	}
 	public void setPubKey(String pubKey) {
 		this.pubKey = pubKey;
+	}
+	public String getPubKeyPEM() {
+		return pubKeyPEM;
+	}
+	public void setPubKeyPEM(String pubKeyPEM) {
+		this.pubKeyPEM = pubKeyPEM;
 	}
 	public String getSignature() {
 		return signature;

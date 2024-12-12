@@ -15,7 +15,14 @@ package com.ibm.example.signingserver.api;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.interfaces.ECPublicKey;
+import java.security.spec.ECPoint;
+import java.security.spec.ECPublicKeySpec;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
 
 import javax.ws.rs.GET;
@@ -27,6 +34,18 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+
+import org.bouncycastle.asn1.ASN1InputStream;
+import org.bouncycastle.asn1.ASN1Primitive;
+import org.bouncycastle.asn1.ASN1Sequence;
+import org.bouncycastle.asn1.DERBitString;
+import org.bouncycastle.jce.ECNamedCurveTable;
+import org.bouncycastle.jce.ECPointUtil;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.jce.spec.ECNamedCurveParameterSpec;
+import org.bouncycastle.jce.spec.ECNamedCurveSpec;
+import org.bouncycastle.util.io.pem.PemObject;
+import org.bouncycastle.util.io.pem.PemWriter;
 
 import com.ibm.example.signingserver.utils.KeyStore;
 import com.ibm.example.signingserver.cryptoclient.CryptoClient;
@@ -76,11 +95,32 @@ public class KeysResource {
 		return createResponse(id, keypair);
 	}
 
-	private Response createResponse(final String id, final KeyPair keypair) throws UnsupportedEncodingException {
+	private Response createResponse(final String id, final KeyPair keypair) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
 		final com.ibm.example.signingserver.api.Response resp = new com.ibm.example.signingserver.api.Response();
 		resp.setId(id);
 		resp.setType(keypair.getType());
 		resp.setPubKey(new String(Base64.getEncoder().encode(keypair.getPubKey().toByteArray()), UTF_8.name()));
+		if (KeyPair.Type.ECDSA_SECP256K1.equals(keypair.getType())) {
+			resp.setPubKeyPEM(getPublicKeyPEM(keypair.getPubKey().getKeyBlobs(0).toByteArray()));
+		}
 		return Response.ok(resp, MediaType.APPLICATION_JSON).build();
+	}
+	
+	private static String getPublicKeyPEM(final byte[] pubKey) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+		final ASN1InputStream input = new ASN1InputStream(pubKey);
+		final ASN1Primitive p = input.readObject(); 
+		final ASN1Sequence sequence = ASN1Sequence.getInstance(p);
+		final ECNamedCurveParameterSpec spec = ECNamedCurveTable.getParameterSpec("secp256k1");
+		final KeyFactory kf = KeyFactory.getInstance("ECDSA", new BouncyCastleProvider());
+		final ECNamedCurveSpec params = new ECNamedCurveSpec("secp256k1", spec.getCurve(), spec.getG(), spec.getN());
+		final ECPoint point =  ECPointUtil.decodePoint(params.getCurve(), ((DERBitString)sequence.getObjectAt(1)).getBytes());
+		final ECPublicKeySpec pubKeySpec = new ECPublicKeySpec(point, params);
+		final ECPublicKey pk = (ECPublicKey) kf.generatePublic(pubKeySpec);
+		final StringWriter stringWriter = new StringWriter();
+		final PemWriter writer = new PemWriter(stringWriter);
+		writer.writeObject(new PemObject("PUBLIC KEY", pk.getEncoded()));
+		writer.close();
+		input.close();
+	    return stringWriter.toString();
 	}
 }
