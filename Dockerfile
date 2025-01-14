@@ -8,9 +8,9 @@ RUN mvn clean package
 FROM ubuntu:24.04
 RUN apt-get update && apt-get upgrade -y && apt-get install -y default-jre wget unzip
 
-RUN wget https://public.dhe.ibm.com/ibmdl/export/pub/software/openliberty/runtime/release/24.0.0.9/openliberty-webProfile10-24.0.0.9.zip
-RUN unzip openliberty-webProfile10-24.0.0.9.zip
-RUN rm openliberty-webProfile10-24.0.0.9.zip
+RUN wget https://public.dhe.ibm.com/ibmdl/export/pub/software/openliberty/runtime/release/24.0.0.12/openliberty-webProfile10-24.0.0.12.zip
+RUN unzip openliberty-webProfile10-24.0.0.12.zip
+RUN rm openliberty-webProfile10-24.0.0.12.zip
 RUN /wlp/bin/server create default
 RUN /wlp/bin/featureUtility installFeature jaxrs-2.1
 
