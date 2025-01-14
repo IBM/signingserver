@@ -13,5 +13,5 @@
                 
     <ssl id="defaultSSLConfig" trustDefaultCerts="true" />
     
-    <logging traceSpecification="com.ibm.example.signingserver.*=finer"/>
+    <logging consoleLogLevel="INFO" traceSpecification="*=info: com.ibm.example.signingserver.*=finer"/>
 </server>

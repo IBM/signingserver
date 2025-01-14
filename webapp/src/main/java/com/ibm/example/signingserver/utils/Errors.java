@@ -16,8 +16,8 @@ package com.ibm.example.signingserver.utils;
 import javax.ws.rs.core.Response;
 
 public class Errors {
-	public static Response cannotCreateKeyPair() {
-		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("ERROR: Cannot create key: Key is already available.").build();
+	public static Response cannotStoreKeyPair() {
+		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("ERROR: Cannot store key.").build();
 	}
 
 	public static Response keyNotFound() {
@@ -33,7 +33,7 @@ public class Errors {
 	}
 	
 	public static Response keyTypeMissing() {
-		return badRequest("ERROR: The key type is missing or invalid. Please specify the query parameter 'type=EC' or 'type=Dilithium'.");
+		return badRequest("ERROR: The key type is missing or invalid.");
 	}
 	
 	public static Response badRequest(final String msg) {
