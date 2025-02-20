@@ -17,14 +17,18 @@ import javax.ws.rs.core.Application;
 
 import com.ibm.example.signingserver.utils.Config;
 
+import java.util.logging.Logger;
+
 import javax.ws.rs.ApplicationPath;
 
 @ApplicationPath("api/v2")
 public class SigningApplication extends Application {
+	private static final Logger LOGGER = Logger.getLogger(SigningApplication.class.getName());
+
 	public SigningApplication() {
 		super();
 		
-		System.out.println("SigningApplication started using "+Config.getInstance().toString());
+		LOGGER.info("SigningApplication started using "+Config.getInstanceUnVerified().toString());
 	}
 
 }

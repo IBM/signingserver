@@ -68,7 +68,7 @@ podman build . -t signingserver
 Use the following command to run the signing server container. Specify the properties of your IBM Cloud Hyper Protect Crypto Services instance in form of environment variables:
 
 ```
-podman run -it -p 9443:9443 -e API_KEY=<your api key> -e HPCS_PORT=<port> -e HPCS_INSTANCEID=<instance id> -e HPCS_ENDPOINT=<EP11 endpoint, e.g. ep11.us-east.hs-crypto.cloud.ibm.com> signingserver
+podman run -it -p 9443:9443 -e API_KEY=<your api key> -e HPCS_PORT=<port, e.g. 443> -e HPCS_INSTANCEID=<instance id> -e HPCS_ENDPOINT=<EP11 API endpoint> signingserver
 ```
 
 ## Run the application in IBM Cloud Hyper Protect Virtual Server
@@ -110,7 +110,7 @@ This returns the id of the newly created key pair and the public key, e.g.
 ```
 {
   "id": "9b3e7169-e4a1-44cc-acf4-c3c4875f4fa3",
-  "pubKey": "MDMwDgYHKoZIzj0CAQYDK2VwAy..."
+  "pubKeyPEM": "...public-key-pem..."
 }
 ```
 
@@ -127,7 +127,7 @@ This returns the id of the newly created key pair and the public key, e.g.
 ```
 {
   "id": "9b3e7169-e4a1-44cc-acf4-c3c4875f4fa3",
-  "pubKey": "MDMwDgYHKoZIzj0CAQYDK2VwAy..."
+  "pubKeyPEM": "...public-key-pem..."
 }
 ```
 
@@ -140,8 +140,8 @@ curl -k --request POST \
   --url https://<ip>:9443/signing/api/v2/sign \
   --header 'Content-Type: application/json' \
   --data '{
-	"data" : "SGFsbG8gZGFzIGlzdCBlaW4gVGVzdA==",
-	"id": "8b3e7169-e4a1-44cc-acf4-c3c4875f4fa2"
+	"id": "8b3e7169-e4a1-44cc-acf4-c3c4875f4fa2",
+	"data" : "SGFsbG8gZGFzIGlzdCBlaW4gVGVzdA=="
 }'
 ```
 
@@ -161,8 +161,8 @@ curl -i -k --request POST \
   --header 'Content-Type: application/json' \
   --data '{
 	 "id": "8b3e7169-e4a1-44cc-acf4-c3c4875f4fa2",
-	"data" : "SGFsbG8gZGFzIGlzdCBlaW4gVGVzdA==",
-	"signature" : "vSqKTh693H8FC3Qwt2PP/sUIIqndOtGEi4bcPIddbWAt/0eT2HWa5o9RMidS4/74e0XMpC5JW4IztCDsZRyWBg=="
+	 "data" : "SGFsbG8gZGFzIGlzdCBlaW4gVGVzdA==",
+	 "signature" : "vSqKTh693H8FC3Qwt2PP/sUIIqndOtGEi4bcPIddbWAt/0eT2HWa5o9RMidS4/74e0XMpC5JW4IztCDsZRyWBg=="
 }'
 ```
 

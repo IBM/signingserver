@@ -35,37 +35,30 @@ public class VerificationResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     public Response verifySignature(final Request request) throws Exception {
-    	final ByteString data;
     	try {
-    		data = ByteString.copyFrom(Base64.getDecoder().decode(request.getData()));
+    		final ByteString data = ByteString.copyFrom(Base64.getDecoder().decode(request.getData()));
+    		final ByteString signature = ByteString.copyFrom(Base64.getDecoder().decode(request.getSignature()));
+    	
+    		final String id = request.getId();
+    		final KeyPair keypair = (id != null ? KeyStore.getKeyPair(id) : null);
+    		final KeyBlob key = (keypair != null ? keypair.getPubKey() : KeyBlob.parseFrom(ByteString.copyFromUtf8(request.getPubKey())));
+    		final KeyPair.Type type =  (keypair != null ? keypair.getType() : request.getType());
+
+    		if ((keypair != null && request.getPubKey() != null) || key == null || type == null) {
+    			return Errors.badRequest();
+    		}
+    		
+        	try {
+        		CryptoClient.getInstance().verify(signature, key, data, type);
+        	}
+        	catch (Exception e) {
+        		return Errors.cryptoOperationFailed();
+        	}
     	}
     	catch (Exception e) {
-    		return Errors.dataInvalid();
-    	}
-    	final ByteString signature;
-    	try {
-    		signature = ByteString.copyFrom(Base64.getDecoder().decode(request.getSignature()));
-    	}
-    	catch (Exception e) {
-    		return Errors.dataInvalid();
+    		return Errors.badRequest();
     	}
     	
-    	final String id = request.getId();
-    	final KeyPair keypair = (id != null ? KeyStore.getKeyPair(id) : null);
-    	final KeyBlob key = (keypair != null ? keypair.getPubKey() : KeyBlob.parseFrom(ByteString.copyFromUtf8(request.getPubKey())));
-    	final KeyPair.Type type =  (keypair != null ? keypair.getType() : request.getType());
-
-    	if ((keypair != null && request.getPubKey() != null) || key == null || type == null) {
-    		return Errors.badRequest("Must specify either id, or pubkey and key type");
-    	}
-
-    	try {
-    		CryptoClient.getInstance().verify(signature, key, data, type);
-    	}
-    	catch (Exception e) {
-    		return Errors.dataInvalid();
-    	}
-
    		return Response.ok().build();
     }
 }

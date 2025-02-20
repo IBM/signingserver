@@ -16,8 +16,12 @@ package com.ibm.example.signingserver.utils;
 import javax.ws.rs.core.Response;
 
 public class Errors {
-	public static Response cannotStoreKeyPair() {
-		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("ERROR: Cannot store key.").build();
+	public static Response cannotCreateKey() {
+		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("ERROR: Cannot create key.").build();
+	}
+
+	public static Response cryptoOperationFailed() {
+		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("ERROR: Cryptographic operation failed.").build();
 	}
 
 	public static Response keyNotFound() {
@@ -25,18 +29,18 @@ public class Errors {
 	}
 
 	public static Response dataInvalid() {
-		return badRequest("ERROR: Invalid data provided. Cannot decode data.");
+		return Response.status(Response.Status.BAD_REQUEST).entity("ERROR: Invalid data provided. Cannot decode data.").build();
 	}
 	
 	public static Response verificationFailed() {
-		return badRequest("Signature verification failed.");
+		return Response.status(Response.Status.BAD_REQUEST).entity("Signature verification failed.").build();
 	}
 	
 	public static Response keyTypeMissing() {
-		return badRequest("ERROR: The key type is missing or invalid.");
+		return Response.status(Response.Status.BAD_REQUEST).entity("ERROR: The key type is missing or invalid.").build();
 	}
 	
-	public static Response badRequest(final String msg) {
-		return Response.status(Response.Status.BAD_REQUEST).entity(msg).build();
+	public static Response badRequest() {
+		return Response.status(Response.Status.BAD_REQUEST).build();
 	}
 }

@@ -13,25 +13,38 @@
 // permissions and limitations under the License.
 package com.ibm.example.signingserver.utils;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Config {
 
 	public static Config getInstance() {
+		if (!INSTANCE.isValid()) {
+			throw new IllegalStateException("Configuration is not valid");
+		}
 		return INSTANCE;
 	}
-
+	
+	public static Config getInstanceUnVerified() {
+		return INSTANCE;
+	}
+	
+	private static final Logger LOGGER = Logger.getLogger(Config.class.getName());
 	private final static Config INSTANCE = new Config();
 	
 	private final String hpcsAPIKey;
 	private final String hpcsEndpoint;
 	private final String hpcsInstanceId;
-	private final int hpcsPort;
+	private int hpcsPort;
 	private final String keyStorePath;
 	private final String clientkey;
 	private final String clientcert;
 	private final String cacert;
 	private final boolean clientAuth;
+	private final boolean valid;
 	
 	private Config() {
+		boolean isValid = true;
 		this.hpcsAPIKey = System.getenv("API_KEY");
 		this.hpcsInstanceId = System.getenv("HPCS_INSTANCEID");
 		this.hpcsEndpoint = System.getenv("HPCS_ENDPOINT");
@@ -39,27 +52,36 @@ public class Config {
 		this.clientkey =  System.getenv("CLIENT_KEY");
 		this.clientcert =  System.getenv("CLIENT_CERT");
 		this.cacert =  System.getenv("CA_CERT");
-		try {
-			this.hpcsPort = Integer.valueOf(System.getenv("HPCS_PORT"));
-		} catch (NumberFormatException e) {
-			throw new IllegalStateException("Invalid configuration: "+toString() + "  ("+System.getenv("HPCS_PORT")+")", e);
+		final String port = System.getenv("HPCS_PORT");
+		this.hpcsPort = 0;
+		if (port != null) {
+			try {
+				this.hpcsPort = Integer.valueOf(port);
+			} catch (NumberFormatException e) {
+				LOGGER.log(Level.WARNING, "Invalid port specified: "+port, e);
+				isValid = false;
+			}
 		}
 		
 		if (clientkey != null || clientcert != null || cacert != null) {
 			if (clientkey == null || clientcert == null || cacert == null || hpcsAPIKey != null || hpcsInstanceId != null) {
-				throw new IllegalStateException("Invalid configuration: "+toString());
+				isValid = false;
 			}
 			this.clientAuth = true;
 		} else {
 			if (hpcsAPIKey == null || hpcsInstanceId==null) {
-				throw new IllegalStateException("Invalid configuration: "+toString());
+				isValid = false;
 			}
 			this.clientAuth = false;
 		}
 		
 		if  (hpcsEndpoint==null || keyStorePath==null) {
-			throw new IllegalStateException("Invalid configuration: "+toString());
+			isValid = false;
 		}
+		if (!isValid) {
+			LOGGER.warning("Invalid configuration: "+toString());
+		}
+		this.valid = isValid;
 	}
 	
 	public String getHpcsAPIKey() {
@@ -96,6 +118,10 @@ public class Config {
 
 	public boolean isClientAuthEnabled() {
 		return clientAuth;
+	}
+
+	public boolean isValid() {
+		return valid;
 	}
 
 	@Override

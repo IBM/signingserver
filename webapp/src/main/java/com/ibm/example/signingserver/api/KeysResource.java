@@ -62,13 +62,12 @@ public class KeysResource {
 			}
 		}
 		try {
-			final CryptoClient client = CryptoClient.getInstance();
-			final KeyPair keypair = client.createKeyPair(keyType);
+			final KeyPair keypair = CryptoClient.getInstance().createKeyPair(keyType);
 			final String id = KeyStore.storeKeyPair(keypair);
 			return createResponse(id, keypair);
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "createKeyPair error", e);
-			return Errors.cannotStoreKeyPair();
+			return Errors.cannotCreateKey();
 		}
 	}
 
@@ -77,11 +76,16 @@ public class KeysResource {
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getKeyInfo(@PathParam("id") String id) throws Exception {
-		final KeyPair keypair = KeyStore.getKeyPair(id);
-		if (keypair == null) {
+		try {
+			final KeyPair keypair = KeyStore.getKeyPair(id);
+			if (keypair == null) {
+				return Errors.keyNotFound();
+			}
+			return createResponse(id, keypair);
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, "createKeyPair error", e);
 			return Errors.keyNotFound();
 		}
-		return createResponse(id, keypair);
 	}
 
 	private Response createResponse(final String id, final KeyPair keypair) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {

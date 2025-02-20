@@ -20,6 +20,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -67,8 +68,6 @@ import io.grpc.TlsChannelCredentials;
 
 public class CryptoClient {
     
-	public static final String ED25519_OID = "1.3.101.112";
-
 	public static synchronized CryptoClient getInstance() throws IOException {
         if (INSTANCE == null) {
             INSTANCE = new CryptoClient();
@@ -80,6 +79,8 @@ public class CryptoClient {
 
     private static final Logger LOGGER = Logger.getLogger(CLASSNAME);
     
+	public static final String ED25519_OID = "1.3.101.112";
+
     private static final ASN1ObjectIdentifier OIDNamedCurveEd25519 = new ASN1ObjectIdentifier(ED25519_OID);
     private static final ASN1ObjectIdentifier OIDNamedCurveSecp256k1  = new ASN1ObjectIdentifier("1.3.132.0.10");
     private static final ASN1ObjectIdentifier OIDDilithiumHigh = new ASN1ObjectIdentifier("1.3.6.1.4.1.2.267.1.6.5");
@@ -159,7 +160,10 @@ public class CryptoClient {
                       .trustManager(caCert)
                       .keyManager(clientCert, clientKey)
                       .build();
-            this.channel = Grpc.newChannelBuilder(Config.getInstance().getHpcsEndpoint() + ":" + Config.getInstance().getHpcsPort(), creds).build();
+			this.channel = Grpc.newChannelBuilder(
+					Config.getInstance().getHpcsEndpoint()
+							+ (Config.getInstance().getHpcsPort() != 0 ? ":" + Config.getInstance().getHpcsPort() : ""),
+					creds).build();
             this.stub = CryptoGrpc.newBlockingStub(channel);
             caCert.close();
             clientCert.close();
@@ -174,13 +178,20 @@ public class CryptoClient {
             this.stub = CryptoGrpc.newBlockingStub(channel);
         }
         
-        final GetMechanismListRequest request = GetMechanismListRequest.newBuilder().build();
-        final GetMechanismListResponse mechanismList = stub.getMechanismList(request);
-        if (LOGGER.isLoggable(Level.FINER)) {
-            LOGGER.finer(mechanismList.toString());
-            LOGGER.exiting(CLASSNAME, METHOD);
-        }
     }
+
+	public boolean checkMechanisms(final boolean checkDilithiumMechanism) {
+		final GetMechanismListRequest request = GetMechanismListRequest.newBuilder().build();
+        final GetMechanismListResponse mechanismList = stub.getMechanismList(request);
+        boolean ok = mechanismList.getMechsCount() > 0;
+        final List<Long> mechsList = mechanismList.getMechsList();
+		ok = ok && mechsList.contains(ECDSA_SECP256K1_MECHANISM.getMechanism());
+        ok = ok && mechsList.contains(EDDSA_ED25519_MECHANISM.getMechanism());
+        if (checkDilithiumMechanism) {
+            ok = ok && mechsList.contains(DILITHIUM_MECHANISM.getMechanism());
+        }
+        return ok;
+	}
     
     public KeyPair createKeyPair(final KeyPair.Type keyType) throws IOException {
         final String METHOD = "createKeyPair";

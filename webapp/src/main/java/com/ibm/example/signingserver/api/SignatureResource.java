@@ -14,6 +14,8 @@
 package com.ibm.example.signingserver.api;
 
 import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -30,24 +32,25 @@ import com.ibm.example.signingserver.utils.Errors;
 
 @Path("sign")
 public class SignatureResource {
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response sign(final Request request) throws Exception {
-    	final ByteString data;
-    	try {
-    		data = ByteString.copyFrom(Base64.getDecoder().decode(request.getData()));
-    	}
-    	catch (Exception e) {
-    		return Errors.dataInvalid();
-    	}
-    	
-    	final KeyPair keypair = KeyStore.getKeyPair(request.getId());
-    	
-    	final CryptoClient client = CryptoClient.getInstance();
-    	final ByteString signature = client.sign(keypair.getPrivKey(), data, keypair.getType());
-    	
-       	return Response.ok(Base64.getEncoder().encode(signature.toByteArray())).build();
-    }
-    
+	private static final Logger LOGGER = Logger.getLogger(SignatureResource.class.getName());
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response sign(final Request request) throws Exception {
+		try {
+			final ByteString data = ByteString.copyFrom(Base64.getDecoder().decode(request.getData()));
+			final KeyPair keypair = KeyStore.getKeyPair(request.getId());
+			try {
+				final ByteString signature = CryptoClient.getInstance().sign(keypair.getPrivKey(), data,
+						keypair.getType());
+				return Response.ok(Base64.getEncoder().encode(signature.toByteArray())).build();
+			} catch (Exception e) {
+				return Errors.cryptoOperationFailed();
+			}
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, "sign error", e.getMessage());
+			return Errors.badRequest();
+		}
+	}
+
 }
