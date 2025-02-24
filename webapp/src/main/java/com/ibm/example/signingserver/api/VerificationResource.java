@@ -52,7 +52,7 @@ public class VerificationResource {
         		CryptoClient.getInstance().verify(signature, key, data, type);
         	}
         	catch (Exception e) {
-        		return Errors.cryptoOperationFailed();
+        		return Errors.verificationFailed();
         	}
     	}
     	catch (Exception e) {

@@ -39,7 +39,7 @@ public class StatusResource {
 			final CryptoClient client = CryptoClient.getInstance();
 			ok = client.checkMechanisms(false);
 			if (!ok) {
-				LOGGER.warning("could not validate mechnism list");
+				LOGGER.warning("could not validate mechnaism list");
 			}
 		}
 		catch (Exception e) {
