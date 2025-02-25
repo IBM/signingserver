@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 export KEYSTORE_PATH=/data/signingservice/keys
 mkdir -p $KEYSTORE_PATH
-/wlp/bin/server run default
+/wlp/bin/server start default
 
 if [ -z "$(ls -A /data/signingservice/keys)" ]; then
   echo "Creating default key pairs"
