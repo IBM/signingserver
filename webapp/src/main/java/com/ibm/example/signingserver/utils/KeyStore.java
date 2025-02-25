@@ -1,17 +1,4 @@
-
-// Copyright 2021 IBM Corp. All Rights Reserved.
-
-// Licensed under the Apache License, Version 2.0 (the "License"); you
-// may not use this file except in compliance with the License.  You
-// may obtain a copy of the License at
-
-// http://www.apache.org/licenses/LICENSE-2.0
-
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied.  See the License for the specific language governing
-// permissions and limitations under the License.
+// Copyright contributors to the Signing Server project
 package com.ibm.example.signingserver.utils;
 
 import java.io.BufferedReader;
@@ -32,52 +19,52 @@ import com.ibm.example.signingserver.cryptoclient.KeyPair.Type;
 public class KeyStore {
 
 
-	private static final String PRIVKEY_TXT = "-privkey.txt";
-	private static final String PUBKEY_TXT = "-pubkey.txt";
-	private static final String KEYTYPE_TXT = "-keytype.txt";
+    private static final String PRIVKEY_TXT = "-privkey.txt";
+    private static final String PUBKEY_TXT = "-pubkey.txt";
+    private static final String KEYTYPE_TXT = "-keytype.txt";
 
-	public static String storeKeyPair(final KeyPair keypair) throws IOException {
-		final String pubkey = Base64.getEncoder().encodeToString(keypair.getPubKey().toByteArray());
-		final String privkey = Base64.getEncoder().encodeToString(keypair.getPrivKey().toByteArray());
-		final String type = keypair.getType().toString();
-		
-		final UUID uuid = UUID. randomUUID();
-		final String uuidAsString = uuid.toString();
-		
-		storeToFile(pubkey, uuidAsString + PUBKEY_TXT);
-		storeToFile(privkey, uuidAsString + PRIVKEY_TXT);
-		storeToFile(type, uuidAsString + KEYTYPE_TXT);
-		
-		return uuidAsString;
-	}
+    public static String storeKeyPair(final KeyPair keypair) throws IOException {
+        final String pubkey = Base64.getEncoder().encodeToString(keypair.getPubKey().toByteArray());
+        final String privkey = Base64.getEncoder().encodeToString(keypair.getPrivKey().toByteArray());
+        final String type = keypair.getType().toString();
 
-	public static KeyPair getKeyPair(final String id) throws IOException {
-		final String pubKey = readFromFile(id + PUBKEY_TXT);
-		final String privKey = readFromFile(id + PRIVKEY_TXT);
-		final String type = readFromFile(id + KEYTYPE_TXT);
-		
-		return new KeyPair(
-				KeyBlob.parseFrom(ByteString.copyFrom(Base64.getDecoder().decode(pubKey))),
-				KeyBlob.parseFrom(ByteString.copyFrom(Base64.getDecoder().decode(privKey))), 
-				Type.valueOf(type));
-	}
+        final UUID uuid = UUID. randomUUID();
+        final String uuidAsString = uuid.toString();
 
-	private static void storeToFile(final String keyval, final String filename) throws FileNotFoundException, UnsupportedEncodingException {
-		final PrintWriter writer = new PrintWriter(getFileName(filename), "UTF-8");
-		writer.println(keyval);
-		writer.close();		
-	}
-	
-	private static String readFromFile(final String filename) throws IOException {
-		final BufferedReader br = new BufferedReader(new FileReader(getFileName(filename)));
-		final String val = br.readLine();
-		br.close();
-		return val;
-	}
+        storeToFile(pubkey, uuidAsString + PUBKEY_TXT);
+        storeToFile(privkey, uuidAsString + PRIVKEY_TXT);
+        storeToFile(type, uuidAsString + KEYTYPE_TXT);
 
-	private static String getFileName(final String filename) {
-		return Config.getInstance().getKeyStorePath() + "/" + filename;
-	}
-	
-	
+        return uuidAsString;
+    }
+
+    public static KeyPair getKeyPair(final String id) throws IOException {
+        final String pubKey = readFromFile(id + PUBKEY_TXT);
+        final String privKey = readFromFile(id + PRIVKEY_TXT);
+        final String type = readFromFile(id + KEYTYPE_TXT);
+
+        return new KeyPair(
+                KeyBlob.parseFrom(ByteString.copyFrom(Base64.getDecoder().decode(pubKey))),
+                KeyBlob.parseFrom(ByteString.copyFrom(Base64.getDecoder().decode(privKey))), 
+                Type.valueOf(type));
+    }
+
+    private static void storeToFile(final String keyval, final String filename) throws FileNotFoundException, UnsupportedEncodingException {
+        final PrintWriter writer = new PrintWriter(getFileName(filename), "UTF-8");
+        writer.println(keyval);
+        writer.close();     
+    }
+
+    private static String readFromFile(final String filename) throws IOException {
+        final BufferedReader br = new BufferedReader(new FileReader(getFileName(filename)));
+        final String val = br.readLine();
+        br.close();
+        return val;
+    }
+
+    private static String getFileName(final String filename) {
+        return Config.getInstance().getKeyStorePath() + "/" + filename;
+    }
+
+
 }
