@@ -1,16 +1,4 @@
-// Copyright 2021 IBM Corp. All Rights Reserved.
-
-// Licensed under the Apache License, Version 2.0 (the "License"); you
-// may not use this file except in compliance with the License.  You
-// may obtain a copy of the License at
-
-// http://www.apache.org/licenses/LICENSE-2.0
-
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied.  See the License for the specific language governing
-// permissions and limitations under the License.
+// Copyright contributors to the Signing Server project
 package com.ibm.example.signingserver.api;
 
 import java.util.Base64;
@@ -32,25 +20,25 @@ import com.ibm.example.signingserver.utils.Errors;
 
 @Path("sign")
 public class SignatureResource {
-	private static final Logger LOGGER = Logger.getLogger(SignatureResource.class.getName());
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
-	public Response sign(final Request request) throws Exception {
-		try {
-			final ByteString data = ByteString.copyFrom(Base64.getDecoder().decode(request.getData()));
-			final KeyPair keypair = KeyStore.getKeyPair(request.getId());
-			try {
-				final ByteString signature = CryptoClient.getInstance().sign(keypair.getPrivKey(), data,
-						keypair.getType());
-				return Response.ok(Base64.getEncoder().encode(signature.toByteArray())).build();
-			} catch (Exception e) {
-				return Errors.cryptoOperationFailed();
-			}
-		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, "sign error", e.getMessage());
-			return Errors.badRequest();
-		}
-	}
+    private static final Logger LOGGER = Logger.getLogger(SignatureResource.class.getName());
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response sign(final Request request) throws Exception {
+        try {
+            final ByteString data = ByteString.copyFrom(Base64.getDecoder().decode(request.getData()));
+            final KeyPair keypair = KeyStore.getKeyPair(request.getId());
+            try {
+                final ByteString signature = CryptoClient.getInstance().sign(keypair.getPrivKey(), data,
+                        keypair.getType());
+                return Response.ok(Base64.getEncoder().encode(signature.toByteArray())).build();
+            } catch (Exception e) {
+                return Errors.cryptoOperationFailed();
+            }
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "sign error", e.getMessage());
+            return Errors.badRequest();
+        }
+    }
 
 }

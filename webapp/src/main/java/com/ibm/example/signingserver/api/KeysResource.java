@@ -1,16 +1,4 @@
-// Copyright 2021 IBM Corp. All Rights Reserved.
-
-// Licensed under the Apache License, Version 2.0 (the "License"); you
-// may not use this file except in compliance with the License.  You
-// may obtain a copy of the License at
-
-// http://www.apache.org/licenses/LICENSE-2.0
-
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied.  See the License for the specific language governing
-// permissions and limitations under the License.
+// Copyright contributors to the Signing Server project
 package com.ibm.example.signingserver.api;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -40,67 +28,67 @@ import com.ibm.example.signingserver.utils.Errors;
 
 @Path("keys")
 public class KeysResource {
-	private static final Logger LOGGER = Logger.getLogger(KeysResource.class.getName());
-	private static final String TYPE = "type";
+    private static final Logger LOGGER = Logger.getLogger(KeysResource.class.getName());
+    private static final String TYPE = "type";
 
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response createKeyPair(@Context UriInfo info) throws Exception {
-		final String type = info.getQueryParameters().getFirst(TYPE);
-		final KeyPair.Type keyType;
-		if (type == null) {
-			keyType = KeyPair.Type.Dilithium;
-		}
-		else if ("EC".equals(type)) {
-			keyType = KeyPair.Type.EDDSA_ED25519;
-		}
-		else {
-			try {
-				keyType = KeyPair.Type.valueOf(type);
-			} catch (Exception e) {
-				return Errors.keyTypeMissing();
-			}
-		}
-		try {
-			final KeyPair keypair = CryptoClient.getInstance().createKeyPair(keyType);
-			final String id = KeyStore.storeKeyPair(keypair);
-			return createResponse(id, keypair);
-		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, "createKeyPair error", e);
-			return Errors.cannotCreateKey();
-		}
-	}
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createKeyPair(@Context UriInfo info) throws Exception {
+        final String type = info.getQueryParameters().getFirst(TYPE);
+        final KeyPair.Type keyType;
+        if (type == null) {
+            keyType = KeyPair.Type.Dilithium;
+        }
+        else if ("EC".equals(type)) {
+            keyType = KeyPair.Type.EDDSA_ED25519;
+        }
+        else {
+            try {
+                keyType = KeyPair.Type.valueOf(type);
+            } catch (Exception e) {
+                return Errors.keyTypeMissing();
+            }
+        }
+        try {
+            final KeyPair keypair = CryptoClient.getInstance().createKeyPair(keyType);
+            final String id = KeyStore.storeKeyPair(keypair);
+            return createResponse(id, keypair);
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "createKeyPair error", e);
+            return Errors.cannotCreateKey();
+        }
+    }
 
 
-	@GET
-	@Path("{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getKeyInfo(@PathParam("id") String id) throws Exception {
-		try {
-			final KeyPair keypair = KeyStore.getKeyPair(id);
-			if (keypair == null) {
-				return Errors.keyNotFound();
-			}
-			return createResponse(id, keypair);
-		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, "createKeyPair error", e);
-			return Errors.keyNotFound();
-		}
-	}
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getKeyInfo(@PathParam("id") String id) throws Exception {
+        try {
+            final KeyPair keypair = KeyStore.getKeyPair(id);
+            if (keypair == null) {
+                return Errors.keyNotFound();
+            }
+            return createResponse(id, keypair);
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "getKeyInfo error", e);
+            return Errors.keyNotFound();
+        }
+    }
 
-	private Response createResponse(final String id, final KeyPair keypair) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
-		final com.ibm.example.signingserver.api.Response resp = new com.ibm.example.signingserver.api.Response();
-		resp.setId(id);
-		resp.setType(keypair.getType());
-		resp.setPubKey(new String(Base64.getEncoder().encode(keypair.getPubKey().toByteArray()), UTF_8.name()));
-		if (KeyPair.Type.ECDSA_SECP256K1.equals(keypair.getType())) {
-			resp.setPubKeyPEM(KeyUtils.getECPublicKeyPEM(keypair.getPubKey().getKeyBlobs(0).toByteArray()));
-		}
-		else if (KeyPair.Type.EDDSA_ED25519.equals(keypair.getType())) {
-			resp.setPubKeyPEM(KeyUtils.getED25519PublicKeyPEM(keypair.getPubKey().getKeyBlobs(0).toByteArray()));
-		}
-		LOGGER.log(Level.INFO, "Key pair created", new Object[] {resp.getType(), resp.getId(), resp.getPubKeyPEM()});
-		return Response.ok(resp, MediaType.APPLICATION_JSON).build();
-	}
-	
+    private Response createResponse(final String id, final KeyPair keypair) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+        final com.ibm.example.signingserver.api.Response resp = new com.ibm.example.signingserver.api.Response();
+        resp.setId(id);
+        resp.setType(keypair.getType());
+        resp.setPubKey(new String(Base64.getEncoder().encode(keypair.getPubKey().toByteArray()), UTF_8.name()));
+        if (KeyPair.Type.ECDSA_SECP256K1.equals(keypair.getType())) {
+            resp.setPubKeyPEM(KeyUtils.getECPublicKeyPEM(keypair.getPubKey().getKeyBlobs(0).toByteArray()));
+        }
+        else if (KeyPair.Type.EDDSA_ED25519.equals(keypair.getType())) {
+            resp.setPubKeyPEM(KeyUtils.getED25519PublicKeyPEM(keypair.getPubKey().getKeyBlobs(0).toByteArray()));
+        }
+        LOGGER.log(Level.INFO, "Key pair created", new Object[] {resp.getType(), resp.getId(), resp.getPubKeyPEM()});
+        return Response.ok(resp, MediaType.APPLICATION_JSON).build();
+    }
+
 }

@@ -1,6 +1,5 @@
 FROM ubuntu:24.04 as builder
 RUN apt-get update && apt-get upgrade -y && apt-get install -y unzip curl default-jdk maven protobuf-compiler
-WORKDIR /tools
 WORKDIR /src/signingserver
 COPY . .
 RUN mvn clean package
