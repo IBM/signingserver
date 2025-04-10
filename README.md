@@ -1,4 +1,4 @@
-# A signing server for quantum-safe cryptography with IBM Cloud Hyper Protect Crypto Services
+# A signing server for quantum-safe and Elliptic Curve cryptography
 
 ## Overview
 
@@ -16,6 +16,10 @@ This example illustrates:
 ## Prerequisites
 
 To run the signing server, you need to meet the following prerequisites:
+- Setup a GREP11 server, as described [here](https://www.ibm.com/docs/en/hpvs/2.2.x?topic=enclaves-deploying-grep11-server)
+
+or
+
 - Create an IBM Cloud account
 - Create and initialize a IBM Cloud Hyper Protect Crypto Services instance and note its instance id and its EP11 API endpoint address and port
 - Create an API key for a id which provides the required access on your IBM Cloud Hyper Protect Crypto Services instance
@@ -65,11 +69,27 @@ podman build . -t signingserver
 
 ### Run the container image
 
-Use the following command to run the signing server container. Specify the properties of your IBM Cloud Hyper Protect Crypto Services instance in form of environment variables:
+Use the following commands to run the signing server container. Specify the properties of your IBM Cloud Hyper Protect Crypto Services instance in form of environment variables. Mount a directory in the container to contain the key store for the created keys.
 
+If you use a GREP11 server, create a file `grep11.env` with the following example content
 ```
-podman run -it -p 9443:9443 -e API_KEY=<your api key> -e HPCS_PORT=<port, e.g. 443> -e HPCS_INSTANCEID=<instance id> -e HPCS_ENDPOINT=<EP11 API endpoint> signingserver
+HPCS_PORT=9876
+HPCS_ENDPOINT=grep11.example.com
+CLIENT_KEY=<the base64 encoded client key for your GREP11 server>
+CLIENT_CERT=<the base64 encoded client cert for your GREP11 server>
+CA_CERT=<the base64 encoded CA certificate for your GREP11 server>
 ```
+and run the following command:
+```
+docker run -it --env-file=grep11.env -p 9443:9443 --add-host=grep11.example.com:<IP address for your GREP11 server> -v /data/signingservice/keys:/data/signingservice/keys signingserver
+```
+
+If you use IBM Cloud Hyper Protect Crypto Services, run the following command:
+```
+docker run -it -p 9443:9443 -e API_KEY=<your api key> -e HPCS_PORT=<port, e.g. 443> -e HPCS_INSTANCEID=<instance id> -e HPCS_ENDPOINT=<EP11 API endpoint> -v /data/signingservice/keys:/data/signingservice/keys signingserver
+```
+
+The Signing Server uses `java.util.logging.Logger` and WebSphere Liberty logging as described [here](https://openliberty.io/docs/latest/log-trace-configuration.html).
 
 ## Run the application in IBM Cloud Hyper Protect Virtual Server
 Optionally, you can run the signing server in [IBM Cloud Hyper Protect Virtual Server](https://www.ibm.com/de-de/products/hyper-protect-virtual-servers) to protect the sensitive data that is in use by the signing server, such as the private keys, in Confidential Computing. 
@@ -171,3 +191,7 @@ curl -i -k --request POST \
 If the verification is successful this API returns response status code 200.
 
 If the verification fails, the API returns response error code 400 and error message `Signature verification failed.`.
+
+## Backup the key store
+The Signing Server stores keys in the file system under path `/data/signingservice/keys`.
+It is your responsibility to backup the keystore as required.
