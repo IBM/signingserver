@@ -1,10 +1,10 @@
-FROM ubuntu:24.04 as builder
+FROM ubuntu:26.04 as builder
 RUN apt-get update && apt-get upgrade -y && apt-get install -y unzip curl default-jdk maven protobuf-compiler
 WORKDIR /src/signingserver
 COPY . .
 RUN mvn clean package
 
-FROM ubuntu:24.04
+FROM ubuntu:26.04
 RUN apt-get update && apt-get upgrade -y && apt-get install -y default-jre wget unzip curl
 
 COPY --from=builder /src/signingserver/runserver.sh /usr/bin/runserver.sh
